@@ -9,15 +9,9 @@ use Tests\TestCase;
  */
 class AuthTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testGetAccessToken()
+    public function testUnauthorized()
     {
         $response = $this->get($this->getAIUrl());
-
         $response->assertStatus(401);
     }
 }

@@ -127,13 +127,6 @@ class Handler extends ExceptionHandler
                 'message' => $e->getMessage() ? $e->getMessage() : JsonResponse::$statusTexts[$e->getStatusCode()]
             ], $e->getStatusCode());
         }
-
-        if ($e instanceof Exception && app()->environment(['local', 'production', 'testing'])) {
-            return new JsonResponse([
-                'success' => false,
-                'message' => $e->getMessage()
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
         return parent::render($request, $e);
     }
 }
