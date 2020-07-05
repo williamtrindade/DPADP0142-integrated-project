@@ -2,7 +2,18 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use HttpException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -29,10 +40,10 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
+     * @param Throwable $exception
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function report(Throwable $exception)
     {
@@ -42,14 +53,87 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @param Throwable $e
+     * @return Response
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e): Response
     {
-        return parent::render($request, $exception);
+        if ($e instanceof AuthenticationException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_UNAUTHORIZED]
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        if ($e instanceof ModelNotFoundException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_NOT_FOUND]
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($e instanceof ModelNotFoundException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_NOT_FOUND]
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($e instanceof NotFoundHttpException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_NOT_FOUND]
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if ($e instanceof UnauthorizedException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        if ($e instanceof ForbiddenException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_FORBIDDEN]
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        if ($e instanceof ValidationException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_UNPROCESSABLE_ENTITY],
+                'data' => $e->getMessages()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if ($e instanceof BadRequestHttpException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_BAD_REQUEST],
+                'data' => [
+                    'error' => $e->getMessage()
+                ]
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        if ($e instanceof HttpException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $e->getMessage() ? $e->getMessage() : JsonResponse::$statusTexts[$e->getStatusCode()]
+            ], $e->getStatusCode());
+        }
+
+        if ($e instanceof Exception && app()->environment(['local', 'production', 'testing'])) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return parent::render($request, $e);
     }
 }
