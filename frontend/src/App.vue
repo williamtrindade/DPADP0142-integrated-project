@@ -1,14 +1,14 @@
 <template>
-  <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-    </div> -->
-    <router-view/>
-  </div>
+    <div id="app">
+        <!-- <div id="nav">
+        <router-link to="/">Home</router-link> |
+        </div>-->
+        <router-view />
+    </div>
 </template>
 
 <style lang="scss">
-@import '../scss/custom.scss';
+@import "assets/scss/custom.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -31,7 +31,7 @@
   }
 }
 h1 label {
-  color:#000;
+  color: #000;
 }
 .full-width {
   width: 100%;
