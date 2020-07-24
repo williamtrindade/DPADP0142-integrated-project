@@ -5,8 +5,11 @@ import router from './router'
 import store from './store'
 import './plugins/axios'
 
-Vue.config.productionTip = false
+// we import jquery and pooperjs
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
+Vue.config.productionTip = false
 new Vue({
   router,
   store,

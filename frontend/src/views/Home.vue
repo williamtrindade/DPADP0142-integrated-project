@@ -1,24 +1,22 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-  </div>
+  <h1>Home</h1>
 </template>
 
 <script>
-
 export default {
   name: 'Home',
   components: {
   },
   created () {
-    this.$http
-      .get()
-      .then(function (res) {
-        console.log(res)
-      })
   },
   mounted () {
-
+    if (
+      !localStorage.getItem('authenticated') ||
+      !localStorage.getItem('access_token') ||
+      !localStorage.getItem('refresh_token')
+    ) {
+      this.$router.push({ name: 'login' })
+    }
   }
 }
 </script>
