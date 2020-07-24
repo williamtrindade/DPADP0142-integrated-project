@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="full-height full-width float-left">
         <!-- <div id="nav">
         <router-link to="/">Home</router-link> |
         </div>-->
@@ -7,34 +7,37 @@
     </div>
 </template>
 
-<style lang="scss">
-@import "assets/scss/custom.scss";
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+export default {
+    name: 'App',
+    mounted () {
+        if (
+            !localStorage.getItem('authenticated') ||
+      !localStorage.getItem('access_token') ||
+      !localStorage.getItem('refresh_token')
+        ) {
+            this.$router.push({ name: 'login' })
+        }
     }
-  }
+}
+</script>
+
+<style lang="scss">
+@import "assets/scss/custom.css";
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 h1 label {
   color: #000;
 }
 .full-width {
   width: 100%;
+}
+.full-height {
+    height: 100%;
 }
 .float-left {
   float: left;
