@@ -1,20 +1,35 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home'
+
 import Login from '../views/auth/Login'
+import NotFound from '../views/exceptions/NotFound'
+import ManagerDash from '../views/manager/Dash'
 
 Vue.use(VueRouter)
 
 const routes = [
+    // Colaborator
+    {
+        path: '*',
+        name: 'not-found',
+        component: NotFound
+    },
     {
         path: '/',
-        name: 'Home',
+        name: 'home',
         component: Home
     },
     {
         path: '/auth/login',
         name: 'login',
         component: Login
+    },
+    // Manager
+    {
+        path: '/manager/dash',
+        name: 'manager-dash',
+        component: ManagerDash
     }
 ]
 

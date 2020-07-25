@@ -12,9 +12,7 @@ export default {
     name: 'App',
     mounted () {
         if (
-            !localStorage.getItem('authenticated') ||
-      !localStorage.getItem('access_token') ||
-      !localStorage.getItem('refresh_token')
+            !localStorage.getItem('access_token')
         ) {
             this.$router.push({ name: 'login' })
         }
@@ -26,9 +24,11 @@ export default {
 @import "assets/scss/custom.css";
 
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    width: 100%;
+    height: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
 }
 h1 label {
   color: #000;
@@ -41,5 +41,17 @@ h1 label {
 }
 .float-left {
   float: left;
+}
+.float-right {
+    float: right;
+}
+.content {
+    padding-top: 70px;
+    float: left;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    padding-left: 70px;
 }
 </style>

@@ -1,25 +1,31 @@
+import axios from 'axios'
 export default {
+
     login: async (email, password) => {
-        this.$http
-            .post('/oauth/token', {
-                grant_type: 'password',
-                client_id: process.env.APP_VUE_CLIENT_ID,
-                client_secret: process.env.APP_VUE_CLIENT_SECRET,
-                username: email,
-                password: password
-            })
+        axios.post('/oauth/token', {
+            grant_type: 'password',
+            client_id: process.env.VUE_APP_CLIENT_ID,
+            client_secret: process.env.VUE_APP_CLIENT_SECRET,
+            username: email,
+            password: password
+        })
             .then(resp => {
-                console.log(resp)
-                // const token = resp.data
-                // localStorage.setItem("token", resp.data.data.me.token);
-                // localStorage.setItem(
-                //     "account_id",
-                //     resp.data.data.me.account_id
-                // );
-                // return token;
+                const token = resp.data
+                localStorage.setItem('token_type', token.token_type)
+                localStorage.setItem('access_token', token.access_token)
+                localStorage.setItem('expires_in', token.expires_in)
+                localStorage.setItem('refresh_token', token.refresh_token)
+                return true
             })
-            .catch(err => {
-                console.log(err)
+            .catch(() => {
+                return false
             })
+    },
+
+    logout: () => {
+        localStorage.removeItem('token_type')
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('expires_in')
+        localStorage.removeItem('refresh_token')
     }
 }

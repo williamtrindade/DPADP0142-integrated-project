@@ -7,6 +7,8 @@ export default {
     name: 'Home',
 
     components: {},
-    created () {}
+    mounted () {
+        this.$router.push({ name: 'manager-dash' })
+    }
 }
 </script>
