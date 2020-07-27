@@ -4,13 +4,14 @@ export default {
     login: async (email, password) => {
         axios.post('/oauth/token', {
             grant_type: 'password',
+            client_secret: process.env.VUE_APP_SECRET,
             client_id: process.env.VUE_APP_CLIENT_ID,
-            client_secret: process.env.VUE_APP_CLIENT_SECRET,
             username: email,
             password: password
         })
             .then(resp => {
                 const token = resp.data
+                console.log(token)
                 localStorage.setItem('token_type', token.token_type)
                 localStorage.setItem('access_token', token.access_token)
                 localStorage.setItem('expires_in', token.expires_in)

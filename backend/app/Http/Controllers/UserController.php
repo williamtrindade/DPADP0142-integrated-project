@@ -2,64 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Http\Controllers\Base\Controller;
+use App\Http\Controllers\Base\CrudInterface;
+use App\Http\Controllers\Traits\CrudTrait;
+use App\Http\Response\Response;
+use App\Http\Transformers\UserTransformer;
+use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-class UserController extends Controller
+/**
+ * Class UserController
+ * @package App\Http\Controllers
+ */
+class UserController extends Controller implements CrudInterface
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
+    use CrudTrait;
+
+    /** @var UserService $service */
+    private $service;
+
+    /** @var Request $request */
+    private $request;
+
+    /** @var Response */
+    private $response;
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * UserController constructor.
+     * @param UserService $service
      * @param Request $request
-     * @return Response
+     * @param Response $response
      */
-    public function store(Request $request)
+    public function __construct(UserService $service, Request $request, Response $response)
     {
-        //
+        $this->service = $service;
+        $this->request = $request;
+        $this->response = $response;
+        $this->service->paginate();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param User $user
-     * @return Response
-     */
-    public function show(User $user)
+    public function getTransformer(): string
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param User $user
-     * @return Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param User $user
-     * @return Response
-     */
-    public function destroy(User $user)
-    {
-        //
+        return UserTransformer::class;
     }
 }

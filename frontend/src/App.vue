@@ -47,11 +47,7 @@ h1 label {
 }
 .content {
     padding-top: 70px;
-    float: left;
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    max-width: 100%;
     padding-left: 70px;
+    height: 100%;
 }
 </style>

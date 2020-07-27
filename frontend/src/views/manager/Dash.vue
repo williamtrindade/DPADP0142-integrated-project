@@ -4,8 +4,8 @@
         <topbar></topbar>
         <div class="content">
             <h1 class="p-3">Dashboard</h1>
-            <div class="row m-0 p-2 justify-content-center">
-                <div class="col-md-5 p-0 m-1">
+            <div class="row m-0 p-0 justify-content-center">
+                <div class="col-md-6 p-3 m-0">
                     <div class="card">
                         <div class="card-header">
                             Featured
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 p-0 m-1">
+                <div class="col-md-6 p-3 m-0">
                     <div class="card">
                         <div class="card-header">
                             Featured
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 p-0 m-1">
+                <div class="col-md-6 p-3 m-0">
                     <div class="card">
                         <div class="card-header">
                             Featured
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 p-0 m-1">
+                <div class="col-md-6 p-3 m-0">
                     <div class="card">
                         <div class="card-header">
                             Featured
@@ -82,8 +82,5 @@ h1 {
     color: white;
     font-size: 130%;
     text-align: left;
-}
-.content {
-    text-align: center;
 }
 </style>
