@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Controller;
-use App\Http\Controllers\Base\CrudInterface;
 use App\Http\Controllers\Traits\CrudTrait;
+use App\Http\Controllers\Traits\PaginationTrait;
 use App\Http\Response\Response;
-use App\Http\Transformers\UserTransformer;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -14,9 +13,10 @@ use Illuminate\Http\Request;
  * Class UserController
  * @package App\Http\Controllers
  */
-class UserController extends Controller implements CrudInterface
+class UserController extends Controller
 {
     use CrudTrait;
+    use PaginationTrait;
 
     /** @var UserService $service */
     private $service;
@@ -38,11 +38,5 @@ class UserController extends Controller implements CrudInterface
         $this->service = $service;
         $this->request = $request;
         $this->response = $response;
-        $this->service->paginate();
-    }
-
-    public function getTransformer(): string
-    {
-        return UserTransformer::class;
     }
 }

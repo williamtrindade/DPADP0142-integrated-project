@@ -19,6 +19,7 @@ class UserTransformer extends Transformer
     {
         return [
             'name' => $this->name,
+            'oo' => 'd'
         ];
     }
 }

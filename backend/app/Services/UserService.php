@@ -17,10 +17,10 @@ class UserService extends Service
 
     /**
      * UserService constructor.
-     * @param UserRepository $user
+     * @param UserRepository $repository
      */
-    public function __construct(UserRepository $user)
+    public function __construct(UserRepository $repository)
     {
-        $this->repository = $user;
+        $this->repository = $repository;
     }
 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Traits;
 use App\Http\Response\Response;
 use App\Services\Base\ServiceInterface;
 use App\User;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
 /**
  * Trait CrudTrait
  * @package  App\Http\Controllers\Traits
@@ -20,16 +22,12 @@ trait CrudTrait
 {
     /**
      * @return JsonResponse
+     * @throws Exception
      */
     public function index(): JsonResponse
     {
-        $data = $this->service->all();
-        $transformer = $this->getTransformer();
-        $transformedData = new $transformer($data);
-        // dd($transformedData);
-        return $this->response->collection(
-            $transformedData
-        );
+        $data = $this->service->paginate();
+        return $this->response->collection($data);
     }
 
     public function create(Request $request)

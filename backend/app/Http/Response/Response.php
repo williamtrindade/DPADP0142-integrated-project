@@ -2,6 +2,10 @@
 
 namespace App\Http\Response;
 
+use App\Http\Transformers\Base\TransformerService;
+use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
@@ -16,16 +20,20 @@ class Response
     /** @var ResponseFactory $response */
     private $response;
 
+    private $transformer;
+
     /** @var int $statusCode */
     private $statusCode = HttpResponse::HTTP_OK;
 
     /**
      * Response constructor.
      * @param ResponseFactory $response
+     * @param TransformerService $transformer
      */
-    public function __construct(ResponseFactory $response)
+    public function __construct(ResponseFactory $response, TransformerService $transformer)
     {
         $this->response = $response;
+        $this->transformer = $transformer;
     }
 
     /**
@@ -143,26 +151,44 @@ class Response
     /**
      * @param mixed $item
      * @return JsonResponse
+     * @throws Exception
      */
     public function item($item): JsonResponse
     {
-        return $this->json([
-            'success' => true,
-            'message' => JsonResponse::$statusTexts[JsonResponse::HTTP_OK],
-            $item
-        ]);
+        if (( $item instanceof Model ) || ( is_array($item) )) {
+            return $this->json([
+                'success' => true,
+                'message' => JsonResponse::$statusTexts[JsonResponse::HTTP_OK],
+                'data' => $item
+            ]);
+        } else {
+            throw new Exception('The [item] parameter must be an array or [Illuminate\Database\Eloquent\Model]');
+        }
     }
 
     /**
      * @param mixed $items
      * @return JsonResponse
+     * @throws Exception
      */
     public function collection($items): JsonResponse
     {
-        return $this->json(array_merge([
-            'success' => true,
-            'message' => JsonResponse::$statusTexts[JsonResponse::HTTP_OK],
-        ], (array) $items));
+        if (( $items instanceof \Illuminate\Support\Collection ) ||
+            ( $items instanceof \Illuminate\Database\Eloquent\Collection) ||
+            ( $items instanceof LengthAwarePaginator) ||
+            ( is_array($items) )) {
+            return $this->json(array_merge([
+                'success' => true,
+                'message' => JsonResponse::$statusTexts[JsonResponse::HTTP_OK],
+            ], (array) $this->transformer->transform($items) ));
+        } else {
+            throw new Exception(
+                'The [items] parameter must be an array, 
+                [\Illuminate\Database\Eloquent\Collection], 
+                [Illuminate\Support\Collection] or 
+                [Illuminate\Contracts\Pagination\LengthAwarePaginator]'
+            );
+        }
     }
 
     /**

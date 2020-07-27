@@ -19,7 +19,7 @@ abstract class Service implements ServiceInterface
      */
     public function all()
     {
-        return $this->paginate();
+        return $this->repository->all();
     }
 
     /**

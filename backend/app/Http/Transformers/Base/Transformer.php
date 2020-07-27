@@ -2,45 +2,38 @@
 
 namespace App\Http\Transformers\Base;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * Class Transformer
  * @package App\Http\Resources\Base
  * @property  AnonymousResourceCollection $resource
  */
-abstract class Transformer extends JsonResource implements TransformerInterface
+abstract class Transformer extends JsonResource
 {
-//    public function __construct($resource)
-//    {
-//        return parent::__construct($resource);
-//        if ($resource instanceof Collection) {
-//            /** @var $resource Collection */
-//            return $this->getCollection($resource);
-//        }
-//        return $this->getItem($this->resource);
-//    }
-//
-//    /**
-//     * @param mixed $resource
-//     * @return array
-//     */
-//    public function getCollection($resource): array
-//    {
-//        return (array) parent::collection(
-//            $resource
-//        )->response()->getData();
-//    }
-//
-//    /**
-//     * @param $resource
-//     * @return mixed
-//     */
-//    public function getItem($resource)
-//    {
-//        return $resource;
-//    }
+    /**
+     * Transformer constructor.
+     * @param $resource
+     */
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+        if (
+            ( $resource instanceof \Illuminate\Database\Eloquent\Collection ) ||
+            ( $resource instanceof LengthAwarePaginator ) ||
+            ( $resource instanceof \Illuminate\Support\Collection) ||
+            ( $resource instanceof AnonymousResourceCollection) ||
+            ( is_array($resource) )
+        ) {
+            $data = parent::collection($resource)->response()->getData();
+            if( is_array($data) ) {
+                return $data;
+            }
+            return (array) $data;
+
+        }
+        return null;
+    }
 }
