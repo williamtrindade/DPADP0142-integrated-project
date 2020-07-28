@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\{Model, ModelNotFoundException};
 use Exception;
 use Throwable;

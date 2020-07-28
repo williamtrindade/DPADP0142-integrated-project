@@ -7,4 +7,5 @@ Route::get('/', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('users', 'UserController');
+Route::get('users', 'UserController@index');
+Route::post('users', 'UserController@create');

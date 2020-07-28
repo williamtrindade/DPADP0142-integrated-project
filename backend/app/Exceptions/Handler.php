@@ -104,10 +104,11 @@ class Handler extends ExceptionHandler
         }
 
         if ($e instanceof ValidationException) {
+            /** @var ValidationException $e */
             return new JsonResponse([
                 'success' => false,
                 'message' => JsonResponse::$statusTexts[Response::HTTP_UNPROCESSABLE_ENTITY],
-                'data' => $e->getMessages()
+                'data' => $e->errors()
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 

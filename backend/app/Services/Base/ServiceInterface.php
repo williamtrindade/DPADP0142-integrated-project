@@ -2,7 +2,7 @@
 
 namespace App\Services\Base;
 
-use App\Models\ModelInterface;
+use App\Models\Contracts\ModelInterface;
 use Exception;
 
 /**
@@ -21,9 +21,8 @@ interface ServiceInterface
 
     /**
      * @param array $data
-     * @return ModelInterface
      */
-    public function create(array $data): ModelInterface;
+    public function create(array $data);
 
     /**
      * @param int $id

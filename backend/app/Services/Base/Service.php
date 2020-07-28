@@ -2,7 +2,7 @@
 
 namespace App\Services\Base;
 
-use App\Models\ModelInterface;
+use App\Models\Contracts\ModelInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,9 +26,8 @@ abstract class Service implements ServiceInterface
 
     /**
      * @param array $data
-     * @return ModelInterface
      */
-    public function create(array $data): ModelInterface
+    public function create(array $data)
     {
         return $this->repository->create($data);
     }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Traits;
 
 use App\Http\Response\Response;
-use App\Models\ModelInterface;
 use App\Services\Base\ServiceInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -29,22 +28,27 @@ trait CrudTrait
         return $this->response->collection($data);
     }
 
-    public function create(Request $request)
+    /**
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function create()
+    {
+        $data = $this->service->create($this->request->all());
+        return $this->response->item($data);
+    }
+
+    public function read()
     {
 
     }
 
-    public function read(ModelInterface $user)
+    public function update()
     {
 
     }
 
-    public function update(Request $request, ModelInterface $user)
-    {
-
-    }
-
-    public function delete(ModelInterface $user)
+    public function delete()
     {
 
     }
