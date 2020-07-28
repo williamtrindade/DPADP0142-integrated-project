@@ -2,12 +2,13 @@
 
 namespace App\Http\Response;
 
-use App\Http\Transformers\Base\TransformerService;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Support\Collection as BaseCollection;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 /**
@@ -20,20 +21,16 @@ class Response
     /** @var ResponseFactory $response */
     private $response;
 
-    private $transformer;
-
     /** @var int $statusCode */
     private $statusCode = HttpResponse::HTTP_OK;
 
     /**
      * Response constructor.
      * @param ResponseFactory $response
-     * @param TransformerService $transformer
      */
-    public function __construct(ResponseFactory $response, TransformerService $transformer)
+    public function __construct(ResponseFactory $response)
     {
         $this->response = $response;
-        $this->transformer = $transformer;
     }
 
     /**
@@ -173,19 +170,20 @@ class Response
      */
     public function collection($items): JsonResponse
     {
-        if (( $items instanceof \Illuminate\Support\Collection ) ||
-            ( $items instanceof \Illuminate\Database\Eloquent\Collection) ||
+        if (( $items instanceof BaseCollection) ||
+            ( $items instanceof Collection) ||
             ( $items instanceof LengthAwarePaginator) ||
-            ( is_array($items) )) {
+            ( is_array($items) )
+        ) {
             return $this->json(array_merge([
                 'success' => true,
                 'message' => JsonResponse::$statusTexts[JsonResponse::HTTP_OK],
-            ], (array) $this->transformer->transform($items) ));
+            ], ['data' => $items] ));
         } else {
             throw new Exception(
-                'The [items] parameter must be an array, 
-                [\Illuminate\Database\Eloquent\Collection], 
-                [Illuminate\Support\Collection] or 
+                'The [items] parameter must be an array,
+                [\Illuminate\Database\Eloquent\Collection],
+                [Illuminate\Support\Collection] or
                 [Illuminate\Contracts\Pagination\LengthAwarePaginator]'
             );
         }

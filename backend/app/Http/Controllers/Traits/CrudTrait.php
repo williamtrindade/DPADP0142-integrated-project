@@ -24,9 +24,9 @@ trait CrudTrait
      * @return JsonResponse
      * @throws Exception
      */
-    public function index(): JsonResponse
+    public function index()
     {
-        $data = $this->service->paginate();
+        $data = $this->service->all();
         return $this->response->collection($data);
     }
 

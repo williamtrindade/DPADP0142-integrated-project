@@ -3,16 +3,22 @@
 
 namespace App\Http\Controllers\Traits;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+
 /**
  * Trait PaginationTrait
  * @package App\Http\Controllers\Traits
  */
 trait PaginationTrait
 {
-    public function paginate()
+    public function paginate($items, $perPage = 15, $page = null, $options = [])
     {
-        $page = $this->request->query('page', 1);
-        $show = $this->request->query('show', 15);
-        $this->service->paginate($page, $show);
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }

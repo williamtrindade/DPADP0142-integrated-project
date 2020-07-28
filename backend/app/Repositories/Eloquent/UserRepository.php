@@ -12,5 +12,5 @@ use App\User;
  */
 class UserRepository extends Repository implements RepositoryInterface
 {
-    public $model = User::class;
+    protected $model = User::class;
 }

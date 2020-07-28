@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Transformers\UserTransformer;
+use App\Http\Response\Transformers\UserTransformer;
 use App\User;
 
 /*

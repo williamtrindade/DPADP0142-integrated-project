@@ -44,11 +44,4 @@ interface ServiceInterface
      * @throws Exception
      */
     public function delete(int $id): ?bool;
-
-    /**
-     * @param int $page
-     * @param int $show
-     * @return mixed
-     */
-    function paginate($page = 1, $show = 15): LengthAwarePaginator;
 }

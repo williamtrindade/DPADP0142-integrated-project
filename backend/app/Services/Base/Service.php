@@ -5,7 +5,6 @@ namespace App\Services\Base;
 use App\Repositories\RepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * Class Service
@@ -19,7 +18,7 @@ abstract class Service implements ServiceInterface
      */
     public function all()
     {
-        return $this->repository->all();
+        return $this->repository->get();
     }
 
     /**
@@ -35,9 +34,9 @@ abstract class Service implements ServiceInterface
      * @param int $id
      * @return Model|null
      */
-    public function read(int $id): ?Model
+    public function read(int $id): Model
     {
-        return $this->repository->find($id);
+        return $this->repository->read($id);
     }
 
     /**
@@ -60,15 +59,5 @@ abstract class Service implements ServiceInterface
         /** @var Model $model */
         $model = $this->read($id);
         return $model->delete();
-    }
-
-    /**
-     * @param int $page
-     * @param int $show
-     * @return LengthAwarePaginator
-     */
-    public function paginate($page = 1, $show = 15): LengthAwarePaginator
-    {
-        return $this->repository->paginate($page, $show);
     }
 }
