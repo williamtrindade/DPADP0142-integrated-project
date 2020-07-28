@@ -1,15 +1,23 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\User;
 
+use App\Models\Base\UserModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Interface RepositoryInterface
- * @package App\Repositories
+ * Interface UserRepositoryInterface
+ * @package App\Repositories\User
  */
-interface RepositoryInterface
+interface UserRepositoryInterface
 {
+    /**
+     * UserRepositoryInterface constructor.
+     * @param UserModel $model
+     */
+    public function __construct(UserModel $model);
+
     /**
      * @param bool $paginate
      * @param int $page
@@ -33,7 +41,7 @@ interface RepositoryInterface
     /**
      * @param array $data
      * @param int $id
-     * @return Model
+     * @return User
      */
     public function update(array $data, int $id): Model;
 

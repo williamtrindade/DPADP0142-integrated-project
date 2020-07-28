@@ -1,18 +1,21 @@
 <?php
 
-namespace App;
+namespace App\Models\Base;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 /**
- * @method static create(array $array)
+ * Class UserModel
+ * @package App\Models\Base
  */
-class User extends Authenticatable
+class UserModel extends Authenticatable
 {
     use HasApiTokens, Notifiable;
+
+    /** @var string $table */
+    protected $table  = 'users';
 
     /**
      * The attributes that are mass assignable.

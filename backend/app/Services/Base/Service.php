@@ -2,39 +2,42 @@
 
 namespace App\Services\Base;
 
-use App\Repositories\RepositoryInterface;
+use App\Models\ModelInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Service
  * @package App\Services
- * @property RepositoryInterface $repository
+ * @property $repository
  */
 abstract class Service implements ServiceInterface
 {
     /**
+     * @param bool $paginate
+     * @param int $page
+     * @param int $show
      * @return mixed
      */
-    public function all()
+    public function all(bool $paginate = true, int $page = 1, int $show = 15)
     {
-        return $this->repository->get();
+        return $this->repository->all($paginate, $page, $show);
     }
 
     /**
      * @param array $data
-     * @return Model|null
+     * @return ModelInterface
      */
-    public function create(array $data): ?Model
+    public function create(array $data): ModelInterface
     {
         return $this->repository->create($data);
     }
 
     /**
      * @param int $id
-     * @return Model|null
+     * @return ModelInterface
      */
-    public function read(int $id): Model
+    public function read(int $id): ModelInterface
     {
         return $this->repository->read($id);
     }
@@ -42,9 +45,9 @@ abstract class Service implements ServiceInterface
     /**
      * @param $data
      * @param $id
-     * @return bool
+     * @return ModelInterface
      */
-    public function update($data, $id): bool
+    public function update($data, $id): ModelInterface
     {
         return $this->repository->update($data, $id);
     }

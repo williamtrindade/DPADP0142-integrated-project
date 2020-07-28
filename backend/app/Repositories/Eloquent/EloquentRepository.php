@@ -1,20 +1,33 @@
 <?php
 
-namespace App\Repositories\Eloquent\Base;
+namespace App\Repositories\Eloquent;
 
+use Illuminate\Database\Eloquent\{Model, ModelNotFoundException};
 use Exception;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
 
 /**
- * Trait ModelMethodsTrait
- * @package App\Repositories\Eloquent\Base
+ * Class EloquentRepository
+ * @package App\Repositories\Base
  *
  * @property Model $model
  */
-trait ModelMethodsTrait
+abstract class EloquentRepository
 {
+    /**
+     * @param bool $paginate
+     * @param int $page
+     * @param int $show
+     * @return mixed
+     */
+    public function all(bool $paginate = true, int $page = 1, int $show = 15)
+    {
+        if ($paginate) {
+            return $this->paginate($page, $show);
+        }
+        return $this->model->all();
+    }
+
     /**
      * @param array $data
      * @return Model
@@ -46,12 +59,13 @@ trait ModelMethodsTrait
     /**
      * @param array $data
      * @param int $id
-     * @return bool
-     * @throws ModelNotFoundException
+     * @return Model
      */
-    public function update(array $data, int $id): bool
+    public function update(array $data, int $id): Model
     {
-        return $this->read($id)->update($data);
+        $model = $this->read($id);
+        $model->update($data);
+        return $model;
     }
 
     /**
@@ -62,5 +76,15 @@ trait ModelMethodsTrait
     public function delete(int $id): bool
     {
         return $this->read($id)->delete();
+    }
+
+    /**
+     * @param int $page
+     * @param int $show
+     * @return mixed
+     */
+    public function paginate(int $page = 1, $show = 15)
+    {
+        return $this->model->paginate($show, ['*'], 'page', $page);
     }
 }

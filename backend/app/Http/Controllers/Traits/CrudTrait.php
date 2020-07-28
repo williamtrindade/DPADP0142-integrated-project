@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Traits;
 
 use App\Http\Response\Response;
+use App\Models\ModelInterface;
 use App\Services\Base\ServiceInterface;
-use App\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
  * @property ServiceInterface     $service
  * @property Request              $request
  * @property Response             $response
- * @method   string               getTransformer()
  * @author William Trindade<williamtrindade.contato@gmail.com>
  */
 trait CrudTrait
@@ -26,7 +25,7 @@ trait CrudTrait
      */
     public function index()
     {
-        $data = $this->service->all();
+        $data = $this->service->all(true, $this->getPage(), $this->getShow());
         return $this->response->collection($data);
     }
 
@@ -35,17 +34,17 @@ trait CrudTrait
 
     }
 
-    public function read(User $user)
+    public function read(ModelInterface $user)
     {
 
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, ModelInterface $user)
     {
 
     }
 
-    public function delete(User $user)
+    public function delete(ModelInterface $user)
     {
 
     }

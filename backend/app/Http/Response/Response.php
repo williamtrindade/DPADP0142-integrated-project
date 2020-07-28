@@ -180,6 +180,7 @@ class Response
                 'message' => JsonResponse::$statusTexts[JsonResponse::HTTP_OK],
             ], ['data' => $items] ));
         } else {
+            dd($items);
             throw new Exception(
                 'The [items] parameter must be an array,
                 [\Illuminate\Database\Eloquent\Collection],

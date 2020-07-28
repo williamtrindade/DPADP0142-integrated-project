@@ -1,12 +1,9 @@
 <?php
 
-
 namespace App\Services\Base;
 
+use App\Models\ModelInterface;
 use Exception;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * Interface ServiceInterface
@@ -15,28 +12,31 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface ServiceInterface
 {
     /**
-     * @return Collection|Model[]|LengthAwarePaginator
+     * @param bool $paginate
+     * @param int $page
+     * @param int $show
+     * @return mixed
      */
-    public function all();
+    public function all(bool $paginate = true, int $page = 1, int $show = 15);
 
     /**
      * @param array $data
-     * @return Model|null
+     * @return ModelInterface
      */
-    public function create(array $data): ?Model;
+    public function create(array $data): ModelInterface;
 
     /**
      * @param int $id
-     * @return Model|null
+     * @return ModelInterface
      */
-    public function read(int $id): ?Model;
+    public function read(int $id): ModelInterface;
 
     /**
      * @param $data
      * @param $id
-     * @return bool
+     * @return ModelInterface
      */
-    public function update($data, $id): bool;
+    public function update($data, $id): ModelInterface;
 
     /**
      * @param $id

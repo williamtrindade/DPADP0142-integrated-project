@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Repositories\Eloquent\UserRepository;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Base\Service;
-use App\User;
 
 /**
  * Class UserService
@@ -12,14 +11,14 @@ use App\User;
  */
 class UserService extends Service
 {
-    /** @var User $repository */
+    /** @var UserRepositoryInterface $repository */
     public $repository;
 
     /**
      * UserService constructor.
-     * @param UserRepository $repository
+     * @param UserRepositoryInterface $repository
      */
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
