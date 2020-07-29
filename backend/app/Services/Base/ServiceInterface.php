@@ -2,12 +2,14 @@
 
 namespace App\Services\Base;
 
-use App\Models\Contracts\ModelInterface;
-use Exception;
+use App\Repositories\RepositoryInterface;
+use App\Validators\ValidatorInterface;
 
 /**
  * Interface ServiceInterface
  * @package App\Services\Contracts
+ * @property RepositoryInterface $repository
+ * @property ValidatorInterface $validator
  */
 interface ServiceInterface
 {
@@ -26,21 +28,17 @@ interface ServiceInterface
 
     /**
      * @param int $id
-     * @return ModelInterface
      */
-    public function read(int $id): ModelInterface;
+    public function read(int $id);
 
     /**
      * @param $data
      * @param $id
-     * @return ModelInterface
      */
-    public function update($data, $id): ModelInterface;
+    public function update($data, $id);
 
     /**
      * @param $id
-     * @return bool|null
-     * @throws Exception
      */
-    public function delete(int $id): ?bool;
+    public function delete(int $id);
 }

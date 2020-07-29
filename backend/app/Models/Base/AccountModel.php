@@ -3,6 +3,8 @@
 namespace App\Models\Base;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class AccountModel
@@ -10,5 +12,32 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AccountModel extends Model
 {
-    protected $table = 'users';
+    /** @var string $table */
+    protected $table = 'accounts';
+
+    /** @var string[] $fillable */
+    protected $fillable = [
+        'name',
+        'cnpj',
+        'address',
+        'cep',
+        'manager_id',
+        'phone',
+    ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function manager(): BelongsTo
+    {
+        return $this->belongsTo(UserModel::class, 'manager_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function users()
+    {
+        return $this->hasMany(UserModel::class, 'account_id', 'id');
+    }
 }

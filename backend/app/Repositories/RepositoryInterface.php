@@ -39,7 +39,7 @@ interface RepositoryInterface
 
     /**
      * @param int $id
-     * @return bool
+     * @return bool|null
      */
-    public function delete(int $id): bool;
+    public function delete(int $id): ?bool;
 }

@@ -2,14 +2,16 @@
 
 namespace App\Services\Base;
 
-use App\Models\Contracts\ModelInterface;
+use App\Repositories\RepositoryInterface;
+use App\Validators\ValidatorInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Service
  * @package App\Services
- * @property $repository
+ * @property RepositoryInterface $repository
+ * @property ValidatorInterface $validator
  */
 abstract class Service implements ServiceInterface
 {
@@ -26,17 +28,19 @@ abstract class Service implements ServiceInterface
 
     /**
      * @param array $data
+     * @return Model
      */
     public function create(array $data)
     {
+        $this->validator->validateToCreate($data);
         return $this->repository->create($data);
     }
 
     /**
      * @param int $id
-     * @return ModelInterface
+     * @return Model
      */
-    public function read(int $id): ModelInterface
+    public function read(int $id)
     {
         return $this->repository->read($id);
     }
@@ -44,10 +48,11 @@ abstract class Service implements ServiceInterface
     /**
      * @param $data
      * @param $id
-     * @return ModelInterface
+     * @return Model
      */
-    public function update($data, $id): ModelInterface
+    public function update($data, $id)
     {
+        $this->validator->validateToUpdate($data);
         return $this->repository->update($data, $id);
     }
 
@@ -56,9 +61,8 @@ abstract class Service implements ServiceInterface
      * @return bool|null
      * @throws Exception
      */
-    public function delete(int $id): ?bool
+    public function delete(int $id)
     {
-        /** @var Model $model */
         $model = $this->read($id);
         return $model->delete();
     }

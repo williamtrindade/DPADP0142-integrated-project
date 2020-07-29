@@ -52,60 +52,60 @@
 </template>
 
 <script>
-import AuthService from '../../services/AuthService'
+    import AuthService from '../../services/AuthService'
 
-export default {
-    name: 'Login',
-    data () {
-        return {
-            email: null,
-            password: null
-        }
-    },
-    methods: {
-        async login () {
-            if (await AuthService.login(this.email, this.password)) {
-                await this.$router.push({ name: 'home' })
-            } else {
-                alert('Erro de autenticação')
+    export default {
+        name: 'Register',
+        data () {
+            return {
+                email: null,
+                password: null
+            }
+        },
+        methods: {
+            async login () {
+                if (await AuthService.login(this.email, this.password)) {
+                    await this.$router.push({ name: 'home' })
+                } else {
+                    alert('Erro de autenticação')
+                }
+            }
+        },
+        mounted () {
+            if (localStorage.getItem('access_token')) {
+                this.$router.push({ name: 'home' })
             }
         }
-    },
-    mounted () {
-        if (localStorage.getItem('access_token')) {
-            this.$router.push({ name: 'home' })
-        }
     }
-}
 </script>
 
 <style scoped>
-.button-primary {
-    background-color: #00ff9d;
-}
-.button-primary:hover {
-    background-color: #5dffbd;
-}
-#form-title {
-    font-size: 140%;
-}
-.login-left {
-    padding-left:10%;
-    padding-right: 15%;
-    padding-top: 10%;
-}
-.login-right img {
-    margin-top: 10%;
-    width: 70%;
-}
-.login-left {
-    background-color:#2c2c2c;
-}
-.login-left {
-    color:#00ff9d;
-}
-.login-right img {
-    margin-left: 10%;
-    margin-top: 20%;
-}
+    .button-primary {
+        background-color: #00ff9d;
+    }
+    .button-primary:hover {
+        background-color: #5dffbd;
+    }
+    #form-title {
+        font-size: 140%;
+    }
+    .login-left {
+        padding-left:10%;
+        padding-right: 15%;
+        padding-top: 10%;
+    }
+    .login-right img {
+        margin-top: 10%;
+        width: 70%;
+    }
+    .login-left {
+        background-color:#2c2c2c;
+    }
+    .login-left {
+        color:#00ff9d;
+    }
+    .login-right img {
+        margin-left: 10%;
+        margin-top: 20%;
+    }
 </style>

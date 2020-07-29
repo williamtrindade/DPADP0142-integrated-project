@@ -7,6 +7,8 @@ use App\Http\Controllers\Traits\CrudTrait;
 use App\Http\Controllers\Traits\PaginationTrait;
 use App\Http\Response\Response;
 use App\Services\AccountService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -38,5 +40,15 @@ class AccountController extends Controller
         $this->service = $service;
         $this->request = $request;
         $this->response = $response;
+    }
+
+    /**
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function create()
+    {
+        $data = $this->service->create($this->request->all());
+        return $this->response->item($data);
     }
 }

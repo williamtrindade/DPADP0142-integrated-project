@@ -50,4 +50,12 @@ h1 label {
     padding-left: 70px;
     height: 100%;
 }
+.link-text {
+    color: #fff;
+    text-decoration: underline;
+    transition: 0.5s;
+}
+.link-text:hover {
+    color: #00ff9d;
+}
 </style>

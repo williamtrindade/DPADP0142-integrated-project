@@ -8,3 +8,10 @@ Route::get('/', function () {
         <p>API V1.0</p>
     ";
 });
+
+/*
+ * -----------------------------------------
+ * Account
+ * _________________________________________
+ */
+Route::post('accounts', 'AccountController@create');

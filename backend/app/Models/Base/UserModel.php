@@ -2,6 +2,7 @@
 
 namespace App\Models\Base;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -15,7 +16,7 @@ class UserModel extends Authenticatable
     use HasApiTokens, Notifiable;
 
     /** @var string $table */
-    protected $table  = 'users';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +24,11 @@ class UserModel extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'permission',
+        'account_id,'
     ];
 
     /**
@@ -43,4 +48,12 @@ class UserModel extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(AccountModel::class, 'account_id', 'id');
+    }
 }
