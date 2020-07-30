@@ -3,29 +3,79 @@
         <div class="row text-left full-width full-height">
             <div class="col-md-6 login-left">
                 <h1>
-                    Bem-vindo ao
-                    <br />Sistema .Ponto
+                    Bem-vindo ao .Ponto
                 </h1>
                 <hr>
-                <h2 id="form-title">Faça seu login</h2>
+                <h2 id="form-title">Faça seu registo na plataforma</h2>
                 <hr>
                 <form v-on:submit.prevent="login">
                     <div class="form-group">
-                        <label for="email">Endereço de email</label>
-                        <input required v-model="email" type="email" class="form-control" id="email" />
+                        <label for="user-name">Nome</label>
+                        <input
+                            required
+                            v-model="user_name"
+                            type="text"
+                            class="form-control"
+                            id="user-name"
+                            placeholder="Seu nome"
+                        />
                     </div>
 
                     <div class="form-group">
-                        <label for="pass">Senha</label>
-                        <input required v-model="password" type="password" class="form-control" id="pass" />
+                        <label for="email">Endereço de email</label>
+                        <input
+                            required
+                            v-model="user_email"
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Seu e-mail"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="account-name">Nome da empresa</label>
+                        <input
+                            required
+                            v-model="account_name"
+                            type="text"
+                            class="form-control"
+                            id="account-name"
+                            placeholder="Nome da sua empresa"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user-password">Senha</label>
+                        <input
+                            required
+                            v-model="user_password"
+                            type="password"
+                            class="form-control"
+                            id="user-password"
+                            placeholder="Sua nova senha"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="account-cnpj">CNPJ</label>
+                        <input
+                            required
+                            v-model="account_cnpj"
+                            type="text"
+                            class="form-control"
+                            id="account-cnpj"
+                            placeholder="CNPJ da empresa"
+                        />
                     </div>
                     <div class="justify-content-start float-left full-width" style="text-align: left;">
                         <button
                             type="submit"
                             class="btn btn-primary button-primary pl-5 pr-5 "
-                            style="color:#000;border: none;">Entrar
+                            style="color:#000;border: none;">{{ this.registerButtonText }}
                         </button>
-                        <a href="#" class="link-text pl-3 pt-1" >Ainda não tenho conta!</a>
+                        <router-link to="login">
+                            <a href="#" class="link-text pl-3 pt-1">Já tenho conta!</a>
+                        </router-link>
                     </div>
                 </form>
             </div>
@@ -52,31 +102,35 @@
 </template>
 
 <script>
-    import AuthService from '../../services/AuthService'
+import AuthService from '../../services/AuthService'
 
-    export default {
-        name: 'Register',
-        data () {
-            return {
-                email: null,
-                password: null
-            }
-        },
-        methods: {
-            async login () {
-                if (await AuthService.login(this.email, this.password)) {
-                    await this.$router.push({ name: 'home' })
-                } else {
-                    alert('Erro de autenticação')
-                }
-            }
-        },
-        mounted () {
-            if (localStorage.getItem('access_token')) {
-                this.$router.push({ name: 'home' })
+export default {
+    name: 'Register',
+    data () {
+        return {
+            registerButtonText: 'Finalizar cadastro',
+            user_name: null,
+            user_email: null,
+            account_name: null,
+            user_password: null,
+            account_cnpj: null
+        }
+    },
+    methods: {
+        async login () {
+            if (await AuthService.login(this.email, this.password)) {
+                await this.$router.push({ name: 'home' })
+            } else {
+                alert('Erro de autenticação')
             }
         }
+    },
+    mounted () {
+        if (localStorage.getItem('access_token')) {
+            this.$router.push({ name: 'home' })
+        }
     }
+}
 </script>
 
 <style scoped>

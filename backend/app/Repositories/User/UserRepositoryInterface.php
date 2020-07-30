@@ -2,7 +2,6 @@
 
 namespace App\Repositories\User;
 
-use App\Models\Base\UserModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,9 +13,9 @@ interface UserRepositoryInterface
 {
     /**
      * UserRepositoryInterface constructor.
-     * @param UserModel $model
+     * @param User $model
      */
-    public function __construct(UserModel $model);
+    public function __construct(User $model);
 
     /**
      * @param bool $paginate

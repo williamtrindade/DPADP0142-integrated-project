@@ -38,7 +38,7 @@ class UserService extends Service
      */
     public function create(array $data)
     {
-        $this->validator::validateToCreate($data);
+        $this->validateToCreate($data);
         Arr::set($data, 'password', Hash::make($data['password']));
         return $this->repository->create($data);
     }

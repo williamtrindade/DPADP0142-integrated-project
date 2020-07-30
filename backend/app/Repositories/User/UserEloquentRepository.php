@@ -2,7 +2,7 @@
 
 namespace App\Repositories\User;
 
-use App\Models\Base\UserModel;
+use App\Models\User;
 use App\Repositories\Eloquent\EloquentRepository;
 
 /**
@@ -11,14 +11,14 @@ use App\Repositories\Eloquent\EloquentRepository;
  */
 class UserEloquentRepository extends EloquentRepository implements UserRepositoryInterface
 {
-    /** @var UserModel $model */
-    protected $model;
+    /** @var User $model */
+    public $model;
 
     /**
      * UserEloquentRepository constructor.
-     * @param UserModel $model
+     * @param User $model
      */
-    public function __construct(UserModel $model)
+    public function __construct(User $model)
     {
         $this->model = $model;
     }

@@ -12,7 +12,7 @@ use App\Repositories\Eloquent\EloquentRepository;
 class AccountEloquentRepository extends EloquentRepository implements AccountRepositoryInterface
 {
     /** @var AccountModel $model */
-    private $model;
+    public $model;
 
     /**
      * UserEloquentRepository constructor.

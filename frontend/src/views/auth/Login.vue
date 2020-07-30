@@ -1,10 +1,9 @@
 <template>
     <div class="login full-height float-left full-width">
         <div class="row text-left full-width full-height">
-            <div class="col-md-6 login-left">
+            <div class="col-sm-12 col-md-6  login-left">
                 <h1>
-                    Bem-vindo ao
-                    <br />Sistema .Ponto
+                    Bem-vindo ao .Ponto
                 </h1>
                 <hr>
                 <h2 id="form-title">Faça seu login</h2>
@@ -12,25 +11,41 @@
                 <form v-on:submit.prevent="login">
                     <div class="form-group">
                         <label for="email">Endereço de email</label>
-                        <input required v-model="email" type="email" class="form-control" id="email" />
+                        <input
+                            required
+                            v-model="email"
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Digite seu email."
+                        />
                     </div>
 
                     <div class="form-group">
                         <label for="pass">Senha</label>
-                        <input required v-model="password" type="password" class="form-control" id="pass" />
+                        <input
+                            required
+                            v-model="password"
+                            type="password"
+                            class="form-control"
+                            id="pass"
+                            placeholder="Digite sua senha."
+                        />
                     </div>
                     <div class="justify-content-start float-left full-width" style="text-align: left;">
                         <button
                             type="submit"
                             class="btn btn-primary button-primary pl-5 pr-5 "
-                            style="color:#000;border: none;">Entrar
+                            style="color:#000;border: none;">{{ this.loginButtonText }}
                         </button>
-                        <a href="#" class="link-text pl-3 pt-1" >Ainda não tenho conta!</a>
+                        <router-link to="register">
+                            <a href="#" class="link-text pl-3 pt-1" >Ainda não tenho conta!</a>
+                        </router-link>
                     </div>
                 </form>
             </div>
 
-            <div class="col-md-6 login-right">
+            <div class="col-xl-0 col-sm-0 col-md-6 login-right">
                 <img src="../../assets/img/office.svg" alt="IMG">
                 <!-- <div class="form-group">
                     <label for="email">Endereço de email</label>
@@ -58,16 +73,19 @@ export default {
     name: 'Login',
     data () {
         return {
+            loginButtonText: 'Entrar',
             email: null,
             password: null
         }
     },
     methods: {
         async login () {
+            this.loginButtonText = 'Entrando...'
             if (await AuthService.login(this.email, this.password)) {
                 await this.$router.push({ name: 'home' })
             } else {
-                alert('Erro de autenticação')
+                this.loginButtonText = 'Entrar'
+                confirm('Erro de autenticação, tente novamente')
             }
         }
     },
@@ -107,5 +125,10 @@ export default {
 .login-right img {
     margin-left: 10%;
     margin-top: 20%;
+}
+@media (max-width: 767px) {
+    .login-right {
+        visibility: collapse;
+    }
 }
 </style>

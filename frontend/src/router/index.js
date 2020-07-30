@@ -5,6 +5,7 @@ import Home from '../views/Home'
 import Login from '../views/auth/Login'
 import NotFound from '../views/exceptions/NotFound'
 import ManagerDash from '../views/manager/Dash'
+import Register from '../views/auth/Register'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
         path: '/auth/login',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/auth/register',
+        name: 'register',
+        component: Register
     },
     // Manager
     {

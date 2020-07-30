@@ -3,7 +3,6 @@
 namespace App\Validators;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 
 /**
  * Class UserValidator
@@ -12,25 +11,25 @@ use Illuminate\Support\Facades\Validator;
 class UserValidator implements ValidatorInterface
 {
     /**
-     * @param array $data
+     * @return string[]
      */
-    public static function validateToCreate(array $data)
+    public static function validateToCreate(): array
     {
-        Validator::make($data, [
+        return [
             'name' => 'required',
             'email' => 'required|email|unique:' . (new User())->getTable(),
             'password' => 'required'
-        ])->validate();
+        ];
     }
 
     /**
-     * @param array $data
      * @param int|null $account_id
+     * @return array
      */
-    public static function validateToUpdate(array $data, int $account_id = null)
+    public static function validateToUpdate(int $account_id = null): array
     {
-        Validator::make($data, [
+        return [
 
-        ])->validate();
+        ];
     }
 }

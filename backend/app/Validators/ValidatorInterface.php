@@ -8,6 +8,6 @@ namespace App\Validators;
  */
 interface ValidatorInterface
 {
-    public static function validateToCreate(array $data);
-    public static function validateToUpdate(array $data, int $account_id = null);
+    public static function validateToCreate(): array;
+    public static function validateToUpdate(int $account_id = null): array;
 }

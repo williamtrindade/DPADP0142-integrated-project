@@ -4,8 +4,8 @@ export default {
     login: async (email, password) => {
         return axios.post('/oauth/token', {
             grant_type: 'password',
-            client_secret: process.env.VUE_APP_SECRET,
             client_id: process.env.VUE_APP_CLIENT_ID,
+            client_secret: process.env.VUE_APP_SECRET,
             username: email,
             password: password
         }).then(resp => {

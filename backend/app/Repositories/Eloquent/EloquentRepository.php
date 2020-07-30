@@ -14,6 +14,8 @@ use Throwable;
  */
 abstract class EloquentRepository
 {
+    protected $model;
+
     /**
      * @param bool $paginate
      * @param int $page
@@ -41,7 +43,7 @@ abstract class EloquentRepository
         try {
             $model->saveOrFail();
         } catch (Throwable $e) {
-            throw new Exception('Error on save a Eloquent model');
+            throw new Exception('Error on create a Eloquent model in table ['.(new $this->model)->getTable().']');
         }
         return $model;
     }

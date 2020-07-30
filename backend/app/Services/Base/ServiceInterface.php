@@ -41,4 +41,17 @@ interface ServiceInterface
      * @param $id
      */
     public function delete(int $id);
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function validateToCreate(array $data);
+
+    /**
+     * @param $data
+     * @param int|null $account_id
+     * @return mixed
+     */
+    public function validateToUpdate($data, int $account_id = null);
 }

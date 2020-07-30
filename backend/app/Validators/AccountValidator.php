@@ -2,6 +2,7 @@
 
 namespace App\Validators;
 
+use App\Models\Account;
 use App\Models\User;
 use App\Rules\CnpjRule;
 use Illuminate\Support\Facades\Validator;
@@ -13,24 +14,27 @@ use Illuminate\Support\Facades\Validator;
 class AccountValidator implements ValidatorInterface
 {
     /**
-     * @param array $data
+     * @return array
      */
-    public static function validateToCreate(array $data)
+    public static function validateToCreate(): array
     {
-        Validator::make($data, [
-
-        ])->validate();
+        return [
+            'name' => 'required',
+            'cnpj' => 'required',
+            'address' => 'sometimes',
+            'cep' => 'sometimes',
+            'manager_id' => 'required|exists:' . (new User())->getTable() . ',id',
+            'phone' => 'required|min:8|max:15|unique:' . (new Account())->getTable() . ',phone',
+        ];
     }
 
     /**
-     * @param array $data
      * @param int|null $account_id
+     * @return array
      */
-    public static function validateToUpdate(array $data, int $account_id = null)
+    public static function validateToUpdate(int $account_id = null): array
     {
-        Validator::make($data, [
-
-        ])->validate();
+        return [];
     }
 
     /**
@@ -43,7 +47,8 @@ class AccountValidator implements ValidatorInterface
             'user_email' => 'required|email|max:255|min:3|unique:' . (new User())->getTable() . ',email',
             'account_name' => 'required|string|max:255|min:3',
             'user_password' => 'required|min:6|max:255',
-            'account_cnpj' => ['bail', 'required', 'min:14', 'max:18', new CnpjRule]
+            'account_phone' => 'required|min:8|max:15|unique:' . (new Account())->getTable() . ',phone',
+            'account_cnpj' => ['bail', 'required', 'min:14', 'max:18', new CnpjRule],
         ])->validate();
     }
 }

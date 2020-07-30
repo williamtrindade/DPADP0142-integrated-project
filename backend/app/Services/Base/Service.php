@@ -6,6 +6,7 @@ use App\Repositories\RepositoryInterface;
 use App\Validators\ValidatorInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * Class Service
@@ -32,7 +33,7 @@ abstract class Service implements ServiceInterface
      */
     public function create(array $data)
     {
-        $this->validator->validateToCreate($data);
+        $this->validateToCreate($data);
         return $this->repository->create($data);
     }
 
@@ -52,7 +53,7 @@ abstract class Service implements ServiceInterface
      */
     public function update($data, $id)
     {
-        $this->validator->validateToUpdate($data);
+        $this->validateToUpdate($data);
         return $this->repository->update($data, $id);
     }
 
@@ -65,5 +66,22 @@ abstract class Service implements ServiceInterface
     {
         $model = $this->read($id);
         return $model->delete();
+    }
+
+    /**
+     * @param $data
+     */
+    public function validateToCreate($data)
+    {
+        Validator::make($data, $this->validator::validateToCreate())->validate();
+    }
+
+    /**
+     * @param $data
+     * @param int|null $account_id
+     */
+    public function validateToUpdate($data, int $account_id = null)
+    {
+        Validator::make($data, $this->validator::validateToUpdate($account_id))->validate();
     }
 }
