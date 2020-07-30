@@ -8,7 +8,7 @@
                 <hr>
                 <h2 id="form-title">Faça seu registo na plataforma</h2>
                 <hr>
-                <form v-on:submit.prevent="login">
+                <form v-on:submit.prevent="register">
                     <div class="form-group">
                         <label for="user-name">Nome</label>
                         <input
@@ -102,7 +102,8 @@
 </template>
 
 <script>
-import AuthService from '../../services/AuthService'
+
+import AccountService from '../../services/AccountService'
 
 export default {
     name: 'Register',
@@ -117,9 +118,15 @@ export default {
         }
     },
     methods: {
-        async login () {
-            if (await AuthService.login(this.email, this.password)) {
-                await this.$router.push({ name: 'home' })
+        async register () {
+            if (await AccountService.create(
+                this.user_name,
+                this.user_email,
+                this.account_name,
+                this.user_password,
+                this.account_cnpj)
+            ) {
+                await this.$router.push({ name: 'login' })
             } else {
                 alert('Erro de autenticação')
             }
@@ -161,5 +168,10 @@ export default {
     .login-right img {
         margin-left: 10%;
         margin-top: 20%;
+    }
+    @media (max-width: 900px) {
+        .login-right {
+            visibility: collapse;
+        }
     }
 </style>

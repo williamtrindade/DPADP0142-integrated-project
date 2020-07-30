@@ -1,34 +1,21 @@
-// import axios from 'axios'
-
+import axios from 'axios'
 export default {
 
-    // login: async (email, password) => {
-    //     axios.post('/oauth/token', {
-    //         grant_type: 'password',
-    //         client_secret: process.env.VUE_APP_SECRET,
-    //         client_id: process.env.VUE_APP_CLIENT_ID,
-    //         username: email,
-    //         password: password
-    //     })
-    //         .then(resp => {
-    //             const token = resp.data
-    //             console.log(token)
-    //             localStorage.setItem('token_type', token.token_type)
-    //             localStorage.setItem('access_token', token.access_token)
-    //             localStorage.setItem('expires_in', token.expires_in)
-    //             localStorage.setItem('refresh_token', token.refresh_token)
-    //             return true
-    //         })
-    //         .catch(() => {
-    //             return false
-    //         })
-    // },
-
-    // logout: () => {
-    //     localStorage.removeItem('token_type')
-    //     localStorage.removeItem('access_token')
-    //     localStorage.removeItem('expires_in')
-    //     localStorage.removeItem('refresh_token')
-    // }
+    create: async (userName, userEmail, accountName, userPassword, accountCnpj) => {
+        return axios.post('/accounts', {
+            user_name: userName,
+            user_email: userEmail,
+            account_name: accountName,
+            user_password: userPassword,
+            account_cnpj: accountCnpj
+        }).then(resp => {
+            if (resp.status === 200) {
+            }
+            console.log(resp.data)
+            return false
+        }).catch(() => {
+            return false
+        })
+    }
 
 }

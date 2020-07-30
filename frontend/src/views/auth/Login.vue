@@ -126,7 +126,7 @@ export default {
     margin-left: 10%;
     margin-top: 20%;
 }
-@media (max-width: 767px) {
+@media (max-width: 900px) {
     .login-right {
         visibility: collapse;
     }
