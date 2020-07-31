@@ -28,7 +28,7 @@ class UserModel extends Authenticatable
         'email',
         'password',
         'permission',
-        'account_id,'
+        'account_id',
     ];
 
     /**
@@ -54,6 +54,6 @@ class UserModel extends Authenticatable
      */
     public function account(): BelongsTo
     {
-        return $this->belongsTo(AccountModel::class, 'account_id', 'id');
+        return $this->belongsTo(AccountModel::class, 'id', 'account_id');
     }
 }

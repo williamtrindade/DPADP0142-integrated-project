@@ -40,7 +40,6 @@ abstract class EloquentRepository
         try {
             return $this->model->create($data);
         } catch (Throwable $e) {
-            dd($data);
             throw new Exception('Error on create a Eloquent model in table ['.(new $this->model)->getTable().']');
         }
     }

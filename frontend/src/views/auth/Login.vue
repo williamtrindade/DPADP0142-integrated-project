@@ -34,8 +34,9 @@
                     </div>
                     <div class="justify-content-start float-left full-width" style="text-align: left;">
                         <button
+                            id="send-button"
                             type="submit"
-                            class="btn btn-primary button-primary pl-5 pr-5 "
+                            class="btn button-primary pl-5 pr-5 "
                             style="color:#000;border: none;">{{ this.loginButtonText }}
                         </button>
                         <router-link to="register">
@@ -80,13 +81,20 @@ export default {
     },
     methods: {
         async login () {
+            this.blockSendButton()
             this.loginButtonText = 'Entrando...'
             if (await AuthService.login(this.email, this.password)) {
                 await this.$router.push({ name: 'home' })
             } else {
-                this.loginButtonText = 'Entrar'
-                confirm('Erro de autenticação, tente novamente')
+                this.loginButtonText = 'Reenviar dados'
+                this.unblockSendButton()
             }
+        },
+        blockSendButton () {
+            document.querySelector('#send-button').disabled = true
+        },
+        unblockSendButton () {
+            document.querySelector('#send-button').disabled = false
         }
     },
     mounted () {

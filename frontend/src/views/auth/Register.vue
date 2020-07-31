@@ -153,7 +153,6 @@ export default {
         },
         blockSendButton () {
             document.querySelector('#send-button').disabled = true
-            console.log('rola')
         },
         unblockSendButton () {
             document.querySelector('#send-button').disabled = false

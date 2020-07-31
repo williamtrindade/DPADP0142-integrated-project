@@ -1,4 +1,5 @@
 import axios from 'axios'
+import NotificationService from './NotificationService'
 export default {
 
     login: async (email, password) => {
@@ -19,7 +20,7 @@ export default {
             }
             return false
         }).catch(() => {
-            return false
+            NotificationService.danger('Falha na autenticação, tente novamente!')
         })
     },
 

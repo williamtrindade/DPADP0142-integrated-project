@@ -9,6 +9,7 @@ use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Base\Service;
 use App\Validators\AccountValidator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -56,7 +57,6 @@ class AccountService extends Service
                 $account_data[Str::replaceFirst('account_', '', $key)] = $value;
             }
         });
-
         // Create Account
         /** @var Account $account */
         $account = parent::create($account_data);
@@ -65,7 +65,8 @@ class AccountService extends Service
         $user_data['account_id'] = $account->id;
         $user_data['permission'] = User::MANAGER_PERMISSION;
         /** @var User $user */
-        $user = app(UserService::class)->create($user_data);
+      //  dd($user_data);
+        $user = app(UserRepositoryInterface::class)->create($user_data);
         parent::update(['manager_id' => $user->id], $account->id);
         return $account;
     }

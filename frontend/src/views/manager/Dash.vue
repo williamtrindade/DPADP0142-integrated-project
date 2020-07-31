@@ -4,7 +4,31 @@
         <topbar></topbar>
         <div class="content">
             <h1 class="p-3">Dashboard</h1>
-            <div class="row m-0 p-0 justify-content-center">
+            <div class="row m-0 p-0 justify-content-center float-left">
+                <div class="col-md-6 p-3 m-0">
+                    <div class="card">
+                        <div class="card-header">
+                            Featured
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-3 m-0">
+                    <div class="card">
+                        <div class="card-header">
+                            Featured
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-6 p-3 m-0">
                     <div class="card">
                         <div class="card-header">

@@ -18,10 +18,11 @@ class UserValidator implements ValidatorInterface
     public static function validateToCreate(int $account_id = null): array
     {
         return [
-            'name' => 'required',
+            'name' => 'required|string',
             'email' => 'required|email|unique:' . (new User())->getTable(),
-            'password' => 'required',
-            'account_id' => 'required|exists:' . (new Account())->getTable(),
+            'password' => 'required|string',
+            'account_id' => 'required|integer|exists:' . (new Account())->getTable() . ',id',
+            'permission' => 'required|integer'
         ];
     }
 

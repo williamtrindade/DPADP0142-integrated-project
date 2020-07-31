@@ -26,6 +26,10 @@
                             William
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <router-link to="settings">
+                                <a class="btn dropdown-item">Alterar dados da conta</a>
+                            </router-link>
+
                             <a class="dropdown-item" v-on:click="logout()" href="#">Logout</a>
                             <!-- <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="#">Something else here</a> -->
@@ -58,6 +62,7 @@ export default {
 
 <style>
 .topbar {
+    z-index: 1;
     border-bottom: rgb(0, 0, 0) 2px solid;
     height: 70px;
     padding-left: 70px;
@@ -65,7 +70,7 @@ export default {
     float: left;
     width: 100%;
 }
-.topbar .navbar {
+.navbar {
     height: 100%;
     float: left;
     width: 100%;
