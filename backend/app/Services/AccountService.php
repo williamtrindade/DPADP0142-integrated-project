@@ -56,15 +56,17 @@ class AccountService extends Service
                 $account_data[Str::replaceFirst('account_', '', $key)] = $value;
             }
         });
-        $user_data['password'] = Hash::make($user_data['password']);
-        /** @var User $user */
-        $user = app(UserService::class)->create($user_data);
-        $account_data['manager_id'] = $user->id;
+
+        // Create Account
         /** @var Account $account */
         $account = parent::create($account_data);
-        app(UserRepositoryInterface::class)->update([
-            'account_id' => $account->id,
-        ], $user->id);
+        // Setup User
+        $user_data['password'] = Hash::make($user_data['password']);
+        $user_data['account_id'] = $account->id;
+        $user_data['permission'] = User::MANAGER_PERMISSION;
+        /** @var User $user */
+        $user = app(UserService::class)->create($user_data);
+        parent::update(['manager_id' => $user->id], $account->id);
         return $account;
     }
 }

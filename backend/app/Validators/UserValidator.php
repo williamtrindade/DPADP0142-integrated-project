@@ -2,6 +2,7 @@
 
 namespace App\Validators;
 
+use App\Models\Account;
 use App\Models\User;
 
 /**
@@ -11,14 +12,16 @@ use App\Models\User;
 class UserValidator implements ValidatorInterface
 {
     /**
+     * @param int|null $account_id
      * @return string[]
      */
-    public static function validateToCreate(): array
+    public static function validateToCreate(int $account_id = null): array
     {
         return [
             'name' => 'required',
             'email' => 'required|email|unique:' . (new User())->getTable(),
-            'password' => 'required'
+            'password' => 'required',
+            'account_id' => 'required|exists:' . (new Account())->getTable(),
         ];
     }
 

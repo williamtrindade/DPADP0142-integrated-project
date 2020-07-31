@@ -44,9 +44,10 @@ interface ServiceInterface
 
     /**
      * @param array $data
+     * @param int|null $account_id
      * @return mixed
      */
-    public function validateToCreate(array $data);
+    public function validateToCreate(array $data, int $account_id = null);
 
     /**
      * @param $data

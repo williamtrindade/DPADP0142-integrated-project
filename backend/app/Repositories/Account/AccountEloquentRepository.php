@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Account;
 
-use App\Models\Base\AccountModel;
+use App\Models\Account;
 use App\Repositories\Eloquent\EloquentRepository;
 
 /**
@@ -11,14 +11,14 @@ use App\Repositories\Eloquent\EloquentRepository;
  */
 class AccountEloquentRepository extends EloquentRepository implements AccountRepositoryInterface
 {
-    /** @var AccountModel $model */
+    /** @var Account $model */
     public $model;
 
     /**
      * UserEloquentRepository constructor.
-     * @param AccountModel $model
+     * @param Account $model
      */
-    public function __construct(AccountModel $model)
+    public function __construct(Account $model)
     {
         $this->model = $model;
     }

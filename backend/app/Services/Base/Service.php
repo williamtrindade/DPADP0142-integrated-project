@@ -70,10 +70,11 @@ abstract class Service implements ServiceInterface
 
     /**
      * @param $data
+     * @param int|null $account_id
      */
-    public function validateToCreate($data)
+    public function validateToCreate($data, int $account_id = null)
     {
-        Validator::make($data, $this->validator::validateToCreate())->validate();
+        Validator::make($data, $this->validator::validateToCreate($account_id = null))->validate();
     }
 
     /**

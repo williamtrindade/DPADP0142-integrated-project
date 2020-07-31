@@ -1,5 +1,8 @@
 <template>
-    <div id="app" class="full-height full-width float-left">
+    <div id="app" class=" full-height">
+        <notifications group="error" class="mt-3 error"/>
+        <notifications group="success" position="bottom left" class="mb-4 success"/>
+        <notifications group="danger" position="bottom left" class="mb-4 danger"/>
         <!-- <div id="nav">
         <router-link to="/">Home</router-link> |
         </div>-->
@@ -11,9 +14,7 @@
 export default {
     name: 'App',
     mounted () {
-        if (
-            !localStorage.getItem('access_token')
-        ) {
+        if (!localStorage.getItem('access_token')) {
             this.$router.push({ name: 'login' })
         }
     }
@@ -22,11 +23,22 @@ export default {
 
 <style lang="scss">
 @import "assets/scss/custom.css";
-
+.error .vue-notification {
+    background-color: #ff5959;
+    border-left: #00ff9d solid 2px;
+}
+.success .vue-notification {
+    background-color: #37d56f;
+    border-left: #00ff9d solid 2px;
+}
+.danger .vue-notification {
+    background-color: #d53764;
+    border-left: #00ff9d solid 2px;
+}
 html, body {
+    float: left;
     width: 100%;
     height: 100%;
-    float: left;
     margin: 0;
     padding: 0;
 }

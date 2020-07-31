@@ -1,6 +1,6 @@
 <template>
-    <div class="login full-height float-left full-width">
-        <div class="row text-left full-width full-height">
+    <div class="login full-height">
+        <div class="row full-height full-width">
             <div class="col-sm-12 col-md-6  login-left">
                 <h1>
                     Bem-vindo ao .Ponto
@@ -45,7 +45,7 @@
                 </form>
             </div>
 
-            <div class="col-xl-0 col-sm-0 col-md-6 login-right">
+            <div class="col-xl-0 col-sm-0 col-md-6 p-0 m-0 login-right">
                 <img src="../../assets/img/office.svg" alt="IMG">
                 <!-- <div class="form-group">
                     <label for="email">Endereço de email</label>
@@ -104,6 +104,9 @@ export default {
 .button-primary:hover {
     background-color: #5dffbd;
 }
+.button-primary:current {
+    background-color: #5dffbd;
+}
 #form-title {
     font-size: 140%;
 }
@@ -111,21 +114,15 @@ export default {
     padding-left:10%;
     padding-right: 15%;
     padding-top: 10%;
-}
-.login-right img {
-    margin-top: 10%;
-    width: 70%;
-}
-.login-left {
     background-color:#2c2c2c;
-}
-.login-left {
     color:#00ff9d;
 }
 .login-right img {
+    margin-top: 10%;
     margin-left: 10%;
-    margin-top: 20%;
+    width: 70%;
 }
+
 @media (max-width: 900px) {
     .login-right {
         visibility: collapse;

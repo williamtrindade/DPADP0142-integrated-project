@@ -23,7 +23,7 @@ class CreateAccountsTable extends Migration
             $table->string('address')->nullable();
             $table->string('cep')->nullable();
 
-            $table->unsignedBigInteger('manager_id');
+            $table->unsignedBigInteger('manager_id')->nullable();
             $table->foreign('manager_id')
                 ->references('id')
                 ->on('users')

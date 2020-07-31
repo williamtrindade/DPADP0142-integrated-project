@@ -1,12 +1,12 @@
 <template>
-    <div class="login full-height float-left full-width">
-        <div class="row text-left full-width full-height">
+    <div class="register full-height ">
+        <div class="row full-width full-height">
             <div class="col-md-6 login-left">
                 <h1>
                     Bem-vindo ao .Ponto
                 </h1>
                 <hr>
-                <h2 id="form-title">Faça seu registo na plataforma</h2>
+                <h2 id="form-title">Faça seu registro na plataforma</h2>
                 <hr>
                 <form v-on:submit.prevent="register">
                     <div class="form-group">
@@ -67,10 +67,24 @@
                             placeholder="CNPJ da empresa"
                         />
                     </div>
+
+                    <div class="form-group">
+                        <label for="account-phone">Telefone/Celular</label>
+                        <input
+                            required
+                            v-model="account_phone"
+                            type="text"
+                            class="form-control"
+                            id="account-phone"
+                            placeholder="+99 99 99999-9999"
+                        />
+                    </div>
+
                     <div class="justify-content-start float-left full-width" style="text-align: left;">
                         <button
+                            id="send-button"
                             type="submit"
-                            class="btn btn-primary button-primary pl-5 pr-5 "
+                            class="btn button-primary pl-5 pr-5 "
                             style="color:#000;border: none;">{{ this.registerButtonText }}
                         </button>
                         <router-link to="login">
@@ -80,7 +94,7 @@
                 </form>
             </div>
 
-            <div class="col-md-6 login-right">
+            <div class="col-md-6 m-0 p-0 login-right">
                 <img src="../../assets/img/office.svg" alt="IMG">
                 <!-- <div class="form-group">
                     <label for="email">Endereço de email</label>
@@ -104,6 +118,7 @@
 <script>
 
 import AccountService from '../../services/AccountService'
+import NotificationService from '../../services/NotificationService'
 
 export default {
     name: 'Register',
@@ -114,22 +129,34 @@ export default {
             user_email: null,
             account_name: null,
             user_password: null,
-            account_cnpj: null
+            account_cnpj: null,
+            account_phone: null
         }
     },
     methods: {
         async register () {
-            if (await AccountService.create(
+            this.blockSendButton()
+            this.registerButtonText = 'Enviando dados...'
+            const data = await AccountService.create(
                 this.user_name,
                 this.user_email,
                 this.account_name,
                 this.user_password,
-                this.account_cnpj)
-            ) {
+                this.account_cnpj,
+                this.account_phone)
+            if (data === true) {
+                NotificationService.success('Bem vindo, faça seu login agora!')
                 await this.$router.push({ name: 'login' })
-            } else {
-                alert('Erro de autenticação')
             }
+            this.registerButtonText = 'Reenviar dados'
+            this.unblockSendButton()
+        },
+        blockSendButton () {
+            document.querySelector('#send-button').disabled = true
+            console.log('rola')
+        },
+        unblockSendButton () {
+            document.querySelector('#send-button').disabled = false
         }
     },
     mounted () {
@@ -142,11 +169,16 @@ export default {
 
 <style scoped>
     .button-primary {
+        border: none;
         background-color: #00ff9d;
     }
     .button-primary:hover {
         background-color: #5dffbd;
     }
+    .button-primary:active {
+        background-color: #5dffbd;
+    }
+
     #form-title {
         font-size: 140%;
     }

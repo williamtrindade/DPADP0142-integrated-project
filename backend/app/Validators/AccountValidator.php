@@ -14,16 +14,17 @@ use Illuminate\Support\Facades\Validator;
 class AccountValidator implements ValidatorInterface
 {
     /**
+     * @param int|null $account_id
      * @return array
      */
-    public static function validateToCreate(): array
+    public static function validateToCreate(int $account_id = null): array
     {
         return [
             'name' => 'required',
-            'cnpj' => 'required',
+            'cnpj' => 'required|unique:' . (new Account())->getTable(),
             'address' => 'sometimes',
             'cep' => 'sometimes',
-            'manager_id' => 'required|exists:' . (new User())->getTable() . ',id',
+            'manager_id' => 'sometimes|exists:' . (new User())->getTable() . ',id',
             'phone' => 'required|min:8|max:15|unique:' . (new Account())->getTable() . ',phone',
         ];
     }

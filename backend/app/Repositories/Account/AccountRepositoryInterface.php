@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Account;
 
-use App\Models\Base\AccountModel;
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,9 +10,9 @@ interface AccountRepositoryInterface
 {
     /**
      * AccountRepositoryInterface constructor.
-     * @param AccountModel $model
+     * @param Account $model
      */
-    public function __construct(AccountModel $model);
+    public function __construct(Account $model);
 
     /**
      * @param bool $paginate

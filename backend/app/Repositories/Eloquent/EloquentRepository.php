@@ -37,15 +37,12 @@ abstract class EloquentRepository
      */
     public function create(array $data): Model
     {
-        /** @var Model $model */
-        $model = new $this->model;
-        $model->fill($data);
         try {
-            $model->saveOrFail();
+            return $this->model->create($data);
         } catch (Throwable $e) {
+            dd($data);
             throw new Exception('Error on create a Eloquent model in table ['.(new $this->model)->getTable().']');
         }
-        return $model;
     }
 
     /**
