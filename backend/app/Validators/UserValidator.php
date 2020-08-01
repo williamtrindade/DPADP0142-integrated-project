@@ -4,6 +4,7 @@ namespace App\Validators;
 
 use App\Models\Account;
 use App\Models\User;
+use App\Repositories\User\UserRepositoryInterface;
 
 /**
  * Class UserValidator
@@ -12,10 +13,10 @@ use App\Models\User;
 class UserValidator implements ValidatorInterface
 {
     /**
-     * @param int|null $account_id
+     * @param array|null $data
      * @return string[]
      */
-    public static function validateToCreate(int $account_id = null): array
+    public static function validateToCreate(array $data = null): array
     {
         return [
             'name' => 'required|string',
@@ -27,13 +28,21 @@ class UserValidator implements ValidatorInterface
     }
 
     /**
-     * @param int|null $account_id
+     * @param array $data
+     * @param int $id
      * @return array
      */
-    public static function validateToUpdate(int $account_id = null): array
+    public static function validateToUpdate(array $data, int $id): array
     {
         return [
-
+            'name' => 'sometimes|string|min:3|max:250   ',
+            'email' =>
+                'sometimes|email|unique:' .
+                (new User())->getTable() . ',email,' .
+                app(UserRepositoryInterface::class)->read($id)->id,
+            'password' => 'sometimes|string',
+            'account_id' => 'sometimes|integer|exists:' . (new Account())->getTable() . ',id',
+            'permission' => 'sometimes|integer'
         ];
     }
 }

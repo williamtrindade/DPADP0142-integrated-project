@@ -8,10 +8,16 @@
            href="#"
         > .P
         </a>
-        <a href="#"> <i class="fas fa-home"></i></a>
-        <a href="#"> <i class="fas fa-users"></i> </a>
+        <router-link :to="{ name:'manager-dash' }">
+            <i class="fas fa-home"></i>
+        </router-link>
+        <router-link :to="{ name:'manager-employees' }">
+            <i class="fas fa-users"></i>
+        </router-link>
         <a href="#"> <i class="fas fa-clock"></i> </a>
-        <a href=""><i class="fas fa-cogs"></i></a>
+        <router-link :to="{ name:'manager-me-settings' }" >
+            <i class="fas fa-cogs"></i>
+        </router-link>
     </div>
 </template>
 
@@ -27,7 +33,6 @@ export default {
     methods: {
         resizeIcons () {
             const icons = document.querySelectorAll('.manager-sidebar a')
-            console.log(icons)
             icons.forEach(function (icon) {
                 icon.style.height = icon.offsetWidth + 'px'
             })

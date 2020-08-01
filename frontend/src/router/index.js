@@ -6,7 +6,8 @@ import Login from '../views/auth/Login'
 import NotFound from '../views/exceptions/NotFound'
 import ManagerDash from '../views/manager/Dash'
 import Register from '../views/auth/Register'
-import Settings from '../views/manager/settings/Settings'
+import UserSettings from '../views/manager/settings/UserSettings'
+import ListEmployees from '../views/manager/employees/ListEmployees'
 
 Vue.use(VueRouter)
 
@@ -39,9 +40,14 @@ const routes = [
         component: ManagerDash
     },
     {
-        path: '/manager/settings',
-        name: 'manager-settings',
-        component: Settings
+        path: '/manager/me/settings',
+        name: 'manager-me-settings',
+        component: UserSettings
+    },
+    {
+        path: '/manager/employees',
+        name: 'manager-employees',
+        component: ListEmployees
     }
 ]
 

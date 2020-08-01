@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('users', 'UserController@index');
 Route::post('users', 'UserController@create');
-
+Route::get('me', 'UserController@getMe');
+Route::put('me', 'UserController@updateMe');
 /*
  * -----------------------------------------
  * Account

@@ -28,7 +28,8 @@ export default {
     border-left: #00ff9d solid 2px;
 }
 .success .vue-notification {
-    background-color: #37d56f;
+    margin-left: 70px;
+    background-color: #009936;
     border-left: #00ff9d solid 2px;
 }
 .danger .vue-notification {

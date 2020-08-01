@@ -42,4 +42,16 @@ class UserService extends Service
         Arr::set($data, 'password', Hash::make($data['password']));
         return $this->repository->create($data);
     }
+
+    /**
+     * @param $data
+     * @param $id
+     * @return Model
+     */
+    public function update($data, $id)
+    {
+        $this->validateToUpdate($data, $id);
+        if ($pass = Arr::get($data, 'password', false)) $data['password'] = Hash::make($pass);
+        return parent::update($data, $id);
+    }
 }

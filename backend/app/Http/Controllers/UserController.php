@@ -7,6 +7,8 @@ use App\Http\Controllers\Traits\CrudTrait;
 use App\Http\Controllers\Traits\PaginationTrait;
 use App\Http\Response\Response;
 use App\Services\UserService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -38,5 +40,25 @@ class UserController extends Controller
         $this->service = $service;
         $this->request = $request;
         $this->response = $response;
+    }
+
+    /**
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function getMe()
+    {
+        return $this->response->item($this->request->user());
+    }
+
+    /**
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function updateMe()
+    {
+        $data = $this->request->all();
+        $returned_data = $this->service->update($data, $this->request->user()->id);
+        return $this->response->item($returned_data);
     }
 }

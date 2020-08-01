@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Validator;
 class AccountValidator implements ValidatorInterface
 {
     /**
-     * @param int|null $account_id
+     * @param array $data
      * @return array
      */
-    public static function validateToCreate(int $account_id = null): array
+    public static function validateToCreate(array $data): array
     {
         return [
             'name' => 'required',
@@ -30,10 +30,11 @@ class AccountValidator implements ValidatorInterface
     }
 
     /**
-     * @param int|null $account_id
+     * @param array $data
+     * @param int $id
      * @return array
      */
-    public static function validateToUpdate(int $account_id = null): array
+    public static function validateToUpdate(array $data, int $id): array
     {
         return [];
     }

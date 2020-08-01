@@ -53,7 +53,7 @@ abstract class Service implements ServiceInterface
      */
     public function update($data, $id)
     {
-        $this->validateToUpdate($data);
+        $this->validateToUpdate($data, $id);
         return $this->repository->update($data, $id);
     }
 
@@ -70,19 +70,18 @@ abstract class Service implements ServiceInterface
 
     /**
      * @param $data
-     * @param int|null $account_id
      */
-    public function validateToCreate($data, int $account_id = null)
+    public function validateToCreate($data)
     {
-        Validator::make($data, $this->validator::validateToCreate($account_id = null))->validate();
+        Validator::make($data, $this->validator::validateToCreate($data))->validate();
     }
 
     /**
      * @param $data
-     * @param int|null $account_id
+     * @param int $id
      */
-    public function validateToUpdate($data, int $account_id = null)
+    public function validateToUpdate($data, int $id)
     {
-        Validator::make($data, $this->validator::validateToUpdate($account_id))->validate();
+        Validator::make($data, $this->validator::validateToUpdate($data, $id))->validate();
     }
 }

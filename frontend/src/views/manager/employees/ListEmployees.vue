@@ -1,9 +1,9 @@
 <template>
-    <div class="settings">
+    <div class="list-employees">
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="p-3">Dados da conta</h1>
+            <h1 class="p-3">Empregados</h1>
         </div>
     </div>
 </template>
@@ -13,7 +13,7 @@ import Sidebar from '@/components/manager/Sidebar'
 import Topbar from '@/components/manager/Topbar'
 
 export default {
-    name: 'Settings',
+    name: 'ListEmployees',
     components: {
         sidebar: Sidebar,
         topbar: Topbar
@@ -22,10 +22,10 @@ export default {
 </script>
 
 <style scoped>
-    h1 {
-        background-color: rgb(0, 0, 0);
-        color: white;
-        font-size: 130%;
-        text-align: left;
-    }
+h1 {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 130%;
+    text-align: left;
+}
 </style>
