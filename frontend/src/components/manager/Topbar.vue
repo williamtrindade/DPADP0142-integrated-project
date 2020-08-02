@@ -33,14 +33,10 @@
                         <div class="dropdown-menu mt-1" aria-labelledby="navbarDropdownMenuLink" style="border-radius: 0;border-style: none">
                             <router-link :to="{ name:'manager-me-settings' }"  class="btn dropdown-item">
                                 <div class="link-drop">
-                                    <i class="fas fa-user"></i> Meus dados
+                                    <i class="fas fa-user"></i>
+                                    Configurações
                                 </div>
 
-                            </router-link>
-                            <router-link :to="{ name:'manager-me-settings' }"  class="btn dropdown-item">
-                                <div class="link-drop">
-                                    <i class="fas fa-cogs"></i> Configurações da conta
-                                </div>
                             </router-link>
                             <a class="dropdown-item" v-on:click="logout()" href="#">
                                 <div class="link-drop-logout">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Base\Controller;
 use App\Http\Controllers\Traits\CrudTrait;
 use App\Http\Controllers\Traits\PaginationTrait;
 use App\Http\Response\Response;
+use App\Scopes\AccountScope;
 use App\Services\AccountService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -43,12 +44,37 @@ class AccountController extends Controller
     }
 
     /**
+     * Guest Create / Not Auth
      * @return JsonResponse
      * @throws Exception
      */
     public function create()
     {
         $data = $this->service->create($this->request->all());
+        return $this->response->item($data);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function read($id): JsonResponse
+    {
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $data = $this->service->read($id);
+        return $this->response->item($data);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function update($id): JsonResponse
+    {
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $data = $this->service->update($this->request->all(), $id);
         return $this->response->item($data);
     }
 }

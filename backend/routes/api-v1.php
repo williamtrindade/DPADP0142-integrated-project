@@ -3,17 +3,25 @@
 use Illuminate\Support\Facades\Route;
 
 /*
+ * ----------------------------------------
+ * User Me
+ * ________________________________________
+ */
+Route::get('me', 'UserController@getMe');
+Route::put('me', 'UserController@updateMe');
+
+/*
  * -----------------------------------------
  * Users
  * _________________________________________
  */
 Route::get('users', 'UserController@index');
 Route::post('users', 'UserController@create');
-Route::get('me', 'UserController@getMe');
-Route::put('me', 'UserController@updateMe');
+
 /*
  * -----------------------------------------
- * Account
+ * Accounts
  * _________________________________________
  */
-// Route::post('accounts', 'AccountController@create');
+Route::get('accounts/{id}', 'AccountController@read');
+Route::put('accounts/{id}', 'AccountController@update');

@@ -69,7 +69,7 @@
                                         class="btn button-primary pl-3 pr-3 mr-3 "
                                         style="color:#434343">
                                         <i class="fas fa-check"></i>
-                                        Salvar dados pessoais
+                                        Atualizar dados pessoais
                                     </button>
                                 </div>
                             </div>
@@ -78,85 +78,85 @@
                 </div>
             </div>
 
-            <!--            <div class="card-data pl-4 pr-4">-->
-            <!--                <div class="card">-->
-            <!--                    <div class="card-header">-->
-            <!--                        Dados Pessoais-->
-            <!--                    </div>-->
-            <!--                    <div class="card-body">-->
-            <!--                        <form v-on:submit.prevent="login">-->
+            <div class="card-data pl-4 pr-4">
+                <div class="card">
+                    <div class="card-header">
+                        Dados da conta
+                    </div>
+                    <div class="card-body">
+                        <form v-on:submit.prevent="saveAccountData">
 
-            <!--                            <div class="row">-->
-            <!--                                <div class="col-md-6 col-sm-12">-->
-            <!--                                    <div class="form-group">-->
-            <!--                                        <label for="email">Endereço de email</label>-->
-            <!--                                        <input-->
-            <!--                                            required-->
-            <!--                                            v-model="email"-->
-            <!--                                            type="email"-->
-            <!--                                            class="form-control"-->
-            <!--                                            id="email"-->
-            <!--                                            placeholder="Digite seu email."-->
-            <!--                                        />-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="col-md-6 col-sm-12">-->
-            <!--                                    <div class="form-group">-->
-            <!--                                        <label for="email">Endereço de email</label>-->
-            <!--                                        <input-->
-            <!--                                            required-->
-            <!--                                            v-model="email"-->
-            <!--                                            type="email"-->
-            <!--                                            class="form-control"-->
-            <!--                                            id="email"-->
-            <!--                                            placeholder="Digite seu email."-->
-            <!--                                        />-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="account-name">Nome da empresa</label>
+                                        <input
+                                            required
+                                            v-model="accountName"
+                                            type="text"
+                                            class="form-control"
+                                            id="account-name"
+                                            placeholder="Digite o nome da empresa."
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="account-phone">Telefone</label>
+                                        <input
+                                            required
+                                            v-model="accountPhone"
+                                            type="number"
+                                            class="form-control"
+                                            id="account-phone"
+                                            placeholder="99 9 9999-9999"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
 
-            <!--                            <div class="row">-->
-            <!--                                <div class="col-md-6 col-sm-12">-->
-            <!--                                    <div class="form-group">-->
-            <!--                                        <label for="pass">Senha</label>-->
-            <!--                                        <input-->
-            <!--                                            required-->
-            <!--                                            v-model="password"-->
-            <!--                                            type="password"-->
-            <!--                                            class="form-control"-->
-            <!--                                            id="pass"-->
-            <!--                                            placeholder="Digite sua senha."-->
-            <!--                                        />-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="col-md-6 col-sm-12">-->
-            <!--                                </div>-->
-            <!--                            </div>-->
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="account-cnpj">CNPJ</label>
+                                        <input
+                                            required
+                                            v-model="accountCnpj"
+                                            type="text"
+                                            class="form-control"
+                                            id="account-cnpj"
+                                            placeholder="99.999.999/9999-99"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                </div>
+                            </div>
 
-            <!--                            <div class="row justify-content-between buttons">-->
-            <!--                                <div class="col-md-6 col-sm-12">-->
-            <!--                                    <button-->
-            <!--                                        id="send-button"-->
-            <!--                                        type="submit"-->
-            <!--                                        class="btn button-primary pl-3 pr-3 mr-3 "-->
-            <!--                                        style="color:#434343"><i class="fas fa-check"></i> Salvar dados da conta-->
-            <!--                                    </button>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </form>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--                <div class="row">-->
-            <!--                    <div class="pt-4 col-md-12">-->
-            <!--                        <router-link-->
-            <!--                            style="color:#434343;"-->
-            <!--                            class="btn button-secondary pl-5 pr-5"-->
-            <!--                            to="register">-->
-            <!--                            Voltar-->
-            <!--                        </router-link>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
+                            <div class="row justify-content-between buttons">
+                                <div class="col-md-6 col-sm-12">
+                                    <button
+                                        id="send-account-data-button"
+                                        type="submit"
+                                        class="btn button-primary pl-3 pr-3 mr-3 "
+                                        style="color:#434343"><i class="fas fa-check"></i>
+                                        Atualizar dados da conta
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="pt-4 col-md-12">
+                        <a
+                            v-on:click="back"
+                            style="color:#434343;"
+                            class="btn button-secondary pl-5 pr-5">Voltar
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -166,15 +166,19 @@ import Sidebar from '@/components/manager/Sidebar'
 import Topbar from '@/components/manager/Topbar'
 import UserService from '../../../services/UserService'
 import NotificationService from '../../../services/NotificationService'
+import AccountService from '../../../services/AccountService'
 
 export default {
-    name: 'UserSettings',
+    name: 'Settings',
     data () {
         return {
             name: null,
             email: null,
             password: null,
-            permission: null
+            permission: null,
+            accountName: null,
+            accountCnpj: null,
+            accountPhone: null
         }
     },
     components: {
@@ -182,10 +186,16 @@ export default {
         topbar: Topbar
     },
     async mounted () {
+        // Get user data
         const data = await UserService.get()
         this.name = data.name
         this.email = data.email
         this.permission = data.permission
+        // Get account data
+        const accountData = await AccountService.get()
+        this.accountName = accountData.name
+        this.accountCnpj = accountData.cnpj
+        this.accountPhone = accountData.phone
     },
     methods: {
         async savePersonalData () {
@@ -198,11 +208,32 @@ export default {
             this.unblockSendPersonalDataButton()
             NotificationService.success('Dados alterados!')
         },
+        async saveAccountData () {
+            this.blockSendAccountDataButton()
+            const data = await AccountService.update(this.accountName, this.accountCnpj, this.accountPhone)
+            if (data !== false) {
+                this.accountName = data.name
+                this.accountCnpj = data.cnpj
+                this.accountPhone = data.phone
+            }
+            this.unblockSendAccountDataButton()
+            NotificationService.success('Dados alterados!')
+        },
         blockSendPersonalDataButton () {
             document.querySelector('#send-personal-data-button').disabled = true
         },
         unblockSendPersonalDataButton () {
             document.querySelector('#send-personal-data-button').disabled = false
+        },
+        blockSendAccountDataButton () {
+            // send-account-data-button
+            document.querySelector('#send-account-data-button').disabled = true
+        },
+        unblockSendAccountDataButton () {
+            document.querySelector('#send-account-data-button').disabled = false
+        },
+        back () {
+            this.$router.go(-1)
         }
     }
 }

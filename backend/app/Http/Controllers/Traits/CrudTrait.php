@@ -22,7 +22,7 @@ trait CrudTrait
      * @return JsonResponse
      * @throws Exception
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $data = $this->service->all(true, $this->getPage(), $this->getShow());
         return $this->response->collection($data);
@@ -32,20 +32,32 @@ trait CrudTrait
      * @return JsonResponse
      * @throws Exception
      */
-    public function create()
+    public function create(): JsonResponse
     {
         $data = $this->service->create($this->request->all());
         return $this->response->item($data);
     }
 
-    public function read()
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function read($id): JsonResponse
     {
-
+        $data = $this->service->read($id);
+        return $this->response->item($data);
     }
 
-    public function update()
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function update($id): JsonResponse
     {
-
+        $data = $this->service->update($this->request->all(), $id);
+        return $this->response->item($data);
     }
 
     public function delete()

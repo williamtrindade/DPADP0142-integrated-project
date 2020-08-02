@@ -24,6 +24,7 @@ export default {
 <style lang="scss">
 @import "assets/scss/custom.css";
 .error .vue-notification {
+    margin-left: 70px;
     background-color: #ff5959;
     border-left: #00ff9d solid 2px;
 }
@@ -33,6 +34,7 @@ export default {
     border-left: #00ff9d solid 2px;
 }
 .danger .vue-notification {
+    margin-left: 70px;
     background-color: #d53764;
     border-left: #00ff9d solid 2px;
 }

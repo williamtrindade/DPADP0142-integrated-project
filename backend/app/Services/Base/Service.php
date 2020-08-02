@@ -53,8 +53,9 @@ abstract class Service implements ServiceInterface
      */
     public function update($data, $id)
     {
+        $item = $this->repository->read($id);
         $this->validateToUpdate($data, $id);
-        return $this->repository->update($data, $id);
+        return $this->repository->update($data, null, $item);
     }
 
     /**

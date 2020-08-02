@@ -36,7 +36,14 @@ class AccountValidator implements ValidatorInterface
      */
     public static function validateToUpdate(array $data, int $id): array
     {
-        return [];
+        return [
+            'name' => 'sometimes|string',
+            'cnpj' => 'sometimes|unique:' . (new Account())->getTable() . ',cnpj,' . $id,
+            'address' => 'sometimes',
+            'cep' => 'sometimes',
+            'manager_id' => 'sometimes|exists:' . (new User())->getTable() . ',id',
+            'phone' => 'sometimes|min:8|max:15|unique:' . (new Account())->getTable() . ',phone,' . $id,
+        ];
     }
 
     /**

@@ -38,8 +38,7 @@ class UserValidator implements ValidatorInterface
             'name' => 'sometimes|string|min:3|max:250   ',
             'email' =>
                 'sometimes|email|unique:' .
-                (new User())->getTable() . ',email,' .
-                app(UserRepositoryInterface::class)->read($id)->id,
+                (new User())->getTable() . ',email,' . $id,
             'password' => 'sometimes|string',
             'account_id' => 'sometimes|integer|exists:' . (new Account())->getTable() . ',id',
             'permission' => 'sometimes|integer'

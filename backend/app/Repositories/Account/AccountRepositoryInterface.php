@@ -4,8 +4,14 @@ namespace App\Repositories\Account;
 
 use App\Models\Account;
 use App\Models\User;
+use App\Scopes\ScopeInterface;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Interface AccountRepositoryInterface
+ * @package App\Repositories\Account
+ * @method void addScope(ScopeInterface $scope)
+ */
 interface AccountRepositoryInterface
 {
     /**
@@ -36,10 +42,11 @@ interface AccountRepositoryInterface
 
     /**
      * @param array $data
-     * @param int $id
+     * @param int|null $id
+     * @param Model|null $model
      * @return User
      */
-    public function update(array $data, int $id): Model;
+    public function update(array $data, int $id = null, Model $model = null): Model;
 
     /**
      * @param int $id

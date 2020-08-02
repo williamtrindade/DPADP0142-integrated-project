@@ -7,6 +7,7 @@ use HttpException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\UnauthorizedException;
@@ -61,6 +62,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e): Response
     {
+        if ($e instanceof ThrottleRequestsException) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_TOO_MANY_REQUESTS]
+            ], Response::HTTP_TOO_MANY_REQUESTS);
+        }
+
         if ($e instanceof AuthenticationException) {
             return new JsonResponse([
                 'success' => false,

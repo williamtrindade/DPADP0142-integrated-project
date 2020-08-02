@@ -32,10 +32,11 @@ interface RepositoryInterface
 
     /**
      * @param array $data
-     * @param int $id
+     * @param int|null $id
+     * @param Model|null $item
      * @return Model
      */
-    public function update(array $data, int $id): Model;
+    public function update(array $data, int $id = null, Model $item = null): Model;
 
     /**
      * @param int $id

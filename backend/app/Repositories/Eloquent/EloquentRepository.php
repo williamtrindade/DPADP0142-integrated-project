@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Repositories\RepositoryInterface;
 use Illuminate\Database\Eloquent\{Model, ModelNotFoundException};
 use Exception;
 use Throwable;
@@ -12,7 +13,7 @@ use Throwable;
  *
  * @property Model $model
  */
-abstract class EloquentRepository
+abstract class EloquentRepository implements RepositoryInterface
 {
     protected $model;
 
@@ -49,21 +50,30 @@ abstract class EloquentRepository
      * @return Model
      * @throws ModelNotFoundException
      */
-    public function read(int $id): Model
+    public function read($id): Model
     {
         return $this->model->findOrFail($id);
     }
 
     /**
      * @param array $data
-     * @param int $id
+     * @param int|null $id
+     * @param Model|null $item
      * @return Model
+     * @throws Exception
      */
-    public function update(array $data, int $id): Model
+    public function update(array $data, int $id = null, Model $item = null): Model
     {
-        $model = $this->read($id);
-        $model->update($data);
-        return $model;
+        if (($id == null) && ($item != null)) {
+            $item->update($data);
+        } elseif (($id != null) && ($item == null)) {
+            $item = $this->read($id);
+            $item->update($data);
+            return $item;
+        } elseif (($id == null) && ($item == null)) {
+            throw new Exception('Error on update a Eloquent model in table ['.(new $this->model)->getTable().']');
+        }
+        return $item;
     }
 
     /**

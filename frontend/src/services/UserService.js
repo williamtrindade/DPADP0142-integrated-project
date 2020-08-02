@@ -10,7 +10,9 @@ export default {
             return {
                 name: resp.data.data.name,
                 email: resp.data.data.email,
-                permission: resp.data.data.permission
+                permission: resp.data.data.permission,
+                account_id: resp.data.data.account_id,
+                id: resp.data.data.id
             }
         }).catch((err) => {
             if (err.response.status === 500) {
@@ -18,7 +20,7 @@ export default {
             } else if (err.response.status === 401) {
                 AuthService.refreshToken().then((resp) => {
                     console.log(resp)
-                    // NotificationService.danger(resp)
+                    NotificationService.danger(resp)
                 })
             }
         })
@@ -47,7 +49,7 @@ export default {
             } else if (err.response.status === 401) {
                 AuthService.refreshToken().then((resp) => {
                     console.log(resp)
-                    // NotificationService.danger(resp)
+                    NotificationService.danger(resp)
                 })
             } else if (err.response.status === 422) {
                 NotificationService.throwValidationErros(err.response.data.data)
