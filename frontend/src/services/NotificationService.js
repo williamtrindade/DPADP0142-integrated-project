@@ -20,7 +20,7 @@ export default {
             group: 'success',
             title: 'Sucesso!',
             text: message,
-            duration: 10000
+            duration: 1000
         })
     },
 

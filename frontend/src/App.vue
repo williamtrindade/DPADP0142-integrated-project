@@ -1,11 +1,8 @@
 <template>
-    <div id="app" class=" full-height">
+    <div id="app" class="full-height">
         <notifications group="error" position="left bottom" class="mt-3 error"/>
         <notifications group="success" position="bottom left" class="mb-4 success"/>
         <notifications group="danger" position="bottom left" class="mb-4 danger"/>
-        <!-- <div id="nav">
-        <router-link to="/">Home</router-link> |
-        </div>-->
         <router-view />
     </div>
 </template>
@@ -14,7 +11,7 @@
 export default {
     name: 'App',
     mounted () {
-        if (!localStorage.getItem('access_token')) {
+        if ((!localStorage.getItem('access_token')) && (this.$route.fullPath === 'auth/register')) {
             this.$router.push({ name: 'login' })
         }
     }
@@ -26,17 +23,18 @@ export default {
 .error .vue-notification {
     margin-left: 70px;
     background-color: #ff5959;
-    border-left: #00ff9d solid 2px;
+    border-left: #000000 solid 2px;
 }
 .success .vue-notification {
     margin-left: 70px;
-    background-color: #009936;
-    border-left: #00ff9d solid 2px;
+    background-color: #00ff9d;
+    color: black;
+    border-left: #000000 solid 2px;
 }
 .danger .vue-notification {
     margin-left: 70px;
     background-color: #d53764;
-    border-left: #00ff9d solid 2px;
+    border-left: #000000 solid 2px;
 }
 html, body {
     float: left;
@@ -64,6 +62,7 @@ h1 label {
     padding-top: 70px;
     padding-left: 70px;
     height: 100%;
+    min-height: 100%;
 }
 .link-text {
     color: #fff;

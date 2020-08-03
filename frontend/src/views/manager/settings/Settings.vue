@@ -1,11 +1,11 @@
 <template>
-    <div class="settings">
+    <div class="settings full-height">
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
             <h1 class="p-3">Meus dados</h1>
 
-            <div class="card-data p-4">
+            <div class="card-data p-3">
                 <div class="card">
                     <div class="card-header">
                         Dados Pessoais
@@ -67,9 +67,8 @@
                                         id="send-personal-data-button"
                                         type="submit"
                                         class="btn button-primary pl-3 pr-3 mr-3 "
-                                        style="color:#434343">
-                                        <i class="fas fa-check"></i>
-                                        Atualizar dados pessoais
+                                    >
+                                        Salvar
                                     </button>
                                 </div>
                             </div>
@@ -78,7 +77,7 @@
                 </div>
             </div>
 
-            <div class="card-data pl-4 pr-4">
+            <div class="card-data pl-3 pr-3">
                 <div class="card">
                     <div class="card-header">
                         Dados da conta
@@ -139,21 +138,12 @@
                                         id="send-account-data-button"
                                         type="submit"
                                         class="btn button-primary pl-3 pr-3 mr-3 "
-                                        style="color:#434343"><i class="fas fa-check"></i>
-                                        Atualizar dados da conta
+                                    >
+                                        Salvar
                                     </button>
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="pt-4 col-md-12">
-                        <a
-                            v-on:click="back"
-                            style="color:#434343;"
-                            class="btn button-secondary pl-5 pr-5">Voltar
-                        </a>
                     </div>
                 </div>
             </div>
@@ -231,9 +221,6 @@ export default {
         },
         unblockSendAccountDataButton () {
             document.querySelector('#send-account-data-button').disabled = false
-        },
-        back () {
-            this.$router.go(-1)
         }
     }
 }
@@ -249,12 +236,9 @@ h1 {
 .card-data {
 }
 .button-primary {
+    font-size: 100%;
     background-color: #00ff9d;
-    border:#00ff9d 2px solid;
-}
-.button-secondary {
-    border: 1px solid #000;
-    background-color: #ffffff;
+    color: black;
 }
 .button-primary:hover {
     background-color: #5dffbd;
