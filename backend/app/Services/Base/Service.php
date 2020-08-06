@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
  * @property RepositoryInterface $repository
  * @property ValidatorInterface $validator
  */
-abstract class Service implements ServiceInterface
+abstract class Service
 {
     /**
      * @param bool $paginate

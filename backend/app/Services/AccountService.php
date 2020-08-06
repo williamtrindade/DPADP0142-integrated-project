@@ -8,6 +8,7 @@ use App\Repositories\Account\AccountRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Scopes\Service\ScopeTrait;
 use App\Services\Base\Service;
+use App\Services\Base\ServiceInterface;
 use App\Validators\AccountValidator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ use Illuminate\Support\Str;
  * Class AccountService
  * @package App\Services
  */
-class AccountService extends Service
+class AccountService extends Service implements ServiceInterface
 {
     use ScopeTrait;
 

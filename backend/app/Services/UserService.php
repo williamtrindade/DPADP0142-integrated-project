@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Base\Service;
+use App\Services\Base\ServiceInterface;
 use App\Validators\UserValidator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
  * Class UserService
  * @package App\Services
  */
-class UserService extends Service
+class UserService extends Service implements ServiceInterface
 {
     /** @var UserRepositoryInterface $repository */
     public $repository;
