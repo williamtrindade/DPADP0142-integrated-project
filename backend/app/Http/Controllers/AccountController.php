@@ -18,7 +18,6 @@ use Illuminate\Http\Request;
  */
 class AccountController extends Controller
 {
-
     use CrudTrait;
     use PaginationTrait;
 
