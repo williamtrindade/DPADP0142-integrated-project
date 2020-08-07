@@ -1,36 +1,43 @@
 <template>
     <div class="register">
         <div class="register-left align-middle">
-            <div class="div-left-content p-5 shadow-lg bg-white rounded">
+            <div class="div-left-content shadow-lg bg-white rounded">
+                <h1 style="text-align: center" class="title-ponto">.Ponto</h1>
+                <hr>
                 <h2 id="form-title">Cadastre-se</h2>
                 <hr>
                 <form v-on:submit.prevent="register" class="form">
-                    <div class="form-group">
-                        <label for="user-name">Nome</label>
-                        <input
-                            required
-                            minlength="3"
-                            maxlength="255"
-                            v-model="user_name"
-                            type="text"
-                            class="form-control"
-                            id="user-name"
-                            placeholder="Seu nome"
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Endereço de email</label>
-                        <input
-                            required
-                            minlength="3"
-                            maxlength="255"
-                            v-model="user_email"
-                            type="email"
-                            class="form-control"
-                            id="email"
-                            placeholder="Seu e-mail"
-                        />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="user-name">Nome</label>
+                                <input
+                                    required
+                                    minlength="3"
+                                    maxlength="255"
+                                    v-model="user_name"
+                                    type="text"
+                                    class="form-control"
+                                    id="user-name"
+                                    placeholder="Seu nome"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">Endereço de email</label>
+                                <input
+                                    required
+                                    minlength="3"
+                                    maxlength="255"
+                                    v-model="user_email"
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    placeholder="Seu e-mail"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -104,13 +111,6 @@
         </div>
 
         <div class="register-right">
-            <div class="div-right-content">
-                <h1 class="welcome-title ">
-                    .Ponto
-                </h1>
-                <p>Venha revolucionar o mercado de trabalho conosco.</p>
-                <p>Qualidade e simplicidade no registro de ponto em apenas um click</p>
-            </div>
         </div>
     </div>
 </template>
@@ -172,7 +172,9 @@ export default {
     height: 100%;
 }
 .div-left-content {
-    width: 60%;
+    padding: 5%;
+}
+.div-left-content {
 }
 .button-primary {
     color: #ffffff;
@@ -189,7 +191,7 @@ export default {
 }
 .register-left {
     background: rgb(0,255,157);
-    background: linear-gradient(343deg, rgba(0,255,157,1) 50%, rgba(255,255,255,1) 50%);
+    background: linear-gradient(320deg, rgba(0,255,157,1) 0%, rgba(255,255,255,1) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -200,7 +202,9 @@ export default {
     color: #000000;
 }
 .register-right {
-    background-color:  rgb(0,255,157);;
+    z-index: 1;
+    background-image: url("../../../public/img/wal2.jpg");
+    background-color: rgb(0,255,157);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -219,10 +223,11 @@ export default {
     color: #242424;
 }
 .welcome-title {
+    z-index: 9999;
     font-family: 'Signika Negative', sans-serif;
     font-size: 300%;
     text-align: left;
-    color: #242424;
+    color: #ffffff;
 }
 .div-right-content {
     text-align: left;
@@ -230,10 +235,30 @@ export default {
 }
 .div-right-content p {
     font-family: 'Signika Negative', sans-serif;
-    color: #242424;
+    color: #ffffff;
     font-size: 200%;
 }
-@media (max-width: 900px) {
+#form-title {
+    font-size: 100%;
+}
+.form input {
+    font-size: 80%;
+}
+.form label {
+    font-size: 80%;
+}
+@media (max-width: 575.98px)  {
+    .register-left {
+        width: 100%;
+    }
+    .div-left-content {
+        width: 90%;
+    }
+    .register-right {
+        display: none;
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
     .div-left-content {
         width: 90%;
     }
@@ -241,7 +266,38 @@ export default {
         width: 100%;
     }
     .register-right {
-        visibility: collapse;
+        display: none;
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .div-right-content p {
+        font-size: 150%;
+    }
+
+    .div-left-content {
+        width: 70%;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+@media (min-width: 1200px) and (max-width: 1900px){
+    .div-right-content p {
+        font-size: 130%;
+    }
+    .title-ponto {
+        font-size: 100%;
+    }
+}
+@media (min-width: 1901px) {
+
+    #form-title {
+        font-size: 130%;
+    }
+    .form input {
+        font-size: 100%;
+    }
+    .form label {
+        font-size: 100%;
     }
 }
 </style>
