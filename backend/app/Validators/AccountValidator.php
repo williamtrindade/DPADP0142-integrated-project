@@ -19,9 +19,10 @@ class AccountValidator implements ValidatorInterface
      */
     public static function validateToCreate(array $data): array
     {
+        $account_table = (new Account())->getTable();
         return [
-            'name' => 'required',
-            'cnpj' => 'required|unique:' . (new Account())->getTable(),
+            'name' => 'required|min:3|max:255',
+            'cnpj' => ['required', 'min:14', 'max:18' , 'unique:' . $account_table, new CnpjRule],
             'address' => 'sometimes',
             'cep' => 'sometimes',
             'manager_id' => 'sometimes|exists:' . (new User())->getTable() . ',id',
@@ -36,9 +37,10 @@ class AccountValidator implements ValidatorInterface
      */
     public static function validateToUpdate(array $data, int $id): array
     {
+        $account_table = (new Account())->getTable();
         return [
-            'name' => 'sometimes|string',
-            'cnpj' => 'sometimes|unique:' . (new Account())->getTable() . ',cnpj,' . $id,
+            'name' => 'sometimes|min:3|max:255|string',
+            'cnpj' => ['sometimes', 'min:14', 'max:18' , 'unique:' . $account_table . ', cnpj,' . $id, new CnpjRule],
             'address' => 'sometimes',
             'cep' => 'sometimes',
             'manager_id' => 'sometimes|exists:' . (new User())->getTable() . ',id',
@@ -55,7 +57,7 @@ class AccountValidator implements ValidatorInterface
             'user_name' => 'required|string|max:255|min:3',
             'user_email' => 'required|email|max:255|min:3|unique:' . (new User())->getTable() . ',email',
             'account_name' => 'required|string|max:255|min:3',
-            'user_password' => 'required|min:6|max:255',
+            'user_password' => 'required|min:6|max:500',
             'account_phone' => 'required|min:8|max:15|unique:' . (new Account())->getTable() . ',phone',
             'account_cnpj' => ['bail', 'required', 'min:14', 'max:18', new CnpjRule],
         ])->validate();

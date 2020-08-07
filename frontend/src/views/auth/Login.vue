@@ -13,6 +13,8 @@
                         <label for="email">Endereço de email</label>
                         <input
                             required
+                            minlength="3"
+                            maxlength="255"
                             v-model="email"
                             type="email"
                             class="form-control"
@@ -25,6 +27,8 @@
                         <label for="pass">Senha</label>
                         <input
                             required
+                            minlength="6"
+                            maxlength="500"
                             v-model="password"
                             type="password"
                             class="form-control"
@@ -126,8 +130,8 @@ export default {
     color:#00ff9d;
 }
 .login-right img {
-    margin-top: 10%;
     margin-left: 10%;
+    margin-top: 20%;
     width: 70%;
 }
 

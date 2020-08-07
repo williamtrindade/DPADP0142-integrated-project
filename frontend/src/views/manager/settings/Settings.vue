@@ -18,13 +18,13 @@
                                     <div class="form-group">
                                         <label for="name">Nome</label>
                                         <input
+                                            required
                                             min="3"
-                                            max="250"
+                                            max="255"
                                             type="text"
                                             class="form-control"
                                             id="name"
-                                            placeholder="Digite seu nome"
-                                            required
+                                            placeholder="Digite seu nome."
                                             v-model="name"
                                         />
                                     </div>
@@ -34,6 +34,8 @@
                                         <label for="email">Endereço de email</label>
                                         <input
                                             required
+                                            minlength="3"
+                                            maxlength="255"
                                             type="email"
                                             class="form-control"
                                             id="email"
@@ -49,6 +51,8 @@
                                     <div class="form-group">
                                         <label for="pass">Senha</label>
                                         <input
+                                            minlength="3"
+                                            maxlength="500"
                                             type="password"
                                             class="form-control"
                                             id="pass"
@@ -91,6 +95,8 @@
                                         <label for="account-name">Nome da empresa</label>
                                         <input
                                             required
+                                            minlength="3"
+                                            maxlength="255"
                                             v-model="accountName"
                                             type="text"
                                             class="form-control"
@@ -104,6 +110,8 @@
                                         <label for="account-phone">Telefone</label>
                                         <input
                                             required
+                                            minlength="8"
+                                            maxlength="15"
                                             v-model="accountPhone"
                                             type="number"
                                             class="form-control"
@@ -120,6 +128,8 @@
                                         <label for="account-cnpj">CNPJ</label>
                                         <input
                                             required
+                                            minlength="14"
+                                            maxlength="18"
                                             v-model="accountCnpj"
                                             type="text"
                                             class="form-control"
@@ -138,8 +148,7 @@
                                         id="send-account-data-button"
                                         type="submit"
                                         class="btn button-primary pl-3 pr-3 mr-3 "
-                                    >
-                                        Salvar
+                                    >Salvar
                                     </button>
                                 </div>
                             </div>

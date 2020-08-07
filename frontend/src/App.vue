@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="full-height">
+    <div id="app" class="full-height full-width">
         <notifications group="error" position="left bottom" class="mt-3 error"/>
         <notifications group="success" position="bottom left" class="mb-4 success"/>
         <notifications group="danger" position="bottom left" class="mb-4 danger"/>
