@@ -1,7 +1,7 @@
 <template>
     <div class="register">
         <div class="register-left align-middle">
-            <div class="div-left-content shadow-lg bg-white rounded">
+            <div class="div-left-content shadow-lg bg-white">
                 <h1 style="text-align: center" class="title-ponto">.Ponto</h1>
                 <hr>
                 <h2 id="form-title">Cadastre-se</h2>
@@ -174,8 +174,6 @@ export default {
 .div-left-content {
     padding: 5%;
 }
-.div-left-content {
-}
 .button-primary {
     color: #ffffff;
     border: none;
@@ -221,17 +219,6 @@ export default {
 }
 .link-text-register:hover {
     color: #242424;
-}
-.welcome-title {
-    z-index: 9999;
-    font-family: 'Signika Negative', sans-serif;
-    font-size: 300%;
-    text-align: left;
-    color: #ffffff;
-}
-.div-right-content {
-    text-align: left;
-    width: 60%;
 }
 .div-right-content p {
     font-family: 'Signika Negative', sans-serif;

@@ -56,6 +56,7 @@ export default {
             phone
         }
         return axios.put('/v1/accounts/' + localStorage.getItem('account_id'), data, options).then((resp) => {
+            NotificationService.success('Dados alterados!')
             return {
                 name: resp.data.data.name,
                 cnpj: resp.data.data.cnpj,

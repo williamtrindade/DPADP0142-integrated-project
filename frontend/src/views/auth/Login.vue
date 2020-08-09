@@ -1,12 +1,10 @@
 <template>
-    <div class="login full-height">
-        <div class="row full-height full-width">
-            <div class="col-sm-12 col-md-6  login-left">
-                <h1>
-                    Bem-vindo ao .Ponto
-                </h1>
+    <div class="login">
+        <div class="login-left align-middle">
+            <div class="div-left-content shadow-lg bg-white">
+                <h1 style="text-align: center" class="title-ponto">.Ponto</h1>
                 <hr>
-                <h2 id="form-title">Faça seu login</h2>
+                <h2 id="form-title">Entre</h2>
                 <hr>
                 <form v-on:submit.prevent="login">
                     <div class="form-group">
@@ -40,33 +38,17 @@
                         <button
                             id="send-button"
                             type="submit"
-                            class="btn button-primary pl-5 pr-5 "
-                            style="color:#000;border: none;">{{ this.loginButtonText }}
+                            class="btn button-primary pl-5 pr-5"
+                            style="border: none;">{{ loginButtonText }}
                         </button>
                         <router-link to="register">
-                            <a href="#" class="link-text pl-3 pt-1" >Ainda não tenho conta!</a>
+                            <a href="#" class="link-text-login pl-3 pt-1" >Ainda não tenho conta!</a>
                         </router-link>
                     </div>
                 </form>
             </div>
-
-            <div class="col-xl-0 col-sm-0 col-md-6 p-0 m-0 login-right">
-                <img src="../../assets/img/office.svg" alt="IMG">
-                <!-- <div class="form-group">
-                    <label for="email">Endereço de email</label>
-                    <input type="email" class="form-control" id="email">
-                </div>
-
-                <div class="form-group">
-                    <label for="pass">Password</label>
-                    <input type="password" class="form-control" id="pass">
-                </div>-->
-
-                <!-- <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>-->
-            </div>
+        </div>
+        <div class="login-right">
         </div>
     </div>
 </template>
@@ -110,34 +92,123 @@ export default {
 </script>
 
 <style scoped>
-.button-primary {
-    background-color: #00ff9d;
+.login {
+    width: 100%;
+    height: 100%;
 }
-.button-primary:hover {
-    background-color: #5dffbd;
-}
-.button-primary:current {
-    background-color: #5dffbd;
-}
-#form-title {
-    font-size: 140%;
-}
-.login-left {
-    padding-left:10%;
-    padding-right: 15%;
-    padding-top: 10%;
-    background-color:#2c2c2c;
-    color:#00ff9d;
-}
-.login-right img {
-    margin-left: 10%;
-    margin-top: 20%;
-    width: 70%;
+.div-left-content {
+    padding: 5%;
 }
 
-@media (max-width: 900px) {
-    .login-right {
-        visibility: collapse;
+#form-title {
+    font-size: 150%;
+}
+.login-left {
+    background: rgb(0,255,157);
+    background: linear-gradient(320deg, rgba(0,255,157,1) 0%, rgba(255,255,255,1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-color: #ffffff;
+    color: #000000;
+}
+.login-right {
+    z-index: 1;
+    background-image: url("../../../public/img/wal2.jpg");
+    background-color: rgb(0,255,157);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+#form-title {
+    font-size: 100%;
+}
+
+@media (max-width: 575.98px)  {
+    .login-left {
+        width: 100%;
     }
+    .div-left-content {
+        width: 90%;
+    }
+    .login-right {
+        display: none;
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .div-left-content {
+        width: 90%;
+    }
+    .login-left {
+        width: 100%;
+    }
+    .login-right {
+        display: none;
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .div-right-content p {
+        font-size: 150%;
+    }
+
+    .div-left-content {
+        width: 70%;
+    }
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+}
+@media (min-width: 1200px) and (max-width: 1900px){
+    .div-right-content p {
+        font-size: 130%;
+    }
+    .title-ponto {
+        font-size: 100%;
+    }
+}
+@media (min-width: 1901px) {
+
+    #form-title {
+        font-size: 130%;
+    }
+}
+.form input {
+    font-size: 80%;
+}
+.form label {
+    font-size: 80%;
+}
+.button-primary {
+    color: #ffffff;
+    border: none;
+    background-color: #242424;
+    transition: 1s;
+}
+.button-primary:hover {
+    color: white;
+    background-color: #000000;
+}
+@media (min-width: 1901px) {
+    .form input {
+        font-size: 100%;
+    }
+    .form label {
+        font-size: 100%;
+    }
+}
+.link-text-login {
+    color: #000000;
+    text-decoration: underline;
+    transition: 0.5s;
+}
+.link-text-login:hover {
+    color: #242424;
 }
 </style>

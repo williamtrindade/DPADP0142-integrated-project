@@ -2,9 +2,11 @@
 
 namespace App\Rules;
 
+use ErrorException;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class CnpjRule
@@ -38,11 +40,17 @@ class CnpjRule implements Rule
 
         // buscar dados na https://www.receitaws.com.br/v1/cnpj/
         $response = Http::get('https://www.receitaws.com.br/v1/cnpj/' . str_replace(['/', '.', '-'], '', $value));
-        if (json_decode($response->body())->status == 'ERROR') {
+        try {
+            if (json_decode($response->body())->status == 'ERROR') {
+                $this->error = self::INVALID_NUMBER;
+                return false;
+            } else if(json_decode($response->body())->status == 'OK') {
+                return true;
+            }
+        } catch (ErrorException $e) {
+            Log::info('Failed to get CNPJ / ' . $e->getMessage());
             $this->error = self::INVALID_NUMBER;
             return false;
-        } else if(json_decode($response->body())->status == 'OK') {
-            return true;
         }
         return false;
     }

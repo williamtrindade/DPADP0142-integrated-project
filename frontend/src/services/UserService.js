@@ -38,6 +38,7 @@ export default {
             data.password = password
         }
         return axios.put('/v1/me', data, options).then((resp) => {
+            NotificationService.success('Dados alterados!')
             return {
                 name: resp.data.data.name,
                 email: resp.data.data.email,

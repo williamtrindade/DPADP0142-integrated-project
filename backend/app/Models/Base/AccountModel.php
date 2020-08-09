@@ -36,7 +36,7 @@ class AccountModel extends Model
     /**
      * @return HasMany
      */
-    public function users()
+    public function users(): HasMany
     {
         return $this->hasMany(UserModel::class, 'account_id', 'id');
     }

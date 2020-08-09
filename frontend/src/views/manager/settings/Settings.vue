@@ -70,8 +70,7 @@
                                     <button
                                         id="send-personal-data-button"
                                         type="submit"
-                                        class="btn button-primary pl-3 pr-3 mr-3 "
-                                    >
+                                        class="btn button-primary pl-3 pr-3 mr-3">
                                         Salvar
                                     </button>
                                 </div>
@@ -164,7 +163,6 @@
 import Sidebar from '@/components/manager/Sidebar'
 import Topbar from '@/components/manager/Topbar'
 import UserService from '../../../services/UserService'
-import NotificationService from '../../../services/NotificationService'
 import AccountService from '../../../services/AccountService'
 
 export default {
@@ -205,7 +203,6 @@ export default {
                 this.email = data.email
             }
             this.unblockSendPersonalDataButton()
-            NotificationService.success('Dados alterados!')
         },
         async saveAccountData () {
             this.blockSendAccountDataButton()
@@ -216,7 +213,6 @@ export default {
                 this.accountPhone = data.phone
             }
             this.unblockSendAccountDataButton()
-            NotificationService.success('Dados alterados!')
         },
         blockSendPersonalDataButton () {
             document.querySelector('#send-personal-data-button').disabled = true

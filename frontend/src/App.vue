@@ -2,7 +2,7 @@
     <div id="app" class="full-height full-width">
         <notifications group="error" position="left bottom" class="mt-3 error"/>
         <notifications group="success" position="bottom left" class="mb-4 success"/>
-        <notifications group="danger" position="bottom left" class="mb-4 danger"/>
+        <notifications group="danger" position="top left" class="mt-4 danger"/>
         <router-view />
     </div>
 </template>
@@ -22,19 +22,19 @@ export default {
 @import "assets/scss/custom.css";
 .error .vue-notification {
     margin-left: 70px;
-    background-color: #ff5959;
-    border-left: #000000 solid 2px;
+    background-color: #ffa600cb;
+    border-left: #ffa600cb solid 2px;
 }
 .success .vue-notification {
     margin-left: 70px;
     background-color: #00ff9d;
     color: black;
-    border-left: #000000 solid 2px;
+    border-left: #00ff9d solid 2px;
 }
 .danger .vue-notification {
     margin-left: 70px;
     background-color: #d53764;
-    border-left: #000000 solid 2px;
+    border-left: #d53764 solid 2px;
 }
 html, body {
     float: left;

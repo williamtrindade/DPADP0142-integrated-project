@@ -9,7 +9,7 @@ export default {
                     group: 'error',
                     title: 'Erro de validação!',
                     text: msg,
-                    duration: 40000
+                    duration: 10000
                 })
             })
         })
@@ -20,7 +20,7 @@ export default {
             group: 'success',
             title: 'Sucesso!',
             text: message,
-            duration: 1000
+            duration: 10000
         })
     },
 
@@ -29,7 +29,7 @@ export default {
             group: 'danger',
             title: 'Aviso!',
             text: message,
-            duration: 40000
+            duration: 10000
         })
     }
 
