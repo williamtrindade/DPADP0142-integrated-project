@@ -2,6 +2,7 @@
 
 namespace App\Models\Base;
 
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +21,16 @@ class PointRecordModel extends Model
         'hour',
         'status',
         'type',
-        'user_id'
+        'user_id',
+        'account_id',
+    ];
+
+    /**
+     * @var string[] $dates
+     */
+    protected $dates = [
+        'date',
+        'hour',
     ];
 
     /**
@@ -29,5 +39,13 @@ class PointRecordModel extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class, 'account_id', 'id');
     }
 }

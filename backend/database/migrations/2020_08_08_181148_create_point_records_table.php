@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Account;
 use App\Models\PointRecord;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -28,6 +29,10 @@ class CreatePointRecordsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on((new User())->getTable())
+                ->onDelete('CASCADE');
+            $table->foreign('account_id')
+                ->references('id')
+                ->on((new Account())->getTable())
                 ->onDelete('CASCADE');
             $table->timestamps();
         });

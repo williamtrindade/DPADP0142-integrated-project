@@ -2,84 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\PointRecordModel;
+use App\Http\Controllers\Base\Controller;
+use App\Http\Controllers\Traits\CrudTrait;
+use App\Http\Controllers\Traits\PaginationTrait;
+use App\Http\Response\Response;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
+/**
+ * Class PointRecordController
+ * @package App\Http\Controllers
+ */
 class PointRecordController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    use CrudTrait;
+    use PaginationTrait;
+
+    /** @var UserService $service */
+    private $service;
+
+    /** @var Request $request */
+    private $request;
+
+    /** @var Response */
+    private $response;
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * UserController constructor.
+     * @param UserService $service
+     * @param Request $request
+     * @param Response $response
      */
-    public function create()
+    public function __construct(UserService $service, Request $request, Response $response)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\PointRecordModel  $pointRecord
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PointRecordModel $pointRecord)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\PointRecordModel  $pointRecord
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PointRecordModel $pointRecord)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PointRecordModel  $pointRecord
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PointRecordModel $pointRecord)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\PointRecordModel  $pointRecord
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PointRecordModel $pointRecord)
-    {
-        //
+        $this->service = $service;
+        $this->request = $request;
+        $this->response = $response;
     }
 }

@@ -16,8 +16,10 @@ use Illuminate\Support\Collection;
  * @property int $status
  * @property int $type
  * @property int $user_id
+ * @property int $account_id
  *
  * @method User user()
+ * @method Account account()
  */
 class PointRecord extends PointRecordModel implements ModelInterface
 {
