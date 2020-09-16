@@ -30,6 +30,7 @@ class CreatePointRecordsTable extends Migration
                 ->references('id')
                 ->on((new User())->getTable())
                 ->onDelete('CASCADE');
+            $table->unsignedBigInteger('account_id');
             $table->foreign('account_id')
                 ->references('id')
                 ->on((new Account())->getTable())
