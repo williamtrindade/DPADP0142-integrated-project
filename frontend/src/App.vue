@@ -11,7 +11,7 @@
 export default {
     name: 'App',
     mounted () {
-        if ((!localStorage.getItem('access_token')) && (this.$route.fullPath === 'auth/register')) {
+        if ((!localStorage.getItem('access_token')) || ((this.$route.fullPath === 'auth/register') && (!localStorage.getItem('access_token')))) {
             this.$router.push({ name: 'login' })
         }
     }

@@ -36,9 +36,8 @@
                                     <i class="fas fa-user"></i>
                                     Configurações
                                 </div>
-
                             </router-link>
-                            <a class="dropdown-item" v-on:click="logout()" href="#">
+                            <a class="dropdown-item" v-on:click="logout()">
                                 <div class="link-drop-logout">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </div>
