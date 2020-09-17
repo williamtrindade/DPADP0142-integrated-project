@@ -3,9 +3,11 @@
 namespace App\Models\Base;
 
 use App\Models\Account;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class PointRecordModel
@@ -21,6 +23,7 @@ class PointRecordModel extends Model
         'hour',
         'status',
         'type',
+        'location_id',
         'user_id',
         'account_id',
     ];
@@ -32,6 +35,15 @@ class PointRecordModel extends Model
         'date',
         'hour',
     ];
+
+    /**
+     * @return HasOne
+     */
+    public function location(): HasOne
+    {
+        return $this->hasOne(Location::class, 'point_record_id');
+    }
+
 
     /**
      * @return BelongsTo

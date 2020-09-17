@@ -16,9 +16,11 @@ use Illuminate\Support\Collection;
  * @property Carbon $hour
  * @property int $status
  * @property int $type
+ * @property int $location_id
  * @property int $user_id
  * @property int $account_id
  *
+ * @method Location location()
  * @method User user()
  * @method Account account()
  */

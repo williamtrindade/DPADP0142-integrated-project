@@ -56,6 +56,8 @@ abstract class EloquentRepository implements RepositoryInterface
     }
 
     /**
+     * Updates by Id or by Model Object
+     *
      * @param array $data
      * @param int|null $id
      * @param Model|null $item

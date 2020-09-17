@@ -2,6 +2,8 @@
 
 namespace App\Models\Base;
 
+use App\Models\Location;
+use App\Models\PointRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -39,5 +41,21 @@ class AccountModel extends Model
     public function users(): HasMany
     {
         return $this->hasMany(UserModel::class, 'account_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function pointRecords(): HasMany
+    {
+        return $this->hasMany(PointRecord::class, 'account_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function locations(): HasMany
+    {
+        return $this->hasMany(Location::class, 'account_id', 'id');
     }
 }

@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Collection;
  *
  * @method User manager()
  * @method Collection users()
+ * @method Collection pointRecords()
+ * @method Collection locations()
  */
 class Account extends AccountModel implements ModelInterface
 {
