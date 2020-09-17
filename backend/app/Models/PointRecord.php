@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Base\PointRecordModel;
@@ -24,8 +25,11 @@ use Illuminate\Support\Collection;
 class PointRecord extends PointRecordModel implements ModelInterface
 {
     public const APPROVED_STATUS = 1;
-
     public const ON_HOLD_STATUS = 2;
+    public const REPROVED_STATUS = 3;
+
+    public const ENTRANCE_TYPE = 1;
+    public const EXIT_TYPE = 2;
 
     /**
      * @return Collection
@@ -33,8 +37,20 @@ class PointRecord extends PointRecordModel implements ModelInterface
     public function getStatuses(): Collection
     {
         return collect([
-           self::APPROVED_STATUS,
-           self::ON_HOLD_STATUS,
+            self::APPROVED_STATUS,
+            self::ON_HOLD_STATUS,
+            self::REPROVED_STATUS,
+        ]);
+    }
+
+    /***
+     * @return Collection
+     */
+    public function getTypes(): Collection
+    {
+        return collect([
+            self::ENTRANCE_TYPE,
+            self::EXIT_TYPE,
         ]);
     }
 }
