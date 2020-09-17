@@ -3,7 +3,7 @@
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="p-3">Dashboard</h1>
+            <h1 class="title-black">Dashboard</h1>
             <div class="row m-0 p-0 justify-content-center float-left">
                 <div class="col-md-6 p-3 m-0">
                     <div class="card">
@@ -100,11 +100,5 @@ export default {
     float: left;
     width: 100%;
     height: 100%;
-}
-h1 {
-    background-color: rgb(0, 0, 0);
-    color: white;
-    font-size: 130%;
-    text-align: left;
 }
 </style>

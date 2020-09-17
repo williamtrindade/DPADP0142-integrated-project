@@ -3,7 +3,7 @@
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="p-3">Meus dados</h1>
+            <h1 class="title-black">Meus dados</h1>
 
             <div class="card-data p-3">
                 <div class="card">
@@ -232,14 +232,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-    background-color: rgb(0, 0, 0);
-    color: white;
-    font-size: 130%;
-    text-align: left;
-}
-.card-data {
-}
 .button-primary {
     font-size: 100%;
     background-color: #00ff9d;

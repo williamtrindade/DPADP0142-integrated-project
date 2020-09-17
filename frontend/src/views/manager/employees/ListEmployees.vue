@@ -3,7 +3,7 @@
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="p-3">Empregados</h1>
+            <h1 class="title-black">Empregados</h1>
             <div class="p-3">
                 <div class="mb-3">
                     <div class="row">
@@ -14,7 +14,9 @@
                                     class="form-control"
                                     placeholder="Pesquisar"
                                 >
-                                <button-component content="Adicionar" icon="fas fa-plus"></button-component>
+                                <router-link :to="{ name:'manager-create-employees' }">
+                                    <button-component content="Adicionar" icon="fas fa-plus"></button-component>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -79,10 +81,4 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-    background-color: rgb(0, 0, 0);
-    color: white;
-    font-size: 130%;
-    text-align: left;
-}
 </style>

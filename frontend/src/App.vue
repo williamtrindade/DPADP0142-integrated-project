@@ -72,4 +72,11 @@ h1 label {
 .link-text:hover {
     color: #00ff9d;
 }
+.title-black {
+    padding: 0.8%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 130%;
+    text-align: left;
+}
 </style>

@@ -8,6 +8,7 @@ import ManagerDash from '../views/manager/Dash'
 import Register from '../views/auth/Register'
 import Settings from '../views/manager/settings/Settings'
 import ListEmployees from '../views/manager/employees/ListEmployees'
+import CreateEmployees from '../views/manager/employees/CreateEmployee.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,11 @@ const routes = [
         path: '/manager/employees',
         name: 'manager-employees',
         component: ListEmployees
+    },
+    {
+        path: '/manager/employees/create',
+        name: 'manager-create-employees',
+        component: CreateEmployees
     }
 ]
 
