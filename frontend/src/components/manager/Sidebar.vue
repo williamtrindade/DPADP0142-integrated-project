@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .manager-sidebar {
     background-color: rgb(0, 0, 0);
     position: fixed;

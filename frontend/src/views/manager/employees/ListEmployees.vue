@@ -14,16 +14,8 @@
                                     class="form-control"
                                     placeholder="Pesquisar"
                                 >
-                                <button
-                                    id="send-personal-data-button"
-                                    type="submit"
-                                    class="btn button-primary ml-2"
-                                    style="color:#434343">
-                                    <i class="fas fa-plus"></i>
-                                    Adicionar
-                                </button>
+                                <button-component content="Adicionar" icon="fas fa-plus"></button-component>
                             </div>
-
                         </div>
                     </div>
 
@@ -75,12 +67,13 @@
 <script>
 import Sidebar from '@/components/manager/Sidebar'
 import Topbar from '@/components/manager/Topbar'
-
+import Button from '@/components/Button'
 export default {
     name: 'ListEmployees',
     components: {
         sidebar: Sidebar,
-        topbar: Topbar
+        topbar: Topbar,
+        'button-component': Button
     }
 }
 </script>
@@ -91,14 +84,5 @@ h1 {
     color: white;
     font-size: 130%;
     text-align: left;
-}
-.button-primary {
-    background-color: #00ff9d;
-}
-.button-primary:hover {
-    background-color: #5dffbd;
-}
-.button-primary:current {
-    background-color: #5dffbd;
 }
 </style>
