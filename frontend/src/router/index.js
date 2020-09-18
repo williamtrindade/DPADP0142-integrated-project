@@ -12,6 +12,22 @@ import CreateEmployees from '../views/manager/employees/CreateEmployee.vue'
 
 Vue.use(VueRouter)
 
+const authenticated = (to, from, next) => {
+    if (localStorage.getItem('access_token')) {
+        next()
+        return
+    }
+    next('/auth/login')
+}
+
+const unauthenticated = (to, from, next) => {
+    if (!localStorage.getItem('access_token')) {
+        next()
+        return
+    }
+    next('/')
+}
+
 const routes = [
     // Colaborator
     {
@@ -22,38 +38,45 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        component: Home
+        component: Home,
+        beforeEnter: authenticated
     },
     {
         path: '/auth/login',
         name: 'login',
-        component: Login
+        component: Login,
+        beforeEnter: unauthenticated
     },
     {
         path: '/auth/register',
         name: 'register',
-        component: Register
+        component: Register,
+        beforeEnter: unauthenticated
     },
     // Manager
     {
         path: '/manager/dash',
         name: 'manager-dash',
-        component: ManagerDash
+        component: ManagerDash,
+        beforeEnter: authenticated
     },
     {
         path: '/manager/settings',
         name: 'manager-me-settings',
-        component: Settings
+        component: Settings,
+        beforeEnter: authenticated
     },
     {
         path: '/manager/employees',
         name: 'manager-employees',
-        component: ListEmployees
+        component: ListEmployees,
+        beforeEnter: authenticated
     },
     {
         path: '/manager/employees/create',
         name: 'manager-create-employees',
-        component: CreateEmployees
+        component: CreateEmployees,
+        beforeEnter: authenticated
     }
 ]
 
