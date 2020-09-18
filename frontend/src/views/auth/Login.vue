@@ -82,11 +82,6 @@ export default {
         unblockSendButton () {
             document.querySelector('#send-button').disabled = false
         }
-    },
-    mounted () {
-        if (localStorage.getItem('access_token')) {
-            this.$router.push({ name: 'home' })
-        }
     }
 }
 </script>
