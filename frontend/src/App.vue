@@ -9,12 +9,7 @@
 
 <script>
 export default {
-    name: 'App',
-    mounted () {
-        if ((!localStorage.getItem('access_token')) || ((this.$route.fullPath === 'auth/register') && (!localStorage.getItem('access_token')))) {
-            this.$router.push({ name: 'login' })
-        }
-    }
+    name: 'App'
 }
 </script>
 
@@ -73,7 +68,7 @@ h1 label {
     color: #00ff9d;
 }
 .title-black {
-    padding: 0.8%;
+    padding: 0.9%;
     background-color: rgb(0, 0, 0);
     color: white;
     font-size: 130%;

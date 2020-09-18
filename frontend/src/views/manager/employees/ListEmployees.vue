@@ -15,7 +15,7 @@
                                     placeholder="Pesquisar"
                                 >
                                 <router-link :to="{ name:'manager-create-employees' }">
-                                    <button-component content="Adicionar" icon="fas fa-plus"></button-component>
+                                    <button-component class="ml-2" content="Adicionar" icon="fas fa-plus"></button-component>
                                 </router-link>
                             </div>
                         </div>

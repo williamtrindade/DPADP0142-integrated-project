@@ -3,7 +3,7 @@
         <button
             id="send-personal-data-button"
             type="submit"
-            class="btn button-primary ml-2"
+            class="btn button-primary"
             style="color:#000000">
             <i :class="icon"></i>
             {{ content }}

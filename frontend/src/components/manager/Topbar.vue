@@ -30,15 +30,17 @@
                                 class="img-thumbnail">
 
                         </a>
-                        <div class="dropdown-menu mt-1" aria-labelledby="navbarDropdownMenuLink" style="border-radius: 0;border-style: none">
-                            <router-link :to="{ name:'manager-me-settings' }"  class="btn dropdown-item">
-                                <div class="link-drop">
+                        <div class="dropdown-menu mt-1" style="border-radius: 0;border-style: none">
+                            <router-link
+                                :to="{ name:'manager-me-settings' }"
+                                class="btn dropdown-item">
+                                <div class="btn link-drop">
                                     <i class="fas fa-user"></i>
                                     Configurações
                                 </div>
                             </router-link>
                             <a class="dropdown-item" v-on:click="logout()">
-                                <div class="link-drop-logout">
+                                <div class="btn link-drop-logout">
                                     <i class="fas fa-sign-out-alt"></i> Logout
                                 </div>
                             </a>
