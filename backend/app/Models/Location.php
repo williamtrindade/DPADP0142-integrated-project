@@ -13,8 +13,8 @@ use App\Models\Base\LocationModel;
  * @property int $account_id
  * @property int $point_record_id
  *
- * @method PointRecord pointRecord()
- * @method Account account()
+ * @property PointRecord $pointRecord
+ * @property Account $account
  */
 class Location extends LocationModel
 {

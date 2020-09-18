@@ -20,9 +20,9 @@ use Illuminate\Support\Collection;
  * @property int $user_id
  * @property int $account_id
  *
- * @method Location location()
- * @method User user()
- * @method Account account()
+ * @property Location $location
+ * @property User $user
+ * @property Account $account
  */
 class PointRecord extends PointRecordModel implements ModelInterface
 {

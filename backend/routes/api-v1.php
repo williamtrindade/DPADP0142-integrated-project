@@ -25,3 +25,10 @@ Route::post('users', 'UserController@create');
  */
 Route::get('accounts/{id}', 'AccountController@read');
 Route::put('accounts/{id}', 'AccountController@update');
+
+/*
+ * ----------------------------------------
+ * Employee
+ * ________________________________________
+ */
+Route::post('employees/invite', 'EmployeesController@inviteEmployee');

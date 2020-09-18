@@ -17,10 +17,10 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $phone
  * @property int $manager_id
  *
- * @method User manager()
- * @method Collection users()
- * @method Collection pointRecords()
- * @method Collection locations()
+ * @property User $manager
+ * @property Collection $users
+ * @property Collection $pointRecords
+ * @property Collection $locations
  */
 class Account extends AccountModel implements ModelInterface
 {

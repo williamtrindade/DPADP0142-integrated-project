@@ -20,7 +20,8 @@ use Illuminate\Support\Collection;
  * @property int $permission
  * @property string phone
  *
- * @method \Illuminate\Database\Eloquent\Collection pointRecords()
+ * @property Account $account
+ * @property Collection $pointRecords
  */
 class User extends UserModel implements ModelInterface
 {
