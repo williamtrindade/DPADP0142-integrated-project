@@ -20,8 +20,8 @@ class CreateEmployeeInvitesTable extends Migration
         Schema::create('employee_invites', function (Blueprint $table) {
             $table->id();
             $table->string('hash');
-            // Account ID
-            $table->unsignedBigInteger('account_id');
+            // User ID
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on((new User())->getTable())
