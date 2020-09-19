@@ -7,6 +7,8 @@ use App\Models\EmployeeInvite;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 /**
  * Class InviteEmployeeService
@@ -16,18 +18,20 @@ class InviteEmployeeService
 {
     /**
      * @param array $data
+     * @return void
      */
     public function inviteEmployee(array $data)
     {
-        if (validMail($data['email'])) {
-            Mail::send(
-                new InviteEmployeeMail(
-                    $data['user'],
-                    $data['email'],
-                    $this->generateEmployeeInvite($data['user'])
-                )
-            );
+        if (!validMail($data['email'])) {
+           throw new UnprocessableEntityHttpException('E-mail inválido');
         }
+        Mail::send(
+            new InviteEmployeeMail(
+                $data['user'],
+                $data['email'],
+                $this->generateEmployeeInvite($data['user'])
+            )
+        );
     }
 
     /**
@@ -37,7 +41,7 @@ class InviteEmployeeService
     private function generateEmployeeInvite(User $user): EmployeeInvite
     {
         return EmployeeInvite::create([
-            'user' => $user->name,
+            'user_id' => $user->id,
             'hash' => Hash::make($user->created_at),
         ]);
     }

@@ -8,8 +8,7 @@
     <title>Email .Ponto</title>
 </head>
 <body>
-    {{ $user_name }} convidou você para se cadastrar como colaborador no .Ponto.<br>
-    Accesse aqui
-    <a href=""></a>
+<h2>Oii!!! {{ $user_name }} convidou você para se cadastrar como colaborador no .Ponto.<br></h2>
+<a href="{{ $vue_url }}">Finalizar cadastro</a>
 </body>
 </html>

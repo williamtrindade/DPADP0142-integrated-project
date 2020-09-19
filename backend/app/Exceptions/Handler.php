@@ -15,6 +15,7 @@ use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -117,6 +118,15 @@ class Handler extends ExceptionHandler
                 'success' => false,
                 'message' => JsonResponse::$statusTexts[Response::HTTP_UNPROCESSABLE_ENTITY],
                 'data' => $e->errors()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if ($e instanceof UnprocessableEntityHttpException) {
+            /** @var ValidationException $e */
+            return new JsonResponse([
+                'success' => false,
+                'message' => JsonResponse::$statusTexts[Response::HTTP_UNPROCESSABLE_ENTITY],
+                'error' => $e->getMessage()
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 

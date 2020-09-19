@@ -3,12 +3,12 @@
 use Illuminate\Support\Facades\Validator;
 
 /**
- * @param string $email
+ * @param $email
  * @return bool
  */
-function validMail(string $email): bool
+function validMail($email): bool
 {
     return !Validator::make(['email' => $email], [
-        'email' => 'required|email'
+        'email' => 'email|required'
     ])->fails();
 }

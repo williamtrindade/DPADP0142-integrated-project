@@ -228,5 +228,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    /**
+     *
+     * VUE ENV
+     *
+     */
+    'vue_url' => env('VUE_URL','http://192.168.0.102:8080'),
 
 ];

@@ -18,7 +18,8 @@ use Illuminate\Support\Collection;
  * @property string $remember_token
  * @property Datetime $email_verified_at
  * @property int $permission
- * @property string phone
+ * @property string $phone
+ * @property string $created_at
  *
  * @property Account $account
  * @property Collection $pointRecords

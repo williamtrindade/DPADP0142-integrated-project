@@ -25,11 +25,11 @@ class InviteEmployeeMail extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param user $user
+     * @param User $user $user
      * @param string $email
      * @param EmployeeInvite $employeeInvite
      */
-    public function __construct(user $user, string $email, EmployeeInvite $employeeInvite)
+    public function __construct(User $user, string $email, EmployeeInvite $employeeInvite)
     {
         $this->user           = $user;
         $this->email          = $email;
@@ -51,6 +51,7 @@ class InviteEmployeeMail extends Mailable
                 'account_name' => $this->user->account->name,
                 'user_name'    => $this->user->name,
                 'hash'         => $this->employeeInvite->hash,
+                'vue_url'      => config('app.vue_url'),
             ]);
     }
 }
