@@ -5,17 +5,25 @@ namespace App\Services;
 use App\Mail\InviteEmployeeMail;
 use App\Models\EmployeeInvitation;
 use App\Models\User;
-use Illuminate\Support\Arr;
+use App\Repositories\EmployeeInvitation\EmployeeInvitationRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 /**
- * Class InviteEmployeeService
+ * Class EmployeeInvitationService
  * @package App\Services
  */
-class InviteEmployeeService
+class EmployeeInvitationService
 {
+    /** @var EmployeeInvitationRepositoryInterface */
+    private $repository;
+
+    public function __construct(EmployeeInvitationRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * @param array $data
      * @return void
@@ -46,11 +54,13 @@ class InviteEmployeeService
         ]);
     }
 
-    public function validateHash(array $data)
+    /**
+     * @param string $hash
+     * @return void
+     */
+    public function validateHash(string $hash)
     {
-        if (Arr::get($data, 'hash', false)) {
-
-        } else {
+        if (!$this->repository->validateHash($hash)) {
             throw new UnprocessableEntityHttpException('Hash inválida');
         }
     }

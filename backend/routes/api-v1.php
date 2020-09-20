@@ -31,4 +31,4 @@ Route::put('accounts/{id}', 'AccountController@update');
  * Employee
  * ________________________________________
  */
-Route::post('employees/invite', 'EmployeesController@inviteEmployee');
+Route::post('employees/invite', 'EmployeeInvitationController@inviteEmployee');

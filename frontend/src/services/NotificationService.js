@@ -15,6 +15,15 @@ export default {
         })
     },
 
+    throwValidationError: (error) => {
+        Vue.notify({
+            group: 'error',
+            title: 'Erro de validação!',
+            text: error,
+            duration: 10000
+        })
+    },
+
     success: (message) => {
         Vue.notify({
             group: 'success',

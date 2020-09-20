@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class EmployeeInviteModel
+ * Class EmployeeInvitationModel
  * @package App\Models\Base
  */
-class EmployeeInviteModel extends Model
+class EmployeeInvitationModel extends Model
 {
     protected $table = 'employee_invites';
 

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\User;
+use App\Repositories\EmployeeInvitation\EmployeeInvitationRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;
@@ -9,6 +11,7 @@ use App\Validators\UserValidator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class UserService
@@ -36,6 +39,7 @@ class UserService extends Service implements ServiceInterface
     /**
      * @param array $data
      * @return Model
+     * @throws ValidationException
      */
     public function create(array $data)
     {
@@ -48,11 +52,28 @@ class UserService extends Service implements ServiceInterface
      * @param $data
      * @param $id
      * @return Model
+     * @throws ValidationException
      */
     public function update($data, $id)
     {
         $this->validateToUpdate($data, $id);
-        if ($pass = Arr::get($data, 'password', false)) $data['password'] = Hash::make($pass);
+        if ($pass = Arr::get($data, 'password', false)) {
+            $data['password'] = Hash::make($pass);
+        }
         return parent::update($data, $id);
+    }
+
+    /**
+     * @param array $data
+     * @return Model
+     * @throws ValidationException
+     */
+    public function createByInvitationHash(array $data)
+    {
+        $this->validator->validateToCreateByInvitationHash($data);
+        $data['account_id'] = app(EmployeeInvitationRepositoryInterface::class)
+                                  ->getAccountByHash($data['hash'])->id;
+        $data['permission'] = User::EMPLOYEE_PERMISSION;
+        return $this->create($data);
     }
 }

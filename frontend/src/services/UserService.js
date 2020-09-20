@@ -3,6 +3,26 @@ import NotificationService from './NotificationService'
 import AuthService from './AuthService'
 
 export default {
+
+    createByHash: async function (name, email, password, hash) {
+        const data = {
+            name: name,
+            email: email,
+            password: password,
+            hash: hash
+        }
+        return axios.post('/users/invitation/hash', data).then((resp) => {
+            return resp.status === 200
+        }).catch((err) => {
+            if (err.response.status === 500) {
+                NotificationService.danger('Erro interno do servidor, tente novamente!')
+            } else if (err.response.status === 422) {
+                NotificationService.throwValidationErros(err.response.data.data)
+            }
+            return false
+        })
+    },
+
     get: async () => {
         return axios.get('/v1/me/', {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }

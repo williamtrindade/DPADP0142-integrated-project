@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\EmployeeInvite;
+use App\Models\EmployeeInvitation;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 // use Illuminate\Contracts\Queue\ShouldQueue;
@@ -19,7 +19,7 @@ class InviteEmployeeMail extends Mailable
     /** @var string $email */
     private $email;
 
-    /** @var EmployeeInvite $employeeInvite */
+    /** @var EmployeeInvitation $employeeInvite */
     private $employeeInvite;
 
     /**
@@ -27,9 +27,9 @@ class InviteEmployeeMail extends Mailable
      *
      * @param User $user $user
      * @param string $email
-     * @param EmployeeInvite $employeeInvite
+     * @param EmployeeInvitation $employeeInvite
      */
-    public function __construct(User $user, string $email, EmployeeInvite $employeeInvite)
+    public function __construct(User $user, string $email, EmployeeInvitation $employeeInvite)
     {
         $this->user           = $user;
         $this->email          = $email;
@@ -50,8 +50,10 @@ class InviteEmployeeMail extends Mailable
             ->with([
                 'account_name' => $this->user->account->name,
                 'user_name'    => $this->user->name,
-                'hash'         => $this->employeeInvite->hash,
-                'vue_url'      => config('app.vue_url'),
+                'vue_url'      => config('app.vue_url') .
+                                  '/employee/register?hash=' .
+                                  $this->employeeInvite->hash .
+                                  '&email=' . $this->email,
             ]);
     }
 }

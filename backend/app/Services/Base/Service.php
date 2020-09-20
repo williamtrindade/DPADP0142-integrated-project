@@ -7,6 +7,7 @@ use App\Validators\ValidatorInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class Service
@@ -30,6 +31,7 @@ abstract class Service
     /**
      * @param array $data
      * @return Model
+     * @throws ValidationException
      */
     public function create(array $data)
     {
@@ -50,6 +52,7 @@ abstract class Service
      * @param $data
      * @param $id
      * @return Model
+     * @throws ValidationException
      */
     public function update($data, $id)
     {
@@ -71,6 +74,7 @@ abstract class Service
 
     /**
      * @param $data
+     * @throws ValidationException
      */
     public function validateToCreate($data)
     {
@@ -80,6 +84,7 @@ abstract class Service
     /**
      * @param $data
      * @param int $id
+     * @throws ValidationException
      */
     public function validateToUpdate($data, int $id)
     {

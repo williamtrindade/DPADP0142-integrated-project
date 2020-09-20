@@ -16,9 +16,22 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="email"><i class="fas fa-envelope"></i></span>
                             </div>
-                            <input type="email" class="form-control" aria-label="Default" aria-describedby="email">
+                            <input
+                                v-model="email"
+                                type="email"
+                                class="form-control"
+                                aria-label="Default"
+                                aria-describedby="email"
+                                required
+                            >
                         </div>
-                        <button-component content="Enviar" icon="fas fa-check"></button-component>
+                        <button-component
+                            ref="button"
+                            content="Enviar"
+                            :icon="icon"
+                            v-on:click.native="sendInvite"
+                        >
+                        </button-component>
                     </div>
                 </div>
             </div>
@@ -27,9 +40,12 @@
 </template>
 
 <script>
+
 import Sidebar from '@/components/manager/Sidebar'
 import Topbar from '@/components/manager/Topbar'
 import Button from '@/components/Button'
+import NotificationService from '../../../services/NotificationService'
+import EmployeeInvitationService from '../../../services/EmployeeInvitationService'
 
 export default {
     name: 'CreateEmployee',
@@ -37,6 +53,24 @@ export default {
         sidebar: Sidebar,
         topbar: Topbar,
         'button-component': Button
+    },
+    data () {
+        return {
+            email: null,
+            icon: 'fas fa-check'
+        }
+    },
+    methods: {
+        async sendInvite () {
+            // this.icon = 'fas fa-circle-notch fa-spin'
+            this.$refs.button.$el.firstChild.disabled = true
+            const res = await EmployeeInvitationService.inviteEmployee(this.email)
+            if (res) {
+                NotificationService.success('Usuário vai ser notificado!')
+            }
+            this.$refs.button.$el.firstChild.disabled = false
+            // this.icon = 'fas fa-check'
+        }
     }
 }
 </script>

@@ -3,7 +3,10 @@
 namespace App\Validators;
 
 use App\Models\Account;
+use App\Models\EmployeeInvitation;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class UserValidator
@@ -42,5 +45,31 @@ class UserValidator implements ValidatorInterface
             'account_id' => 'sometimes|integer|exists:' . (new Account())->getTable() . ',id',
             'permission' => 'sometimes|integer'
         ];
+    }
+
+    /**
+     * ----------------------------------------------------------------
+     * Custom user validator
+     * ----------------------------------------------------------------
+     */
+
+    /**
+     * @param array|null $data
+     * @return string[]
+     */
+    private function rulesToCreateByInvitationHash(array $data = null): array
+    {
+        return [
+            'hash' => 'required|string|exists:' . (new EmployeeInvitation())->getTable() . ',hash'
+        ];
+    }
+
+    /**
+     * @param array $data
+     * @throws ValidationException
+     */
+    public function validateToCreateByInvitationHash(array $data)
+    {
+        Validator::make($data, $this->rulesToCreateByInvitationHash())->validate();
     }
 }

@@ -8,7 +8,8 @@ import ManagerDash from '../views/manager/Dash'
 import Register from '../views/auth/Register'
 import Settings from '../views/manager/settings/Settings'
 import ListEmployees from '../views/manager/employees/ListEmployees'
-import CreateEmployees from '../views/manager/employees/CreateEmployee.vue'
+import CreateEmployees from '../views/manager/employees/CreateEmployee'
+import EmployeeRegister from '../views/employee/register/EmployeeRegister'
 
 Vue.use(VueRouter)
 
@@ -29,18 +30,7 @@ const unauthenticated = (to, from, next) => {
 }
 
 const routes = [
-    // Colaborator
-    {
-        path: '*',
-        name: 'not-found',
-        component: NotFound
-    },
-    {
-        path: '/',
-        name: 'home',
-        component: Home,
-        beforeEnter: authenticated
-    },
+    // Guest
     {
         path: '/auth/login',
         name: 'login',
@@ -53,6 +43,26 @@ const routes = [
         component: Register,
         beforeEnter: unauthenticated
     },
+    {
+        path: '/employee/register',
+        name: 'employee-register',
+        component: EmployeeRegister,
+        beforeEnter: unauthenticated
+    },
+
+    // Colaborator
+    {
+        path: '*',
+        name: 'not-found',
+        component: NotFound
+    },
+    {
+        path: '/',
+        name: 'home',
+        component: Home,
+        beforeEnter: authenticated
+    },
+
     // Manager
     {
         path: '/manager/dash',

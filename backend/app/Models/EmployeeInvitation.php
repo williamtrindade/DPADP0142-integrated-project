@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Base\EmployeeInviteModel;
+use App\Models\Base\EmployeeInvitationModel;
 
 /**
- * Class EmployeeInvite
+ * Class EmployeeInvitation
  * @package App\Models
  *
  * @property string $hash
@@ -13,7 +13,7 @@ use App\Models\Base\EmployeeInviteModel;
  *
  * @property User $user
  */
-class EmployeeInvite extends EmployeeInviteModel
+class EmployeeInvitation extends EmployeeInvitationModel
 {
     /**
      * @return Account

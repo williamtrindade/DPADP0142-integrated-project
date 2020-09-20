@@ -10,6 +10,7 @@ use App\Services\UserService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class UserController
@@ -60,5 +61,16 @@ class UserController extends Controller
         $data = $this->request->all();
         $returned_data = $this->service->update($data, $this->request->user()->id);
         return $this->response->item($returned_data);
+    }
+
+    /**
+     * @return JsonResponse
+     * @throws ValidationException
+     * @throws Exception
+     */
+    public function createByInvitationHash(): JsonResponse
+    {
+        $user = $this->service->createByInvitationHash($this->request->all());
+        return $this->response->item($user);
     }
 }

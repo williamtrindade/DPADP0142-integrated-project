@@ -2,6 +2,7 @@
 
 namespace App\Models\Base;
 
+use App\Models\Account;
 use App\Models\PointRecord;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,7 +58,7 @@ class UserModel extends Authenticatable
      */
     public function account(): BelongsTo
     {
-        return $this->belongsTo(AccountModel::class, 'account_id', 'id');
+        return $this->belongsTo(Account::class, 'account_id', 'id');
     }
 
     /**

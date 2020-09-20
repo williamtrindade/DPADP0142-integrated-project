@@ -15,3 +15,17 @@ Route::get('/', function () {
  * _________________________________________
  */
 Route::post('accounts', 'AccountController@create');
+
+/*
+ * -----------------------------------------
+ * Employees
+ * _________________________________________
+ */
+Route::post('employees/validate/hash', 'EmployeeInvitationController@validateHash');
+
+/*
+ * -----------------------------------------
+ * Users
+ * _________________________________________
+ */
+Route::post('users/invitation/hash', 'UserController@createByInvitationHash');
