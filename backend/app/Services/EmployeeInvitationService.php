@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use App\Mail\InviteEmployeeMail;
-use App\Models\EmployeeInvite;
+use App\Models\EmployeeInvitation;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 /**
@@ -36,13 +36,22 @@ class InviteEmployeeService
 
     /**
      * @param User $user
-     * @return EmployeeInvite
+     * @return EmployeeInvitation
      */
-    private function generateEmployeeInvite(User $user): EmployeeInvite
+    private function generateEmployeeInvite(User $user): EmployeeInvitation
     {
-        return EmployeeInvite::create([
+        return EmployeeInvitation::create([
             'user_id' => $user->id,
             'hash' => Hash::make($user->created_at),
         ]);
+    }
+
+    public function validateHash(array $data)
+    {
+        if (Arr::get($data, 'hash', false)) {
+
+        } else {
+            throw new UnprocessableEntityHttpException('Hash inválida');
+        }
     }
 }

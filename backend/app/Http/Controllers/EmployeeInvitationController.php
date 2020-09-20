@@ -39,10 +39,20 @@ class EmployeesController extends Controller
     /**
      * @return JsonResponse
      */
-    public function inviteEmployee()
+    public function inviteEmployee(): JsonResponse
     {
         $this->request->merge(['user' => $this->request->user()]);
         $this->service->inviteEmployee($this->request->all());
+        return $this->response->withAccepted();
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function validateHash()
+    {
+        $this->request->merge(['user' => $this->request->user()]);
+        $this->service->validateHash($this->request->all());
         return $this->response->withAccepted();
     }
 }
