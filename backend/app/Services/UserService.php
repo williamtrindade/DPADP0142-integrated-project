@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Repositories\EmployeeInvitation\EmployeeInvitationRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Scopes\Service\ScopeTrait;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;
 use App\Validators\UserValidator;
@@ -19,6 +20,8 @@ use Illuminate\Validation\ValidationException;
  */
 class UserService extends Service implements ServiceInterface
 {
+    use ScopeTrait;
+
     /** @var UserRepositoryInterface $repository */
     public $repository;
 

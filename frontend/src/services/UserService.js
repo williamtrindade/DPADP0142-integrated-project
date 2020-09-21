@@ -23,6 +23,23 @@ export default {
         })
     },
 
+    all: async () => {
+        return axios.get('/v1/users/', {
+            headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
+        }).then((resp) => {
+            return resp.data.data.data
+        }).catch((err) => {
+            if (err.response.status === 500) {
+                NotificationService.danger('Erro interno do servidor, tente novamente!')
+            } else if (err.response.status === 401) {
+                AuthService.refreshToken().then((resp) => {
+                    console.log(resp)
+                    NotificationService.danger(resp)
+                })
+            }
+        })
+    },
+
     get: async () => {
         return axios.get('/v1/me/', {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
@@ -35,6 +52,7 @@ export default {
                 id: resp.data.data.id
             }
         }).catch((err) => {
+            console.log(err)
             if (err.response.status === 500) {
                 NotificationService.danger('Erro interno do servidor, tente novamente!')
             } else if (err.response.status === 401) {

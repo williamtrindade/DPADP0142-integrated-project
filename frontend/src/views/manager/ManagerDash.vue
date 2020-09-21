@@ -83,14 +83,14 @@
 </template>
 
 <script>
-import Sidebar from '@/components/manager/Sidebar'
-import Topbar from '@/components/manager/Topbar'
+import ManagerSidebar from '@/components/manager/ManagerSidebar'
+import ManagerTopbar from '@/components/manager/ManagerTopbar'
 
 export default {
     name: 'ManagerDash',
     components: {
-        sidebar: Sidebar,
-        topbar: Topbar
+        sidebar: ManagerSidebar,
+        topbar: ManagerTopbar
     }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="topbar">
+    <div class="manager-topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">.Ponto web</a>
             <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,10 +56,10 @@
 </template>
 
 <script>
-import AuthService from '../../services/AuthService'
+import AuthService from '@/services/AuthService'
 
 export default {
-    name: 'Topbar',
+    name: 'ManagerTopbar',
     data () {
         return {
             username: localStorage.getItem('access_token')
@@ -74,14 +74,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .link-drop:hover {
     color: #00be73;
 }
 .link-drop-logout:hover {
     color: #be004c;
 }
-.topbar {
+.manager-topbar {
     z-index: 1;
     border-bottom: rgb(0, 0, 0) 2px solid;
     height: 70px;

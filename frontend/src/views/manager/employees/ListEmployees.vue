@@ -31,33 +31,30 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Celular</th>
+                                        <th scope="col">Permissão</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
+                                    <tr v-for="user in users" v-bind:key="user.id">
+                                        <th>{{ user.name }}</th>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ (user.phone != null) ? user.phone : 'Telefone não informado'  }}</td>
+                                        <td>{{ (user.permission === '1') ? 'Gerente': 'Empregado'  }}</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -67,15 +64,25 @@
 </template>
 
 <script>
-import Sidebar from '@/components/manager/Sidebar'
-import Topbar from '@/components/manager/Topbar'
+import ManagerSidebar from '@/components/manager/ManagerSidebar'
+import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import Button from '@/components/Button'
+import UserService from '@/services/UserService'
+
 export default {
     name: 'ListEmployees',
+    data () {
+        return {
+            users: null
+        }
+    },
     components: {
-        sidebar: Sidebar,
-        topbar: Topbar,
+        sidebar: ManagerSidebar,
+        topbar: ManagerTopbar,
         'button-component': Button
+    },
+    async mounted () {
+        this.users = await UserService.all()
     }
 }
 </script>

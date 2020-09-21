@@ -27,6 +27,6 @@ class AccountScope implements ScopeInterface
      */
     public function apply(Builder $builder): Builder
     {
-        return $builder->where('id', '=', $this->account_id);
+        return $builder->where('account_id', '=', $this->account_id);
     }
 }

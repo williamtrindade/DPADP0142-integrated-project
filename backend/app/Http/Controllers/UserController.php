@@ -6,6 +6,7 @@ use App\Http\Controllers\Base\Controller;
 use App\Http\Controllers\Traits\CrudTrait;
 use App\Http\Controllers\Traits\PaginationTrait;
 use App\Http\Response\Response;
+use App\Scopes\AccountScope;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -41,6 +42,17 @@ class UserController extends Controller
         $this->service = $service;
         $this->request = $request;
         $this->response = $response;
+    }
+
+    /**
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function index(): JsonResponse
+    {
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $data = $this->service->all(true, $this->getPage(), $this->getShow());
+        return $this->response->collection($data);
     }
 
     /**

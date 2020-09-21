@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class AccountService
@@ -77,6 +78,7 @@ class AccountService extends Service implements ServiceInterface
      * @param $data
      * @param $id
      * @return Model
+     * @throws ValidationException
      */
     public function update($data, $id)
     {

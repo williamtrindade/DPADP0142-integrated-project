@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import AuthService from '../../services/AuthService'
+import AuthService from '@/services/AuthService'
 
 export default {
     name: 'Login',

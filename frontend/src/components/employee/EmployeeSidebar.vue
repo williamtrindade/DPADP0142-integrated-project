@@ -1,5 +1,5 @@
 <template>
-    <div class="manager-sidebar">
+    <div class="employee-sidebar">
         <a style="font-size:250%;
            padding-top:6px;
            background-color:#00ff9d;
@@ -8,14 +8,14 @@
            href="#"
         > .P
         </a>
-        <router-link :to="{ name:'manager-dash' }">
+        <router-link :to="{ name:'employee-dash' }">
             <i class="fas fa-home"></i>
         </router-link>
-        <router-link :to="{ name:'manager-employees' }">
+        <router-link :to="{ name:'employee-employees' }">
             <i class="fas fa-users"></i>
         </router-link>
         <a href="#"> <i class="fas fa-clock"></i> </a>
-        <router-link :to="{ name:'manager-me-settings' }" >
+        <router-link :to="{ name:'employee-me-settings' }" >
             <i class="fas fa-cogs"></i>
         </router-link>
     </div>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    name: 'Sidebar',
+    name: 'EmployeeSidebar',
     mounted () {
         this.resizeIcons()
         window.onresize = () => {
@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         resizeIcons () {
-            const icons = document.querySelectorAll('.manager-sidebar a')
+            const icons = document.querySelectorAll('.employee-sidebar a')
             icons.forEach(function (icon) {
                 icon.style.height = icon.offsetWidth + 'px'
             })
@@ -42,14 +42,14 @@ export default {
 </script>
 
 <style scoped>
-.manager-sidebar {
+.employee-sidebar {
     background-color: rgb(0, 0, 0);
     position: fixed;
     float: left;
     height: 100%;
     width:70px;
 }
-.manager-sidebar a {
+.employee-sidebar a {
     padding-top: 20px;
     text-align: center;
     justify-content: center;
@@ -60,14 +60,14 @@ export default {
     float:left;
     max-width: 100%;
 }
-.manager-sidebar a i {
+.employee-sidebar a i {
     font-size: 200%;
     width: 100%;
     height: 100%;
     float:left;
     max-width: 100%;
 }
-.manager-sidebar a:hover {
+.employee-sidebar a:hover {
     transition: 0.5s;
     text-decoration: none;
     color: #fff;

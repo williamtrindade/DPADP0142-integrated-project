@@ -62,6 +62,16 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="permission">Permissão</label>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            v-model="permission"
+                                            class="form-control"
+                                            id="permission"
+                                        />
+                                    </div>
                                 </div>
                             </div>
 
@@ -160,10 +170,10 @@
 </template>
 
 <script>
-import Sidebar from '@/components/manager/Sidebar'
-import Topbar from '@/components/manager/Topbar'
-import UserService from '../../../services/UserService'
-import AccountService from '../../../services/AccountService'
+import ManagerSidebar from '@/components/manager/ManagerSidebar'
+import ManagerTopbar from '@/components/manager/ManagerTopbar'
+import UserService from '@/services/UserService'
+import AccountService from '@/services/AccountService'
 
 export default {
     name: 'Settings',
@@ -179,15 +189,16 @@ export default {
         }
     },
     components: {
-        sidebar: Sidebar,
-        topbar: Topbar
+        sidebar: ManagerSidebar,
+        topbar: ManagerTopbar
     },
     async mounted () {
         // Get user data
         const data = await UserService.get()
         this.name = data.name
         this.email = data.email
-        this.permission = data.permission
+        this.permission = data.permission === '1' ? 'Gerente' : 'Empregado'
+
         // Get account data
         const accountData = await AccountService.get()
         this.accountName = accountData.name

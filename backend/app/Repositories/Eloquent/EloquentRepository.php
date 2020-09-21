@@ -3,7 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Repositories\RepositoryInterface;
-use Illuminate\Database\Eloquent\{Model, ModelNotFoundException};
+use Illuminate\Database\Eloquent\{Builder, Model, ModelNotFoundException};
 use Exception;
 use Throwable;
 

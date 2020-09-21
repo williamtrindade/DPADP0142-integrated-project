@@ -117,8 +117,8 @@
 
 <script>
 
-import AccountService from '../../services/AccountService'
-import NotificationService from '../../services/NotificationService'
+import AccountService from '@/services/AccountService'
+import NotificationService from '@/services/NotificationService'
 
 export default {
     name: 'Register',

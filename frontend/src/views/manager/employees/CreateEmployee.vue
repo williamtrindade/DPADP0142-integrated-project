@@ -41,17 +41,17 @@
 
 <script>
 
-import Sidebar from '@/components/manager/Sidebar'
-import Topbar from '@/components/manager/Topbar'
+import ManagerSidebar from '@/components/manager/ManagerSidebar'
+import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import Button from '@/components/Button'
-import NotificationService from '../../../services/NotificationService'
-import EmployeeInvitationService from '../../../services/EmployeeInvitationService'
+import NotificationService from '@/services/NotificationService'
+import EmployeeInvitationService from '@/services/EmployeeInvitationService'
 
 export default {
     name: 'CreateEmployee',
     components: {
-        sidebar: Sidebar,
-        topbar: Topbar,
+        sidebar: ManagerSidebar,
+        topbar: ManagerTopbar,
         'button-component': Button
     },
     data () {
