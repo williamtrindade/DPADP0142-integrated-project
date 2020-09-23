@@ -5,11 +5,11 @@ namespace App\Repositories\PointRecord;
 
 
 use App\Models\PointRecord;
-use App\Scopes\Repository\ScopeTrait;
+use App\Scopes\Repository\RepositoryScopeTrait;
 
 class PointRecordEloquentRepository
 {
-    use ScopeTrait;
+    use RepositoryScopeTrait;
 
     /** @var PointRecord $model */
     public $model;

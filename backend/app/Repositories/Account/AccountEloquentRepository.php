@@ -5,7 +5,7 @@ namespace App\Repositories\Account;
 use App\Models\Account;
 use App\Repositories\Eloquent\EloquentRepository;
 use App\Scopes\Repository\ScopedRepositoryInterface;
-use App\Scopes\Repository\ScopeTrait;
+use App\Scopes\Repository\RepositoryScopeTrait;
 
 /**
  * Class AccountEloquentRepository
@@ -13,7 +13,7 @@ use App\Scopes\Repository\ScopeTrait;
  */
 class AccountEloquentRepository extends EloquentRepository implements AccountRepositoryInterface, ScopedRepositoryInterface
 {
-    use ScopeTrait;
+    use RepositoryScopeTrait;
 
     /** @var Account $model */
     public $model;

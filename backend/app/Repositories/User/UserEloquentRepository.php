@@ -5,7 +5,7 @@ namespace App\Repositories\User;
 use App\Models\User;
 use App\Repositories\Eloquent\EloquentRepository;
 use App\Scopes\Repository\ScopedRepositoryInterface;
-use App\Scopes\Repository\ScopeTrait;
+use App\Scopes\Repository\RepositoryScopeTrait;
 
 /**
  * Class UserEloquentRepository
@@ -13,7 +13,7 @@ use App\Scopes\Repository\ScopeTrait;
  */
 class UserEloquentRepository extends EloquentRepository implements UserRepositoryInterface, ScopedRepositoryInterface
 {
-    use ScopeTrait;
+    use RepositoryScopeTrait;
 
     /** @var User $model */
     public $model;

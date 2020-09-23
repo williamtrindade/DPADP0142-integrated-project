@@ -85,4 +85,16 @@ class UserController extends Controller
         $user = $this->service->createByInvitationHash($this->request->all());
         return $this->response->item($user);
     }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function delete(int $id): JsonResponse
+    {
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $this->service->delete($id);
+        return $this->response->withNoContent();
+    }
 }

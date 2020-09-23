@@ -5,14 +5,12 @@ namespace App\Services;
 use App\Models\Account;
 use App\Models\User;
 use App\Repositories\Account\AccountRepositoryInterface;
-use App\Repositories\User\UserRepositoryInterface;
-use App\Scopes\Service\ScopeTrait;
+use App\Scopes\Service\ServiceScopeTrait;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;
 use App\Validators\AccountValidator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -22,7 +20,7 @@ use Illuminate\Validation\ValidationException;
  */
 class AccountService extends Service implements ServiceInterface
 {
-    use ScopeTrait;
+    use ServiceScopeTrait;
 
     /** @var AccountRepositoryInterface $repository */
     public $repository;
@@ -57,18 +55,16 @@ class AccountService extends Service implements ServiceInterface
     private function createNewAccount(array $data)
     {
         $this->validator::validateToCreateGuest($data);
-        [$user_data, $account_data] = $this->getAccountAndUserData($data);
+        $account_data = $this->getAccountData($data);
+        $user_data = $this->getUserData($data);
         $account = null;
         DB::transaction(function() use (&$user_data, &$account_data, &$account) {
             // Create Account
             /** @var Account $account */
             $account = parent::create($account_data);
-            // Setup User
-            $user_data['password'] = Hash::make($user_data['password']);
-            $user_data['account_id'] = $account->id;
-            $user_data['permission'] = User::MANAGER_PERMISSION;
+            $this->setupManagerUserData($user_data, $account);
             /** @var User $user */
-            $user = app(UserRepositoryInterface::class)->create($user_data);
+            $user = app(UserService::class)->create($user_data);
             parent::update(['manager_id' => $user->id], $account->id);
         });
         return $account;
@@ -88,20 +84,46 @@ class AccountService extends Service implements ServiceInterface
     }
 
     /**
-     * @param array $data
-     * @return array[]
+     * @param array $user_data
+     * @return void
      */
-    private function getAccountAndUserData(array $data): array
+    private function setupManagerUserData(array $user_data, Account $account)
+    {
+        $user_data['account_id'] = $account->id;
+        $user_data['permission'] = User::MANAGER_PERMISSION;
+    }
+
+    /**
+     * Get user data
+     *
+     * @param array $data
+     * @return array
+     */
+    private function getUserData(array $data): array
     {
         $user_data = [];
-        $account_data = [];
-        collect($data)->each(function ($value, $key) use (&$user_data, &$account_data) {
+        collect($data)->each(function ($value, $key) use (&$user_data) {
             if (Str::startsWith($key, 'user_')) {
                 $user_data[Str::replaceFirst('user_', '', $key)] = $value;
-            } elseif(Str::startsWith($key, 'account_')) {
+            }
+        });
+        return $user_data;
+    }
+
+    /**
+     * Get account data
+     *
+     * @param array $data
+     * @return array
+     */
+    private function getAccountData(array $data): array
+    {
+        $account_data = [];
+        collect($data)->each(function ($value, $key) use (&$account_data) {
+            if(Str::startsWith($key, 'account_')) {
                 $account_data[Str::replaceFirst('account_', '', $key)] = $value;
             }
         });
-        return [$user_data, $account_data];
+        return $account_data;
     }
 }

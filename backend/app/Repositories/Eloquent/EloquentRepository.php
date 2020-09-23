@@ -50,7 +50,7 @@ abstract class EloquentRepository implements RepositoryInterface
      * @return Model
      * @throws ModelNotFoundException
      */
-    public function read($id): Model
+    public function read(int $id): Model
     {
         return $this->model->findOrFail($id);
     }

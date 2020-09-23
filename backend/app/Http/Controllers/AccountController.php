@@ -59,7 +59,7 @@ class AccountController extends Controller
      * @return JsonResponse
      * @throws Exception
      */
-    public function read($id): JsonResponse
+    public function read(int $id): JsonResponse
     {
         $this->service->addScope(new AccountScope($this->request->user()->account_id));
         $data = $this->service->read($id);
@@ -71,7 +71,7 @@ class AccountController extends Controller
      * @return JsonResponse
      * @throws Exception
      */
-    public function update($id): JsonResponse
+    public function update(int $id): JsonResponse
     {
         $this->service->addScope(new AccountScope($this->request->user()->account_id));
         $data = $this->service->update($this->request->all(), $id);

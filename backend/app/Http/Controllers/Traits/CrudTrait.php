@@ -43,7 +43,7 @@ trait CrudTrait
      * @return JsonResponse
      * @throws Exception
      */
-    public function read($id): JsonResponse
+    public function read(int $id): JsonResponse
     {
         $data = $this->service->read($id);
         return $this->response->item($data);
@@ -54,7 +54,7 @@ trait CrudTrait
      * @return JsonResponse
      * @throws Exception
      */
-    public function update($id): JsonResponse
+    public function update(int $id): JsonResponse
     {
         $data = $this->service->update($this->request->all(), $id);
         return $this->response->item($data);

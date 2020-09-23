@@ -68,8 +68,7 @@ abstract class Service
      */
     public function delete(int $id)
     {
-        $model = $this->read($id);
-        return $model->delete();
+        return $this->repository->delete($id);
     }
 
     /**

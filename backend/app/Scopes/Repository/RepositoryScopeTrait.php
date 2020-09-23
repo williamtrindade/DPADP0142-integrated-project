@@ -6,11 +6,12 @@ use App\Scopes\ScopeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Trait ScopeTrait
+ * Trait RepositoryScopeTrait
+ *
  * @package App\Repositories\Traits
  * @property Model $model
  */
-trait ScopeTrait
+trait RepositoryScopeTrait
 {
     public function addScope(ScopeInterface $scope): void
     {

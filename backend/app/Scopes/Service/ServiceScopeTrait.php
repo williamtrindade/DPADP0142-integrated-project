@@ -6,11 +6,12 @@ use App\Scopes\Repository\ScopedRepositoryInterface;
 use App\Scopes\ScopeInterface;
 
 /**
- * Class ScopeTrait
+ * Class ServiceScopeTrait
+ *
  * @package App\Scopes\Service
  * @property ScopedRepositoryInterface $repository
  */
-trait ScopeTrait
+trait ServiceScopeTrait
 {
     public function addScope(ScopeInterface $scope): void
     {

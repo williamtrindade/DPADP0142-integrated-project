@@ -17,6 +17,7 @@ Route::put('me', 'UserController@updateMe');
  */
 Route::get('users', 'UserController@index');
 Route::post('users', 'UserController@create');
+Route::delete('users/{id}', 'UserController@delete');
 
 /*
  * -----------------------------------------
