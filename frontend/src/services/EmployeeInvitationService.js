@@ -1,5 +1,5 @@
 import axios from 'axios'
-import NotificationService from './NotificationService'
+import NotificationService from '@/services/NotificationService'
 
 export default {
 

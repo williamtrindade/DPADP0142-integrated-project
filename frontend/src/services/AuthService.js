@@ -1,6 +1,7 @@
 import axios from 'axios'
-import NotificationService from './NotificationService'
-import UserService from './UserService'
+import NotificationService from '@/services/NotificationService'
+import UserService from '@/services/UserService'
+
 export default {
 
     login: async (email, password) => {

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import NotificationService from './NotificationService'
-import AuthService from './AuthService'
+import NotificationService from '@services/NotificationService'
+import AuthService from '@/services/AuthService'
 
 export default {
 

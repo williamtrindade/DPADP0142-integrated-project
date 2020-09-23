@@ -21,12 +21,12 @@ class AccountValidator implements ValidatorInterface
     {
         $account_table = (new Account())->getTable();
         return [
-            'name' => 'required|min:3|max:255',
-            'cnpj' => ['required', 'min:14', 'max:18' , 'unique:' . $account_table, new CnpjRule],
-            'address' => 'sometimes',
-            'cep' => 'sometimes',
+            'name'       => 'required|min:3|max:255',
+            'cnpj'       => ['required', 'min:14', 'max:18' , 'unique:' . $account_table, new CnpjRule],
+            'address'    => 'sometimes',
+            'cep'        => 'sometimes',
             'manager_id' => 'sometimes|exists:' . (new User())->getTable() . ',id',
-            'phone' => 'required|min:8|max:15|unique:' . (new Account())->getTable() . ',phone',
+            'phone'      => 'required|min:8|max:15|unique:' . (new Account())->getTable() . ',phone',
         ];
     }
 
@@ -39,12 +39,12 @@ class AccountValidator implements ValidatorInterface
     {
         $account_table = (new Account())->getTable();
         return [
-            'name' => 'sometimes|min:3|max:255|string',
-            'cnpj' => ['sometimes', 'min:14', 'max:18' , 'unique:' . $account_table . ', cnpj,' . $id, new CnpjRule],
-            'address' => 'sometimes',
-            'cep' => 'sometimes',
+            'name'       => 'sometimes|min:3|max:255|string',
+            'cnpj'       => ['sometimes', 'min:14', 'max:18' , 'unique:' . $account_table . ', cnpj,' . $id, new CnpjRule],
+            'address'    => 'sometimes',
+            'cep'        => 'sometimes',
             'manager_id' => 'sometimes|exists:' . (new User())->getTable() . ',id',
-            'phone' => 'sometimes|min:8|max:15|unique:' . (new Account())->getTable() . ',phone,' . $id,
+            'phone'      => 'sometimes|min:8|max:15|unique:' . (new Account())->getTable() . ',phone,' . $id,
         ];
     }
 
@@ -54,12 +54,12 @@ class AccountValidator implements ValidatorInterface
     public static function validateToCreateGuest(array $data)
     {
         Validator::make($data, [
-            'user_name' => 'required|string|max:255|min:3',
-            'user_email' => 'required|email|max:255|min:3|unique:' . (new User())->getTable() . ',email',
-            'account_name' => 'required|string|max:255|min:3',
+            'user_name'     => 'required|string|max:255|min:3',
+            'user_email'    => 'required|email|max:255|min:3|unique:' . (new User())->getTable() . ',email',
+            'account_name'  => 'required|string|max:255|min:3',
             'user_password' => 'required|min:6|max:500',
             'account_phone' => 'required|min:8|max:15|unique:' . (new Account())->getTable() . ',phone',
-            'account_cnpj' => ['bail', 'required', 'min:14', 'max:18', new CnpjRule],
+            'account_cnpj'  => ['bail', 'required', 'min:14', 'max:18', new CnpjRule],
         ])->validate();
     }
 }
