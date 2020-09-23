@@ -1,5 +1,5 @@
 import axios from 'axios'
-import NotificationService from '@services/NotificationService'
+import NotificationService from '@/services/NotificationService'
 import AuthService from '@/services/AuthService'
 
 export default {
@@ -18,7 +18,7 @@ export default {
             if (err.response.status === 500) {
                 NotificationService.danger('Erro interno do servidor, tente novamente!')
             } else if (err.response.status === 422) {
-                NotificationService.throwValidationErros(err.response.data.data)
+                NotificationService.throwValidationErrors(err.response.data.data)
             }
             return false
         })
@@ -71,7 +71,7 @@ export default {
                     NotificationService.danger(resp)
                 })
             } else if (err.response.status === 422) {
-                NotificationService.throwValidationErros(err.response.data.data)
+                NotificationService.throwValidationErrors(err.response.data.data)
             }
             return false
         })

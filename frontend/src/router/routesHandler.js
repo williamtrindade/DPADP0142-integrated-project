@@ -1,13 +1,13 @@
 import UserService from '@/services/UserService'
 
 export default {
-    varifyPermission: async (to, from, next) => {
-        const isGuestRoute = to.meta.isGuestRoute
+    verifyPermission: async (to, from, next) => {
+        const isGuestRoute = to.meta.isGuestRoute ?? false
         const requireManagerPermission = to.meta.requireManagerPermission ?? false
         const requireEmployeePermission = to.meta.requireEmployeePermission ?? false
-        const accesToken = localStorage.getItem('access_token')
+        const accessToken = localStorage.getItem('access_token')
 
-        if (accesToken) {
+        if (accessToken) {
             const user = await UserService.get()
             if (user.permission === '1' && requireManagerPermission) {
                 next()

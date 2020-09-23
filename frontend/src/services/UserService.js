@@ -17,7 +17,7 @@ export default {
             if (err.response.status === 500) {
                 NotificationService.danger('Erro interno do servidor, tente novamente!')
             } else if (err.response.status === 422) {
-                NotificationService.throwValidationErros(err.response.data.data)
+                NotificationService.throwValidationErrors(err.response.data.data)
             }
             return false
         })
@@ -91,7 +91,29 @@ export default {
                     NotificationService.danger(resp)
                 })
             } else if (err.response.status === 422) {
-                NotificationService.throwValidationErros(err.response.data.data)
+                NotificationService.throwValidationErrors(err.response.data.data)
+            }
+            return false
+        })
+    },
+
+    delete: async (id) => {
+        const options = {
+            headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
+        }
+        return axios.delete(`/v1/users/${id}`, options).then((resp) => {
+            NotificationService.success('Usuário deletado!')
+            return true
+        }).catch((err) => {
+            if (err.response.status === 500) {
+                NotificationService.danger('Erro interno do servidor, tente novamente!')
+            } else if (err.response.status === 401) {
+                AuthService.refreshToken().then((resp) => {
+                    console.log(resp)
+                    NotificationService.danger(resp)
+                })
+            } else if (err.response.status === 422) {
+                NotificationService.throwValidationErrors(err.response.data.data)
             }
             return false
         })

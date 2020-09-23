@@ -35,6 +35,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Celular</th>
                                         <th scope="col">Permissão</th>
+                                        <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,6 +44,14 @@
                                         <td>{{ user.email }}</td>
                                         <td>{{ (user.phone != null) ? user.phone : 'Telefone não informado'  }}</td>
                                         <td>{{ (user.permission === '1') ? 'Gerente': 'Empregado'  }}</td>
+                                        <td>
+                                            <view-button icon="far fa-eye"></view-button>
+                                            <delete-button
+                                                icon="far fa-trash-alt"
+                                                v-on:click.native="deleteUser(user.id)"
+                                            ></delete-button>
+                                        </td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -68,6 +77,8 @@ import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import Button from '@/components/Button'
 import UserService from '@/services/UserService'
+import ListDeleteButton from '@/components/ListDeleteButton'
+import ListViewButton from '@/components/ListViewButton'
 
 export default {
     name: 'ListEmployees',
@@ -79,10 +90,18 @@ export default {
     components: {
         sidebar: ManagerSidebar,
         topbar: ManagerTopbar,
-        'button-component': Button
+        'button-component': Button,
+        'delete-button': ListDeleteButton,
+        'view-button': ListViewButton
     },
     async mounted () {
         this.users = await UserService.all()
+    },
+    methods: {
+        async deleteUser (id) {
+            await UserService.delete(id)
+            this.users = await UserService.all
+        }
     }
 }
 </script>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 export default {
 
-    throwValidationErros: (errors) => {
+    throwValidationErrors: (errors) => {
         Object.values(errors).forEach(val => {
             val.forEach((msg) => {
                 Vue.notify({

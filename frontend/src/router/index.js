@@ -91,6 +91,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach(function (to, from, next) {
-    RoutesHandler.varifyPermission(to, from, next)
+    RoutesHandler.verifyPermission(to, from, next)
 })
 export default router
