@@ -4,13 +4,11 @@ namespace App\Repositories\Account;
 
 use App\Models\Account;
 use App\Models\User;
-use App\Scopes\ScopeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Interface AccountRepositoryInterface
  * @package App\Repositories\Account
- * @method void addScope(ScopeInterface $scope)
  */
 interface AccountRepositoryInterface
 {

@@ -2,14 +2,16 @@
 
 namespace App\Services;
 
+use App\Filters\Service\FilterableServiceInterface;
+use App\Filters\Service\ServiceFilterTrait;
 use App\Models\User;
 use App\Repositories\EmployeeInvitation\EmployeeInvitationRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Scopes\ScopableService;
 use App\Scopes\Service\ServiceScopeTrait;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;
 use App\Validators\UserValidator;
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
@@ -19,9 +21,10 @@ use Illuminate\Validation\ValidationException;
  * Class UserService
  * @package App\Services
  */
-class UserService extends Service implements ServiceInterface
+class UserService extends Service implements ServiceInterface, ScopableService, FilterableServiceInterface
 {
     use ServiceScopeTrait;
+    use ServiceFilterTrait;
 
     /** @var UserRepositoryInterface $repository */
     public $repository;
@@ -48,7 +51,7 @@ class UserService extends Service implements ServiceInterface
      */
     public function all(bool $paginate = true, int $page = 1, int $show = 15)
     {
-        return $this->repository->all();
+        return $this->repository->all($paginate, $page, $show);
     }
 
     /**

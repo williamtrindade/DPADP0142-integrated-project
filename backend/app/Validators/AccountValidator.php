@@ -6,6 +6,7 @@ use App\Models\Account;
 use App\Models\User;
 use App\Rules\CnpjRule;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class AccountValidator
@@ -50,6 +51,7 @@ class AccountValidator implements ValidatorInterface
 
     /**
      * @param array $data
+     * @throws ValidationException
      */
     public static function validateToCreateGuest(array $data)
     {

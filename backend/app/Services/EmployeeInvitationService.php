@@ -19,6 +19,10 @@ class EmployeeInvitationService
     /** @var EmployeeInvitationRepositoryInterface */
     private $repository;
 
+    /**
+     * EmployeeInvitationService constructor.
+     * @param EmployeeInvitationRepositoryInterface $repository
+     */
     public function __construct(EmployeeInvitationRepositoryInterface $repository)
     {
         $this->repository = $repository;

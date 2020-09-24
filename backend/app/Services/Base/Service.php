@@ -25,7 +25,7 @@ abstract class Service
      */
     public function all(bool $paginate = true, int $page = 1, int $show = 15)
     {
-        return $this->repository->all();
+        return $this->repository->all($paginate, $page, $show);
     }
 
     /**

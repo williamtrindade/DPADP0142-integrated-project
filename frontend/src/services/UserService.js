@@ -101,7 +101,7 @@ export default {
         const options = {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
         }
-        return axios.delete(`/v1/users/${id}`, options).then((resp) => {
+        return axios.delete(`/v1/users/${id}`, options).then(() => {
             NotificationService.success('Usuário deletado!')
             return true
         }).catch((err) => {

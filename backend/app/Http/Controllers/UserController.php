@@ -50,8 +50,10 @@ class UserController extends Controller
      */
     public function index(): JsonResponse
     {
-        $this->service->addScope(new AccountScope($this->request->user()->account_id));
-        $data = $this->service->all(true, $this->getPage(), $this->getShow());
+        $data = $this->service
+            ->filter($this->request->query())
+            ->addScope(new AccountScope($this->request->user()->account_id))
+            ->all(true, $this->getPage(), $this->getShow());
         return $this->response->collection($data);
     }
 

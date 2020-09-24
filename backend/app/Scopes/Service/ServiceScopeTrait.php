@@ -2,19 +2,24 @@
 
 namespace App\Scopes\Service;
 
-use App\Scopes\Repository\ScopedRepositoryInterface;
 use App\Scopes\ScopeInterface;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ServiceScopeTrait
  *
  * @package App\Scopes\Service
- * @property ScopedRepositoryInterface $repository
+ * @property Model $model
  */
 trait ServiceScopeTrait
 {
-    public function addScope(ScopeInterface $scope): void
+    /**
+     * @param ScopeInterface $scope
+     * @return mixed
+     */
+    public function addScope(ScopeInterface $scope)
     {
-        $this->repository->addScope($scope);
+        $this->repository->model = $scope->apply($this->repository->model->query());
+        return $this;
     }
 }
