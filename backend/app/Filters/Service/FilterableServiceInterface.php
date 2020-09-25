@@ -2,12 +2,12 @@
 
 namespace App\Filters\Service;
 
-use App\Repositories\RepositoryInterface;
+use App\Repositories\EloquentRepositoryInterface;
 
 /**
  * Interface FilterableServiceInterface
  * @package App\Filters\Service
- * @property RepositoryInterface $repository
+ * @property EloquentRepositoryInterface $repository
  */
 interface FilterableServiceInterface
 {

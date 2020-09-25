@@ -9,7 +9,7 @@ class UserFilter implements FilterInterface
     public function getFilters(): array
     {
         return [
-            'name'
+            'name' => 'like'
         ];
     }
 }

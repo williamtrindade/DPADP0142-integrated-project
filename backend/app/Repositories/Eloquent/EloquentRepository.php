@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Repositories\RepositoryInterface;
-use Illuminate\Database\Eloquent\{Model, ModelNotFoundException};
+use App\Repositories\EloquentRepositoryInterface;
+use Illuminate\Database\Eloquent\{Builder, Model, ModelNotFoundException};
 use Exception;
 use Throwable;
 
@@ -12,10 +12,15 @@ use Throwable;
  * @package App\Repositories\Base
  *
  * @property Model $model
+ * @property Builder $queryBuilder
  */
-abstract class EloquentRepository implements RepositoryInterface
+abstract class EloquentRepository implements EloquentRepositoryInterface
 {
-    protected $model;
+    /** @var Model $model */
+    public $model;
+
+    /** @var Builder $queryBuilder */
+    public $queryBuilder;
 
     /**
      * @param bool $paginate
@@ -28,7 +33,7 @@ abstract class EloquentRepository implements RepositoryInterface
         if ($paginate) {
             return $this->paginate($page, $show);
         }
-        return $this->model->all();
+        return $this->queryBuilder()->get();
     }
 
     /**
@@ -95,6 +100,17 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function paginate(int $page = 1, $show = 15)
     {
-        return $this->model->paginate($show, ['*'], 'page', $page);
+        return $this->queryBuilder()->paginate($show, ['*'], 'page', $page);
+    }
+
+    /**
+     * @return Builder
+     */
+    public function queryBuilder(): Builder
+    {
+        if (!isset($this->queryBuilder)) {
+            $this->queryBuilder = $this->model->newQuery();
+        }
+        return $this->queryBuilder;
     }
 }

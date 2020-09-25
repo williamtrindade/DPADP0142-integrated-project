@@ -2,12 +2,12 @@
 
 namespace App\Scopes;
 
-use App\Repositories\RepositoryInterface;
+use App\Repositories\EloquentRepositoryInterface;
 
 /**
  * Interface ScopableService
  * @package App\Scopes
- * @property RepositoryInterface $repository
+ * @property EloquentRepositoryInterface $repository
  */
 interface ScopableService
 {

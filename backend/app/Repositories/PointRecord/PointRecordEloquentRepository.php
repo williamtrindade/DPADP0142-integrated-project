@@ -6,7 +6,6 @@ use App\Models\PointRecord;
 
 class PointRecordEloquentRepository
 {
-
     /** @var PointRecord $model */
     public $model;
 

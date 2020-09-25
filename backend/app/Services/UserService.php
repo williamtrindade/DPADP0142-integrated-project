@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Filters\Service\FilterableServiceInterface;
-use App\Filters\Service\ServiceFilterTrait;
+use App\Filters\Service\FilterTrait;
 use App\Models\User;
 use App\Repositories\EmployeeInvitation\EmployeeInvitationRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
@@ -24,7 +24,7 @@ use Illuminate\Validation\ValidationException;
 class UserService extends Service implements ServiceInterface, ScopableService, FilterableServiceInterface
 {
     use ServiceScopeTrait;
-    use ServiceFilterTrait;
+    use FilterTrait;
 
     /** @var UserRepositoryInterface $repository */
     public $repository;

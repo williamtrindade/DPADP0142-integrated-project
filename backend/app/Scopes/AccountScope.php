@@ -3,6 +3,7 @@
 namespace App\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class AccountScope
@@ -22,10 +23,10 @@ class AccountScope implements ScopeInterface
     }
 
     /**
-     * @param Builder $builder
+     * @param Model|Builder $builder
      * @return Builder
      */
-    public function apply(Builder $builder): Builder
+    public function apply($builder): Builder
     {
         return $builder->where('account_id', '=', $this->account_id);
     }

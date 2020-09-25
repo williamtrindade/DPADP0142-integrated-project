@@ -3,6 +3,7 @@
 namespace App\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Interface ScopeInterface
@@ -13,8 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 interface ScopeInterface
 {
     /**
-     * @param Builder $builder
+     * @param Model|Builder $builder
      * @return Builder
      */
-    public function apply(Builder $builder): Builder;
+    public function apply($builder): Builder;
 }

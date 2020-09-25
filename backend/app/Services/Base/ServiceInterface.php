@@ -2,13 +2,13 @@
 
 namespace App\Services\Base;
 
-use App\Repositories\RepositoryInterface;
+use App\Repositories\EloquentRepositoryInterface;
 use App\Validators\ValidatorInterface;
 
 /**
  * Interface ServiceInterface
  * @package App\Services\Contracts
- * @property RepositoryInterface $repository
+ * @property EloquentRepositoryInterface $repository
  * @property ValidatorInterface $validator
  */
 interface ServiceInterface

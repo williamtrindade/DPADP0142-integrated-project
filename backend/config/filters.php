@@ -4,5 +4,8 @@ use App\Filters\UserFilter;
 use App\Services\UserService;
 
 return [
-    UserService::class => UserFilter::class,
+    'builder_location' => 'repository.queryBuilder()',
+    'entities' => [
+        UserService::class => UserFilter::class,
+    ],
 ];

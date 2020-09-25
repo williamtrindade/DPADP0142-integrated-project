@@ -2,13 +2,16 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Interface RepositoryInterface
+ * Interface EloquentRepositoryInterface
  * @package App\Repositories
+ * @property Model $model
+ * @property Builder $queryBuilder
  */
-interface RepositoryInterface
+interface EloquentRepositoryInterface
 {
     /**
      * @param bool $paginate
@@ -43,4 +46,9 @@ interface RepositoryInterface
      * @return bool|null
      */
     public function delete(int $id): ?bool;
+
+    /**
+     * @return Builder
+     */
+    public function queryBuilder(): Builder;
 }

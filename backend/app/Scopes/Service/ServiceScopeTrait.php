@@ -19,7 +19,7 @@ trait ServiceScopeTrait
      */
     public function addScope(ScopeInterface $scope)
     {
-        $this->repository->model = $scope->apply($this->repository->model->query());
+        $this->repository->queryBuilder = $scope->apply($this->repository->queryBuilder());
         return $this;
     }
 }

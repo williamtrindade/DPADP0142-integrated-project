@@ -4,6 +4,7 @@ namespace App\Repositories\Account;
 
 use App\Models\Account;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -51,4 +52,9 @@ interface AccountRepositoryInterface
      * @return bool
      */
     public function delete(int $id): bool;
+
+    /**
+     * @return Builder
+     */
+    public function queryBuilder(): Builder;
 }
