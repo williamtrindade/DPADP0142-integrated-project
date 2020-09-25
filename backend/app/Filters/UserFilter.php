@@ -9,7 +9,8 @@ class UserFilter implements FilterInterface
     public function getFilters(): array
     {
         return [
-            'name' => 'like'
+            'name'       => 'like',
+            'permission' => 'equal',
         ];
     }
 }

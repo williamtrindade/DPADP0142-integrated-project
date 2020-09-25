@@ -58,6 +58,11 @@ class FilterProcessor
             switch ($filter_value) {
                 case 'like': {
                     $this->builder = $this->builder->where($filter_key, 'like', "%$query_value%");
+                    break;
+                }
+                case 'equal': {
+                    $this->builder = $this->builder->where($filter_key, '=', $query_value);
+                    break;
                 }
             }
         }
