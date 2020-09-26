@@ -4,6 +4,9 @@
 
 <script>
 export default {
-    name: 'Home'
+    name: 'Home',
+    mounted () {
+        this.$router.push({ name: 'login' })
+    }
 }
 </script>

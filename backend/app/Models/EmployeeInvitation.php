@@ -9,9 +9,9 @@ use App\Models\Base\EmployeeInvitationModel;
  * @package App\Models
  *
  * @property string $hash
- * @property int $user_id
+ * @property int    $user_id
  *
- * @property User $user
+ * @property User   $user
  */
 class EmployeeInvitation extends EmployeeInvitationModel
 {

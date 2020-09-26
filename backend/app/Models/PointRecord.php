@@ -27,11 +27,11 @@ use Illuminate\Support\Collection;
 class PointRecord extends PointRecordModel implements ModelInterface
 {
     public const APPROVED_STATUS = 1;
-    public const ON_HOLD_STATUS = 2;
+    public const ON_HOLD_STATUS  = 2;
     public const REPROVED_STATUS = 3;
 
-    public const ENTRANCE_TYPE = 1;
-    public const EXIT_TYPE = 2;
+    public const ENTRANCE_TYPE   = 1;
+    public const EXIT_TYPE       = 2;
 
     /**
      * @return Collection

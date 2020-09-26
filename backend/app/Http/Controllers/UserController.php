@@ -74,7 +74,7 @@ class UserController extends Controller
      * @return JsonResponse
      * @throws Exception
      */
-    public function getMe()
+    public function getMe(): JsonResponse
     {
         return $this->response->item($this->request->user());
     }
@@ -83,7 +83,7 @@ class UserController extends Controller
      * @return JsonResponse
      * @throws Exception
      */
-    public function updateMe()
+    public function updateMe(): JsonResponse
     {
         $data = $this->request->all();
         $returned_data = $this->service->update($data, $this->request->user()->id);

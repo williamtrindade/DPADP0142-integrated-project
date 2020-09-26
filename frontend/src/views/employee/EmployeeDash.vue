@@ -96,7 +96,7 @@ export default {
 </script>
 
 <style scoped>
-.manager-dash {
+.employee-dash {
     float: left;
     width: 100%;
     height: 100%;

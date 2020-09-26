@@ -170,8 +170,8 @@ class Response
      */
     public function collection($items): JsonResponse
     {
-        if (( $items instanceof BaseCollection) ||
-            ( $items instanceof Collection) ||
+        if (( $items instanceof BaseCollection)       ||
+            ( $items instanceof Collection)           ||
             ( $items instanceof LengthAwarePaginator) ||
             ( is_array($items) )
         ) {

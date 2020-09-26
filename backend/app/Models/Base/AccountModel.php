@@ -4,6 +4,8 @@ namespace App\Models\Base;
 
 use App\Models\Location;
 use App\Models\PointRecord;
+use App\Models\TimeBlock;
+use App\Models\WorkingHour;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,10 +16,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class AccountModel extends Model
 {
-    /** @var string $table */
     protected $table = 'accounts';
 
-    /** @var string[] $fillable */
     protected $fillable = [
         'name',
         'cnpj',
@@ -57,5 +57,21 @@ class AccountModel extends Model
     public function locations(): HasMany
     {
         return $this->hasMany(Location::class, 'account_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function timeBlocks(): HasMany
+    {
+        return $this->hasMany(TimeBlock::class, 'account_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function workingHours(): HasMany
+    {
+        return $this->hasMany(WorkingHour::class, 'account_id', 'id');
     }
 }

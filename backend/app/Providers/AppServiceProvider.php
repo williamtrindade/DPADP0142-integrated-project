@@ -8,7 +8,9 @@ use App\Repositories\EmployeeInvitation\EmployeeInvitationEloquentRepository;
 use App\Repositories\EmployeeInvitation\EmployeeInvitationRepositoryInterface;
 use App\Repositories\User\UserEloquentRepository;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\WorkingHour\WorkingHourRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use WorkingHourEloquentRepository;
 
 /**
  * Class AppServiceProvider
@@ -31,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class,UserEloquentRepository::class);
         $this->app->bind(AccountRepositoryInterface::class, AccountEloquentRepository::class);
         $this->app->bind(EmployeeInvitationRepositoryInterface::class, EmployeeInvitationEloquentRepository::class);
+        $this->app->bind(WorkingHourRepositoryInterface::class, WorkingHourEloquentRepository::class);
     }
 
     /**

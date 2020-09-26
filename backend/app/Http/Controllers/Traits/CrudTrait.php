@@ -60,8 +60,13 @@ trait CrudTrait
         return $this->response->item($data);
     }
 
-    public function delete()
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function delete(int $id): JsonResponse
     {
-
+        $this->service->delete($id);
+        return $this->response->withNoContent();
     }
 }

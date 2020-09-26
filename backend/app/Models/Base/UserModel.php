@@ -4,6 +4,7 @@ namespace App\Models\Base;
 
 use App\Models\Account;
 use App\Models\PointRecord;
+use App\Models\WorkingHour;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -32,7 +33,7 @@ class UserModel extends Authenticatable
         'password',
         'permission',
         'account_id',
-        'phone'
+        'phone',
     ];
 
     /**
@@ -67,5 +68,13 @@ class UserModel extends Authenticatable
     public function pointRecords(): HasMany
     {
         return $this->hasMany(PointRecord::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function workingHours(): HasMany
+    {
+        return $this->hasMany(WorkingHour::class, 'user_id', 'id');
     }
 }
