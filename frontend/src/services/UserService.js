@@ -23,8 +23,14 @@ export default {
         })
     },
 
-    all: async () => {
-        return axios.get('/v1/users/', {
+    getAll: async (params) => {
+        let url = null
+        if (params != null) {
+            url = '/v1/users' + params
+        } else {
+            url = '/v1/users'
+        }
+        return axios.get(url, {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
         }).then((resp) => {
             return resp.data.data.data
@@ -34,6 +40,28 @@ export default {
             } else if (err.response.status === 401) {
                 AuthService.refreshToken().then((resp) => {
                     console.log(resp)
+                    NotificationService.danger(resp)
+                })
+            }
+        })
+    },
+
+    getUser: async (id) => {
+        return axios.get('/v1/users/' + id, {
+            headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
+        }).then((resp) => {
+            return {
+                name: resp.data.data.name,
+                email: resp.data.data.email,
+                permission: resp.data.data.permission,
+                account_id: resp.data.data.account_id,
+                id: resp.data.data.id
+            }
+        }).catch((err) => {
+            if (err.response.status === 500) {
+                NotificationService.danger('Erro interno do servidor, tente novamente!')
+            } else if (err.response.status === 401) {
+                AuthService.refreshToken().then((resp) => {
                     NotificationService.danger(resp)
                 })
             }

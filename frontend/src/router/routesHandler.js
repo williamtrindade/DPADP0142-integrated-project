@@ -7,6 +7,11 @@ export default {
         const requireEmployeePermission = to.meta.requireEmployeePermission ?? false
         const accessToken = localStorage.getItem('access_token')
 
+        if (!(to.meta.isGuestRoute === true) && !requireManagerPermission && !requireEmployeePermission) {
+            next()
+            return
+        }
+
         if (accessToken) {
             const user = await UserService.get()
             if (user.permission === '1' && requireManagerPermission) {

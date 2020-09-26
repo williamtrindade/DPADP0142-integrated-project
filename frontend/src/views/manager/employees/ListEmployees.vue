@@ -10,9 +10,11 @@
                         <div class="col-md-12">
                             <div class="input-group">
                                 <input
+                                    v-model="searchText"
+                                    v-on:keyup="search"
                                     type="text"
                                     class="form-control"
-                                    placeholder="Pesquisar"
+                                    placeholder="Pesquisar nome"
                                 >
                                 <router-link :to="{ name:'manager-create-employees' }">
                                     <button-component class="ml-2" content="Adicionar" icon="fas fa-plus"></button-component>
@@ -45,7 +47,11 @@
                                         <td>{{ (user.phone != null) ? user.phone : 'Telefone não informado'  }}</td>
                                         <td>{{ (user.permission === '1') ? 'Gerente': 'Empregado'  }}</td>
                                         <td>
-                                            <view-button icon="far fa-eye"></view-button>
+                                            <view-button
+                                                icon="far fa-eye"
+                                                v-on:click.native="viewUser(user.id)"
+                                            >
+                                            </view-button>
                                             <delete-button
                                                 icon="far fa-trash-alt"
                                                 v-on:click.native="deleteUser(user.id)"
@@ -55,7 +61,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example">
+                            <!-- <nav aria-label="Page navigation example">
                                 <ul class="pagination">
                                     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                                     <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -63,7 +69,7 @@
                                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                                     <li class="page-item"><a class="page-link" href="#">Next</a></li>
                                 </ul>
-                            </nav>
+                            </nav> -->
                         </div>
                     </div>
                 </div>
@@ -83,9 +89,7 @@ import ListViewButton from '@/components/ListViewButton'
 export default {
     name: 'ListEmployees',
     data () {
-        return {
-            users: null
-        }
+        return { users: null, searchText: null }
     },
     components: {
         sidebar: ManagerSidebar,
@@ -94,13 +98,30 @@ export default {
         'delete-button': ListDeleteButton,
         'view-button': ListViewButton
     },
-    async mounted () {
-        this.users = await UserService.all()
+    mounted () {
+        UserService.getAll('?permission=2')
+            .then((users) => {
+                if (users) {
+                    this.users = users
+                }
+            })
     },
     methods: {
-        async deleteUser (id) {
-            await UserService.delete(id)
-            this.users = await UserService.all
+        viewUser (id) {
+            this.$router.push({ name: 'manager-view-employee', params: { id: id } })
+        },
+        deleteUser (id) {
+            UserService.delete(id)
+            UserService.getAll('?permission=2')
+                .then((users) => {
+                    if (users) {
+                        this.users = users
+                    }
+                })
+        },
+        async search () {
+            this.users = await UserService
+                .getAll('?permission=2&name=' + this.searchText)
         }
     }
 }

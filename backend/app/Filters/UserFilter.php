@@ -14,3 +14,4 @@ class UserFilter implements FilterInterface
         ];
     }
 }
+    

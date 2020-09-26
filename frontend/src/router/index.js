@@ -11,6 +11,7 @@ import ListEmployees from '@/views/manager/employees/ListEmployees'
 import CreateEmployees from '@/views/manager/employees/CreateEmployee'
 import EmployeeRegister from '@/views/employee/register/EmployeeRegister'
 import RoutesHandler from '@/router/routesHandler'
+import ViewEmployee from '@/views/manager/employees/ViewEmployee'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,8 @@ const routes = [
     {
         path: '/',
         name: 'home',
-        component: Home
+        component: Home,
+        meta: { isGuestRoute: true }
     },
 
     // Guest
@@ -72,6 +74,12 @@ const routes = [
         path: '/manager/employees/create',
         name: 'manager-create-employees',
         component: CreateEmployees,
+        meta: { requireManagerPermission: true }
+    },
+    {
+        path: '/manager/employees/view/:id',
+        name: 'manager-view-employee',
+        component: ViewEmployee,
         meta: { requireManagerPermission: true }
     },
 
