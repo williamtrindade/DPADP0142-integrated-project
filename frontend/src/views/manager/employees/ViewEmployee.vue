@@ -3,7 +3,7 @@
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="title-black">Visualizar empregado</h1>
+            <h1 class="title-black">Visualizar colaborador</h1>
 
             <div class="card-data p-3">
                 <button-component
@@ -105,7 +105,7 @@ export default {
                     this.user = {
                         name: user.name,
                         email: user.email,
-                        permission: user.permission === '1' ? 'Gerente' : 'Empregado'
+                        permission: user.permission === '1' ? 'Gerente' : 'Colaborador'
                     }
                 }).catch(() => {
                     this.$router.push({ name: 'not-found' })

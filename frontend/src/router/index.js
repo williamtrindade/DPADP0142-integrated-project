@@ -12,6 +12,8 @@ import CreateEmployees from '@/views/manager/employees/CreateEmployee'
 import EmployeeRegister from '@/views/employee/register/EmployeeRegister'
 import RoutesHandler from '@/router/routesHandler'
 import ViewEmployee from '@/views/manager/employees/ViewEmployee'
+import ListWorkingHours from '@/views/manager/working-hours/ListWorkingHours'
+import CreateWorkingHour from '@/views/manager/working-hours/CreateWorkingHour'
 
 Vue.use(VueRouter)
 
@@ -80,6 +82,18 @@ const routes = [
         path: '/manager/employees/view/:id',
         name: 'manager-view-employee',
         component: ViewEmployee,
+        meta: { requireManagerPermission: true }
+    },
+    {
+        path: '/manager/working/hours',
+        name: 'manager-working-hours',
+        component: ListWorkingHours,
+        meta: { requireManagerPermission: true }
+    },
+    {
+        path: '/manager/working/hours/create',
+        name: 'manager-create-working-hours',
+        component: CreateWorkingHour,
         meta: { requireManagerPermission: true }
     },
 

@@ -3,12 +3,19 @@
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="title-black">Adicionar Empregado</h1>
+            <h1 class="title-black">Adicionar Colaborador</h1>
 
             <div class="m-3 card-data">
+                <button-component
+                    class="mb-3"
+                    content="Voltar"
+                    v-on:click.native="$router.go(-1)"
+                    icon="fas fa-arrow-left"
+                >
+                </button-component>
                 <div class="card">
                     <div class="card-header">
-                        Adicione o empregado
+                        Adicione o colaborador
                     </div>
                     <div class="card-body">
                         <p>Vamos enviar um email para o seu colaborador, digite o email do mesmo abaixo.</p>

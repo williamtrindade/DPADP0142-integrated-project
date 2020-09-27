@@ -197,7 +197,7 @@ export default {
         const data = await UserService.get()
         this.name = data.name
         this.email = data.email
-        this.permission = data.permission === '1' ? 'Gerente' : 'Empregado'
+        this.permission = data.permission === '1' ? 'Gerente' : 'Colabadorador'
 
         // Get account data
         const accountData = await AccountService.get()

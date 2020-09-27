@@ -14,7 +14,9 @@
         <router-link :to="{ name:'manager-employees' }">
             <i class="fas fa-users"></i>
         </router-link>
-        <a href="#"> <i class="fas fa-clock"></i> </a>
+        <router-link :to="{ name:'manager-working-hours' }" >
+            <i class="fas fa-business-time"></i>
+        </router-link>
         <router-link :to="{ name:'manager-me-settings' }" >
             <i class="fas fa-cogs"></i>
         </router-link>

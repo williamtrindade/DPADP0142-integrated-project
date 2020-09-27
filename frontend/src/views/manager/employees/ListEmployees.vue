@@ -3,7 +3,7 @@
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="title-black">Empregados</h1>
+            <h1 class="title-black">Colaboradores</h1>
             <div class="p-3">
                 <div class="mb-3">
                     <div class="row">
@@ -16,18 +16,24 @@
                                     class="form-control"
                                     placeholder="Pesquisar nome"
                                 >
-                                <router-link :to="{ name:'manager-create-employees' }">
-                                    <button-component class="ml-2" content="Adicionar" icon="fas fa-plus"></button-component>
+                                <router-link
+                                    :to="{ name:'manager-create-employees' }"
+                                >
+                                    <button-component
+                                        class="ml-2"
+                                        content="Adicionar"
+                                        icon="fas fa-plus"
+                                    >
+                                    </button-component>
                                 </router-link>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="card-data">
                     <div class="card">
                         <div class="card-header">
-                            Listagem de empregados
+                            Listagem de colaboradores
                         </div>
                         <div class="card-body">
                             <table class="table table-striped">
@@ -45,7 +51,7 @@
                                         <th>{{ user.name }}</th>
                                         <td>{{ user.email }}</td>
                                         <td>{{ (user.phone != null) ? user.phone : 'Telefone não informado'  }}</td>
-                                        <td>{{ (user.permission === '1') ? 'Gerente': 'Empregado'  }}</td>
+                                        <td>{{ (user.permission === '1') ? 'Gerente': 'Colaborador'  }}</td>
                                         <td>
                                             <view-button
                                                 icon="far fa-eye"
