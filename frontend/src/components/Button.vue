@@ -1,10 +1,11 @@
 <template>
     <div class="button-component">
         <button
+            v-bind:class="buttonClass"
             id="send-personal-data-button"
             type="submit"
             class="btn button-primary"
-            style="color:#000000">
+        >
             <i :class="icon"></i>
             {{ content }}
         </button>
@@ -14,7 +15,7 @@
 <script>
 export default {
     name: 'Button',
-    props: ['content', 'icon']
+    props: ['content', 'icon', 'buttonClass']
 }
 </script>
 
@@ -27,5 +28,17 @@ export default {
 }
 .button-primary:current {
     background-color: #5dffbd;
+}
+
+.button-secondary {
+    color: white;
+    background-color: #2b2b2b;
+}
+.button-secondary .icon {
+    color:white;
+}
+.button-secondary:hover {
+    color: white;
+    background-color: #4b4b4b;
 }
 </style>

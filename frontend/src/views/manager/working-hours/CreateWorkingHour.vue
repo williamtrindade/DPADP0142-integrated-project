@@ -1,0 +1,224 @@
+<template>
+    <div class="create-employees full-height">
+        <sidebar></sidebar>
+        <topbar></topbar>
+        <div class="content">
+            <h1 class="title-black">Adicionar carga horária</h1>
+
+            <div class="m-3 card-data">
+                <!--FORM------------------------------------------------->
+                <form class="mb-5 pb-5" v-on:submit.prevent="sendForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Nome da carga horária</label>
+                                <input
+                                    required
+                                    placeholder="Digite o nome da carga horária"
+                                    minlength="3"
+                                    maxlength="255"
+                                    v-model="workHour.name"
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description">Descrição da carga horária</label>
+                                <input
+                                    required
+                                    placeholder="Digite a descrição da carga horária"
+                                    minlength="3"
+                                    maxlength="255"
+                                    v-model="workHour.description"
+                                    type="text"
+                                    class="form-control"
+                                    id="description"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--time row---------------------------------------->
+                    <div
+                        class="time-blocks"
+                        v-for="(timeBlock, index) in timeBlocks"
+                        v-bind:key="index"
+                    >
+                        <div class="card mb-2 shadow">
+                            <div class="card-header">
+                                Bloco de horário
+                                <a
+                                    @click="removeItem(index)"
+                                    class="remove-time-block"
+                                    style="display:inline; float:right; color:red;border:none;"
+                                >
+                                    <i class="fas fa-minus-circle"></i>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="entrance">Entrada</label>
+                                            <input
+                                                required
+                                                minlength="3"
+                                                maxlength="255"
+                                                v-model="timeBlock.entranceTime"
+                                                type="time"
+                                                class="form-control"
+                                                id="entrance"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="exit">Saída</label>
+                                            <input
+                                                required
+                                                minlength="3"
+                                                maxlength="255"
+                                                v-model="timeBlock.exitTime"
+                                                type="time"
+                                                class="form-control"
+                                                id="exit"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="week-days">Dias da semana</label><br>
+                                        <div class="form-group">
+                                            <!--week day-->
+                                            <div class="form-check form-check-inline"
+                                                 v-for="(weekDayObject, weekDaysIndex) in timeBlock.weekDays"
+                                                 v-bind:key="weekDaysIndex"
+                                            >
+                                                <input
+                                                    v-model="weekDayObject.value"
+                                                    class="form-check-input"
+                                                    type="checkbox"
+                                                >
+                                                <label class="form-check-label">{{weekDayObject.day}}</label>
+                                            </div>
+                                            <!--Week Days--------------------------------------------------------------------------->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button-component
+                        style="position: fixed;
+                            bottom: 10px;
+                            right: 15px;
+                            "
+                        class="mt-3"
+                        buttonClass="button-primary"
+                        ref="button-add-time-block"
+                        icon="fas fa-plus"
+                        content=""
+                        v-on:click.prevent.native="addTimeBlock"
+                    >
+                    </button-component>
+
+                    <!--time row---------------------------------------->
+                    <button-component
+                        style="position: fixed;
+                            bottom: 10px;
+                            left: 85px;
+                            "
+                        class="mt-3"
+                        ref="button"
+                        content="Finalizar"
+                        icon="fas fa-check"
+                    >
+                    </button-component>
+                    <button-component
+                        style="position: fixed;
+                            bottom: 10px;
+                            left: 200px;
+                            "
+                        class="mt-3"
+                        buttonClass="button-secondary"
+                        ref="button"
+                        content="Cancelar"
+                        v-on:click.prevent.native="$router.go(-1)"
+                    >
+                    </button-component>
+                </form>
+                <!--FORM------------------------------------------------->
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import ManagerSidebar from '@/components/manager/ManagerSidebar'
+import ManagerTopbar from '@/components/manager/ManagerTopbar'
+import Button from '@/components/Button'
+
+export default {
+    name: 'CreateWorkingHour',
+    data () {
+        return {
+            workHour: {
+                name: null,
+                description: null
+            },
+            timeBlocks: [
+                {
+                    entranceTime: null,
+                    exitTime: null,
+                    weekDays: [
+                        { id: 0, value: false, day: 'SEG' },
+                        { id: 1, value: false, day: 'TER' },
+                        { id: 2, value: false, day: 'QUA' },
+                        { id: 3, value: false, day: 'QUI' },
+                        { id: 4, value: false, day: 'SEX' },
+                        { id: 5, value: false, day: 'SAB' },
+                        { id: 6, value: false, day: 'DOM' }
+                    ]
+                }
+            ]
+        }
+    },
+    components: {
+        sidebar: ManagerSidebar,
+        topbar: ManagerTopbar,
+        'button-component': Button
+    },
+    methods: {
+        removeItem (index) {
+            this.timeBlocks.splice(index, 1)
+        },
+        addTimeBlock () {
+            this.timeBlocks.push({
+                entranceTime: null,
+                exitTime: null,
+                weekDays: [
+                    { id: 0, value: false, day: 'SEG' },
+                    { id: 1, value: false, day: 'TER' },
+                    { id: 2, value: false, day: 'QUA' },
+                    { id: 3, value: false, day: 'QUI' },
+                    { id: 4, value: false, day: 'SEX' },
+                    { id: 5, value: false, day: 'SAB' },
+                    { id: 6, value: false, day: 'DOM' }
+                ]
+            })
+        },
+        sendForm () {
+            console.log(this.$data)
+        }
+    }
+}
+</script>
+
+<style scoped>
+.card {
+    border-radius: 0;
+}
+</style>
