@@ -52,6 +52,7 @@ class AccountService extends Service implements ServiceInterface, ScopableServic
     /**
      * @param array $data
      * @return Account
+     * @throws ValidationException
      */
     private function createNewAccount(array $data)
     {
@@ -86,9 +87,10 @@ class AccountService extends Service implements ServiceInterface, ScopableServic
 
     /**
      * @param array $user_data
+     * @param Account $account
      * @return void
      */
-    private function setupManagerUserData(array $user_data, Account $account)
+    private function setupManagerUserData(array &$user_data, Account $account)
     {
         $user_data['account_id'] = $account->id;
         $user_data['permission'] = User::MANAGER_PERMISSION;

@@ -1,95 +1,37 @@
 import axios from 'axios'
 import NotificationService from '@/services/NotificationService'
-import AuthService from '@/services/AuthService'
 
 export default {
 
-    createByHash: async function (name, email, password, hash) {
-        const data = {
-            name: name,
-            email: email,
-            password: password,
-            hash: hash
-        }
-        return axios.post('/users/invitation/hash', data).then((resp) => {
-            return resp.status === 200
-        }).catch((err) => {
-            if (err.response.status === 500) {
-                NotificationService.danger('Erro interno do servidor, tente novamente!')
-            } else if (err.response.status === 422) {
-                NotificationService.throwValidationErrors(err.response.data.data)
-            }
-            return false
-        })
+    createByHash: async (name, email, password, hash) => {
+        const data = { name: name, email: email, password: password, hash: hash }
+        return axios.post('/users/invitation/hash', data)
     },
 
     getAll: async (params) => {
-        let url = null
-        if (params != null) {
-            url = '/v1/users' + params
-        } else {
-            url = '/v1/users'
-        }
-        return axios.get(url, {
-            headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
-        }).then((resp) => {
-            return resp.data.data.data
-        }).catch((err) => {
-            if (err.response.status === 500) {
-                NotificationService.danger('Erro interno do servidor, tente novamente!')
-            } else if (err.response.status === 401) {
-                AuthService.refreshToken().then((resp) => {
-                    console.log(resp)
-                    NotificationService.danger(resp)
-                })
-            }
-        })
+        const url = (params != null) ? '/v1/users' + params : '/v1/users'
+        const options = { headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') } }
+        return axios
+            .get(url, options)
+            .then((resp) => resp.data.data.data)
+            .catch((error) => Promise.reject(error))
     },
 
     getUser: async (id) => {
-        return axios.get('/v1/users/' + id, {
-            headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
-        }).then((resp) => {
-            return {
-                name: resp.data.data.name,
-                email: resp.data.data.email,
-                permission: resp.data.data.permission,
-                account_id: resp.data.data.account_id,
-                id: resp.data.data.id
-            }
-        }).catch((err) => {
-            if (err.response.status === 500) {
-                NotificationService.danger('Erro interno do servidor, tente novamente!')
-            } else if (err.response.status === 401) {
-                AuthService.refreshToken().then((resp) => {
-                    NotificationService.danger(resp)
-                })
-            }
-        })
+        return axios
+            .get('/v1/users/' + id, {
+                headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
+            })
+            .then((resp) => resp.data.data)
+            .catch((error) => error)
     },
 
-    get: async () => {
-        return axios.get('/v1/me/', {
-            headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
-        }).then((resp) => {
-            return {
-                name: resp.data.data.name,
-                email: resp.data.data.email,
-                permission: resp.data.data.permission,
-                account_id: resp.data.data.account_id,
-                id: resp.data.data.id
-            }
-        }).catch((err) => {
-            console.log(err)
-            if (err.response.status === 500) {
-                NotificationService.danger('Erro interno do servidor, tente novamente!')
-            } else if (err.response.status === 401) {
-                AuthService.refreshToken().then((resp) => {
-                    console.log(resp)
-                    NotificationService.danger(resp)
-                })
-            }
-        })
+    getMe: async () => {
+        const options = { headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') } }
+        return axios
+            .get('/v1/me/', options)
+            .then((resp) => resp.data.data)
+            .catch((error) => error)
     },
 
     update: async (name, email, password) => {
@@ -103,47 +45,25 @@ export default {
         if (password != null) {
             data.password = password
         }
-        return axios.put('/v1/me', data, options).then((resp) => {
-            NotificationService.success('Dados alterados!')
-            return {
-                name: resp.data.data.name,
-                email: resp.data.data.email,
-                permission: resp.data.data.permission
-            }
-        }).catch((err) => {
-            if (err.response.status === 500) {
-                NotificationService.danger('Erro interno do servidor, tente novamente!')
-            } else if (err.response.status === 401) {
-                AuthService.refreshToken().then((resp) => {
-                    console.log(resp)
-                    NotificationService.danger(resp)
-                })
-            } else if (err.response.status === 422) {
-                NotificationService.throwValidationErrors(err.response.data.data)
-            }
-            return false
-        })
+        return axios
+            .put('/v1/me', data, options)
+            .then((resp) => {
+                NotificationService.success('Dados do usuário alterados com sucesso!')
+                return resp.data.data
+            })
+            .catch(() => false)
     },
 
     delete: async (id) => {
         const options = {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
         }
-        return axios.delete(`/v1/users/${id}`, options).then(() => {
-            NotificationService.success('Usuário deletado!')
-            return true
-        }).catch((err) => {
-            if (err.response.status === 500) {
-                NotificationService.danger('Erro interno do servidor, tente novamente!')
-            } else if (err.response.status === 401) {
-                AuthService.refreshToken().then((resp) => {
-                    console.log(resp)
-                    NotificationService.danger(resp)
-                })
-            } else if (err.response.status === 422) {
-                NotificationService.throwValidationErrors(err.response.data.data)
-            }
-            return false
-        })
+        return axios
+            .delete('/v1/users/' + id, options)
+            .then(() => {
+                NotificationService.success('Usuário deletado!')
+                return true
+            })
+            .catch((error) => error)
     }
 }

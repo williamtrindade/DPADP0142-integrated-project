@@ -19,7 +19,9 @@
                         Formulário de cadastro
                     </div>
                     <div class="card-body">
-                        <form v-on:submit.prevent="createUser">
+                        <form
+                            v-on:submit.prevent="createUser"
+                        >
                             <div class="form-group">
                                 <label for="name">Nome</label>
                                 <input
@@ -90,14 +92,16 @@ export default {
             hash: null
         }
     },
-    mounted: async function () {
+    mounted () {
         if (this.$route.query.hash && this.$route.query.email) {
-            const hashIsValid = await EmployeeInvitationService.validateHash(this.$route.query.hash)
-            if (!hashIsValid) {
-                this.$router.push({ name: 'login' })
-            }
-            this.hash = this.$route.query.hash
-            this.email = this.$route.query.email
+            EmployeeInvitationService.validateHash(this.$route.query.hash)
+                .then((resp) => {
+                    if (resp.status !== 200) {
+                        this.$router.push({ name: 'login' })
+                    }
+                    this.hash = this.$route.query.hash
+                    this.email = this.$route.query.email
+                })
         } else {
             this.$router.push({ name: 'login' })
         }
@@ -106,14 +110,18 @@ export default {
         'button-component': Button
     },
     methods: {
-        createUser: async function () {
+        createUser () {
             this.$refs.button.$el.firstChild.disabled = true
-            const resp = await UserService.createByHash(this.name, this.email, this.password, this.hash)
-            if (resp) {
-                NotificationService.success('Bem vindo, faça seu login agora!')
-                await this.$router.push({ name: 'login' })
-            }
-            this.$refs.button.$el.firstChild.disabled = false
+            UserService.createByHash(this.name, this.email, this.password, this.hash)
+                .then((resp) => {
+                    if (resp.status === 201) {
+                        NotificationService.success('Bem vindo, faça seu login agora!')
+                        this.$router.push({ name: 'login' })
+                    }
+                    this.$refs.button.$el.firstChild.disabled = false
+                }).catch(() => {
+                    this.$refs.button.$el.firstChild.disabled = false
+                })
         }
     }
 }

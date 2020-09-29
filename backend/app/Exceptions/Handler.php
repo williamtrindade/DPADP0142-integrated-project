@@ -126,7 +126,7 @@ class Handler extends ExceptionHandler
             return new JsonResponse([
                 'success' => false,
                 'message' => JsonResponse::$statusTexts[Response::HTTP_UNPROCESSABLE_ENTITY],
-                'error' => $e->getMessage()
+                'data' => ['error' => [$e->getMessage()]]
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 

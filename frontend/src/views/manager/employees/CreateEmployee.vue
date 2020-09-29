@@ -68,15 +68,18 @@ export default {
         }
     },
     methods: {
-        async sendInvite () {
-            // this.icon = 'fas fa-circle-notch fa-spin'
+        sendInvite () {
             this.$refs.button.$el.firstChild.disabled = true
-            const res = await EmployeeInvitationService.inviteEmployee(this.email)
-            if (res) {
-                NotificationService.success('Usuário vai ser notificado!')
-            }
-            this.$refs.button.$el.firstChild.disabled = false
-            // this.icon = 'fas fa-check'
+            EmployeeInvitationService.inviteEmployee(this.email)
+                .then((resp) => {
+                    if (resp.status === 202) {
+                        NotificationService.success('Usuário vai ser notificado!')
+                    }
+                    this.$refs.button.$el.firstChild.disabled = false
+                })
+                .catch(() => {
+                    this.$refs.button.$el.firstChild.disabled = false
+                })
         }
     }
 }

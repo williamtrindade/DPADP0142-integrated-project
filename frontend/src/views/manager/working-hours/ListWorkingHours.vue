@@ -37,8 +37,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="user in users" v-bind:key="user.id">
-                                            <th>{{ user.name }}</th>
+                                        <!-- <tr v-for="user in users" v-bind:key="user.id">
+                                            <th>{{ user.name }} </th>
                                             <td>{{ user.email }}</td>
                                             <td>{{ (user.phone != null) ? user.phone : 'Telefone não informado'  }}</td>
                                             <td>{{ (user.permission === '1') ? 'Gerente': 'Colaborador'  }}</td>
@@ -55,18 +55,9 @@
                                                 </delete-button>
                                             </td>
 
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
-                                <!-- <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav> -->
                             </div>
                         </div>
                     </div>
@@ -91,6 +82,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>

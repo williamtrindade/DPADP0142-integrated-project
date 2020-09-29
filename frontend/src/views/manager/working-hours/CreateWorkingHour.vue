@@ -91,7 +91,7 @@
                                     <div class="col-md-6">
                                         <label for="week-days">Dias da semana</label><br>
                                         <div class="form-group">
-                                            <!--week day-->
+                                            <!--week Days-------------------------------------------------------------------------->
                                             <div class="form-check form-check-inline"
                                                  v-for="(weekDayObject, weekDaysIndex) in timeBlock.weekDays"
                                                  v-bind:key="weekDaysIndex"

@@ -37,19 +37,17 @@ class Response
      * @param $item
      * @return JsonResponse
      */
-    public function withCreated(array $item = null): JsonResponse
+    public function withCreated($item = null): JsonResponse
     {
         $this->setStatusCode(HttpResponse::HTTP_CREATED);
-
-        if (null != $item) {
-            return $this->json();
+        if (( $item instanceof Model ) || ( is_array($item) ) && ($item != null)) {
+            return $this->json([
+               'success' => true,
+               'message' => JsonResponse::$statusTexts[JsonResponse::HTTP_CREATED],
+               'data' => $item
+           ]);
         }
-
-        return $this->json([
-            'success' => true,
-            'message' => JsonResponse::$statusTexts[JsonResponse::HTTP_CREATED],
-            'data' => $item
-        ]);
+        return $this->json();
     }
 
     /**

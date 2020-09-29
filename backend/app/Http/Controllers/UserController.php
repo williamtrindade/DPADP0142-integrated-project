@@ -98,7 +98,7 @@ class UserController extends Controller
     public function createByInvitationHash(): JsonResponse
     {
         $user = $this->service->createByInvitationHash($this->request->all());
-        return $this->response->item($user);
+        return $this->response->withCreated($user);
     }
 
     /**

@@ -13,7 +13,7 @@ export default {
         }
 
         if (accessToken) {
-            const user = await UserService.get()
+            const user = await UserService.getMe()
             if (user.permission === '1' && requireManagerPermission) {
                 next()
                 return

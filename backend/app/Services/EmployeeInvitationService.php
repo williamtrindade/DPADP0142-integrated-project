@@ -35,7 +35,7 @@ class EmployeeInvitationService
     public function inviteEmployee(array $data)
     {
         if (!validMail($data['email'])) {
-           throw new UnprocessableEntityHttpException('E-mail inválido');
+           throw new UnprocessableEntityHttpException("E-mail inválido");
         }
         Mail::send(
             new InviteEmployeeMail(

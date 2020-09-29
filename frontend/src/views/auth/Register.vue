@@ -134,22 +134,19 @@ export default {
         }
     },
     methods: {
-        async register () {
+        register () {
             this.blockSendButton()
             this.registerButtonText = 'Enviando dados...'
-            const data = await AccountService.create(
-                this.user_name,
-                this.user_email,
-                this.account_name,
-                this.user_password,
-                this.account_cnpj,
-                this.account_phone)
-            if (data === true) {
-                NotificationService.success('Bem vindo, faça seu login agora!')
-                await this.$router.push({ name: 'login' })
-            }
-            this.registerButtonText = 'Reenviar dados'
-            this.unblockSendButton()
+
+            AccountService.create(this.user_name, this.user_email, this.account_name, this.user_password, this.account_cnpj, this.account_phone)
+                .then((data) => {
+                    NotificationService.success('Bem vindo, faça seu login agora!')
+                    this.$router.push({ name: 'login' })
+                })
+                .catch(() => {
+                    this.registerButtonText = 'Reenviar dados'
+                    this.unblockSendButton()
+                })
         },
         blockSendButton () {
             document.querySelector('#send-button').disabled = true

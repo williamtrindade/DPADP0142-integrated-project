@@ -174,6 +174,7 @@ import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import UserService from '@/services/UserService'
 import AccountService from '@/services/AccountService'
+import NotificationService from '@/services/NotificationService'
 
 export default {
     name: 'Settings',
@@ -194,16 +195,20 @@ export default {
     },
     async mounted () {
         // Get user data
-        const data = await UserService.get()
-        this.name = data.name
-        this.email = data.email
-        this.permission = data.permission === '1' ? 'Gerente' : 'Colabadorador'
+        UserService.getMe()
+            .then((data) => {
+                this.name = data.name
+                this.email = data.email
+                this.permission = data.permission === '1' ? 'Gerente' : 'Colabadorador'
+            })
 
         // Get account data
-        const accountData = await AccountService.get()
-        this.accountName = accountData.name
-        this.accountCnpj = accountData.cnpj
-        this.accountPhone = accountData.phone
+        AccountService.get()
+            .then((resp) => {
+                this.accountName = resp.data.data.name
+                this.accountCnpj = resp.data.data.cnpj
+                this.accountPhone = resp.data.data.phone
+            })
     },
     methods: {
         async savePersonalData () {
@@ -217,13 +222,16 @@ export default {
         },
         async saveAccountData () {
             this.blockSendAccountDataButton()
-            const data = await AccountService.update(this.accountName, this.accountCnpj, this.accountPhone)
-            if (data !== false) {
-                this.accountName = data.name
-                this.accountCnpj = data.cnpj
-                this.accountPhone = data.phone
-            }
-            this.unblockSendAccountDataButton()
+            AccountService.update(this.accountName, this.accountCnpj, this.accountPhone)
+                .then((resp) => {
+                    NotificationService.success('Dados alterados com sucesso!')
+                    this.accountName = resp.data.data.name
+                    this.accountCnpj = resp.data.data.cnpj
+                    this.accountPhone = resp.data.data.phone
+                    this.unblockSendAccountDataButton()
+                }).catch(() => {
+                    this.unblockSendAccountDataButton()
+                })
         },
         blockSendPersonalDataButton () {
             document.querySelector('#send-personal-data-button').disabled = true
