@@ -5,6 +5,7 @@ namespace App\Validators;
 use App\Models\Account;
 use App\Models\User;
 use App\Rules\CnpjRule;
+use App\Validators\Base\ValidatorInterface;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 

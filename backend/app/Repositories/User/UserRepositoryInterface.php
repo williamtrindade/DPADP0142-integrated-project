@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Interface UserRepositoryInterface
  * @package App\Repositories\User
- * @property Model $model
- * @property Builder $queryBuilder
  */
 interface UserRepositoryInterface
 {
@@ -59,4 +57,8 @@ interface UserRepositoryInterface
      */
     public function queryBuilder(): Builder;
 
+    /**
+     * @return Builder
+     */
+    public function resetBuilder(): Builder;
 }

@@ -96,11 +96,13 @@ export default {
         if (this.$route.query.hash && this.$route.query.email) {
             EmployeeInvitationService.validateHash(this.$route.query.hash)
                 .then((resp) => {
-                    if (resp.status !== 200) {
-                        this.$router.push({ name: 'login' })
+                    if (resp.status === 200) {
+                        this.hash = this.$route.query.hash
+                        this.email = this.$route.query.email
                     }
-                    this.hash = this.$route.query.hash
-                    this.email = this.$route.query.email
+                })
+                .catch(() => {
+                    this.$router.push({ name: 'login' })
                 })
         } else {
             this.$router.push({ name: 'login' })

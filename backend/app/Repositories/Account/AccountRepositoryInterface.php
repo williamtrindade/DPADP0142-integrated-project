@@ -57,4 +57,9 @@ interface AccountRepositoryInterface
      * @return Builder
      */
     public function queryBuilder(): Builder;
+
+    /**
+     * @return Builder
+     */
+    public function resetBuilder(): Builder;
 }

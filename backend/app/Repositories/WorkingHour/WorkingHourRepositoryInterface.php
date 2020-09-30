@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\WorkingHour;
 
 use App\Models\User;
@@ -56,4 +57,9 @@ interface WorkingHourRepositoryInterface
      * @return Builder
      */
     public function queryBuilder(): Builder;
+
+    /**
+     * @return Builder
+     */
+    public function resetBuilder(): Builder;
 }

@@ -1,8 +1,9 @@
 <?php
 
+namespace App\Repositories\WorkingHour;
+
 use App\Models\WorkingHour;
 use App\Repositories\Eloquent\EloquentRepository;
-use App\Repositories\WorkingHour\WorkingHourRepositoryInterface;
 
 /**
  * Class WorkingHourEloquentRepository

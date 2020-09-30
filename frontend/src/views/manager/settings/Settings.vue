@@ -204,30 +204,34 @@ export default {
 
         // Get account data
         AccountService.get()
-            .then((resp) => {
-                this.accountName = resp.data.data.name
-                this.accountCnpj = resp.data.data.cnpj
-                this.accountPhone = resp.data.data.phone
+            .then((account) => {
+                this.accountName = account.name
+                this.accountCnpj = account.cnpj
+                this.accountPhone = account.phone
             })
     },
     methods: {
         async savePersonalData () {
             this.blockSendPersonalDataButton()
-            const data = await UserService.update(this.name, this.email, this.password)
-            if (data !== false) {
-                this.name = data.name
-                this.email = data.email
-            }
-            this.unblockSendPersonalDataButton()
+            UserService.update(this.name, this.email, this.password)
+                .then((user) => {
+                    NotificationService.success('Dados do usuário alterados!')
+                    this.name = user.name
+                    this.email = user.email
+                    this.unblockSendPersonalDataButton()
+                })
+                .catch(() => {
+                    this.unblockSendPersonalDataButton()
+                })
         },
         async saveAccountData () {
             this.blockSendAccountDataButton()
             AccountService.update(this.accountName, this.accountCnpj, this.accountPhone)
-                .then((resp) => {
+                .then((account) => {
                     NotificationService.success('Dados alterados com sucesso!')
-                    this.accountName = resp.data.data.name
-                    this.accountCnpj = resp.data.data.cnpj
-                    this.accountPhone = resp.data.data.phone
+                    this.accountName = account.name
+                    this.accountCnpj = account.cnpj
+                    this.accountPhone = account.phone
                     this.unblockSendAccountDataButton()
                 }).catch(() => {
                     this.unblockSendAccountDataButton()

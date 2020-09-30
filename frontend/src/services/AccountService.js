@@ -25,12 +25,18 @@ export default {
         const options = {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
         }
-        return axios.get('/v1/accounts/' + localStorage.getItem('account_id'), options)
+        return await axios
+            .get('/v1/accounts/' + localStorage.getItem('account_id'), options)
+            .then((resp) => resp.data.data)
+            .catch((error) => Promise.reject(error))
     },
 
     update: async (name, cnpj, phone) => {
         const options = { headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') } }
         const data = { name, cnpj, phone }
-        return axios.put('/v1/accounts/' + localStorage.getItem('account_id'), data, options)
+        return await axios
+            .put('/v1/accounts/' + localStorage.getItem('account_id'), data, options)
+            .then((resp) => resp.data.data)
+            .catch((error) => Promise.reject(error))
     }
 }

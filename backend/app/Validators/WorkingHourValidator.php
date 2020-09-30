@@ -2,6 +2,8 @@
 
 namespace App\Validators;
 
+use App\Validators\Base\ValidatorInterface;
+
 /**
  * Class WorkingHourValidator
  * @package App\Validators
@@ -15,7 +17,16 @@ class WorkingHourValidator implements ValidatorInterface
      */
     public static function validateToCreate(array $data): array
     {
-        return [];
+        return [
+            'workingHour' => 'required',
+            'workingHour.name' => 'required|string|min:3|max:255',
+            'workingHour.description' => 'required|string|min:3|max:255',
+//            'timeBlocks' => 'array|required',
+//            'timeBlocks.*.entranceTime' => 'required|time',
+//            'timeBlocks.*.exitTime' => 'required|time',
+//            'timeBlocks.*.weekDays' => 'required|array',
+//            'timeBlocks.*.weekDays.*.id' => 'required|int',
+        ];
     }
 
     /**

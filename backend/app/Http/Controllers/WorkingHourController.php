@@ -6,7 +6,10 @@ use App\Http\Controllers\Base\Controller;
 use App\Http\Controllers\Traits\CrudTrait;
 use App\Http\Response\Response;
 use App\Services\WorkingHourService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class WorkingHourController
@@ -36,5 +39,16 @@ class WorkingHourController extends Controller
         $this->service  = $service;
         $this->request  = $request;
         $this->response = $response;
+    }
+
+    /**
+     * @return JsonResponse
+     * @throws ValidationException
+     * @throws Exception
+     */
+    public function create(): JsonResponse
+    {
+        $data = $this->service->create($this->request->all());
+        return $this->response->item($data);
     }
 }

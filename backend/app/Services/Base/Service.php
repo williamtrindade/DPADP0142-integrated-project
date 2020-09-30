@@ -2,8 +2,7 @@
 
 namespace App\Services\Base;
 
-use App\Repositories\EloquentRepositoryInterface;
-use App\Validators\ValidatorInterface;
+use App\Validators\Base\ValidatorInterface;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 /**
  * Class Service
  * @package App\Services
- * @property EloquentRepositoryInterface $repository
+ * @property mixed $repository
  * @property ValidatorInterface $validator
  */
 abstract class Service

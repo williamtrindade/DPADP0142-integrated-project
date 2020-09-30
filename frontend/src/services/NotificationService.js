@@ -1,44 +1,42 @@
-import Vue from 'vue'
+import Swal from 'sweetalert2'
 
 export default {
 
     throwValidationErrors: (errors) => {
+        let data = ''
         Object.values(errors).forEach(val => {
             val.forEach((msg) => {
-                Vue.notify({
-                    group: 'error',
-                    title: 'Erro de validação!',
-                    text: msg,
-                    duration: 10000
-                })
+                data = data + '\n' + msg
             })
+        })
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: data
         })
     },
 
     throwValidationError: (error) => {
-        Vue.notify({
-            group: 'error',
-            title: 'Erro de validação!',
-            text: error,
-            duration: 10000
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error
         })
     },
 
     success: (message) => {
-        Vue.notify({
-            group: 'success',
-            title: 'Sucesso!',
-            text: message,
-            duration: 10000
-        })
+        Swal.fire(
+            'Sucesso!',
+            message,
+            'success'
+        )
     },
 
     danger: (message) => {
-        Vue.notify({
-            group: 'danger',
-            title: 'Aviso!',
-            text: message,
-            duration: 10000
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: message
         })
     }
 

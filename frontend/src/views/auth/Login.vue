@@ -56,7 +56,6 @@
 <script>
 import AuthService from '@/services/AuthService'
 import NotificationService from '@/services/NotificationService'
-import UserService from '@/services/UserService'
 
 export default {
     name: 'Login',
@@ -73,19 +72,6 @@ export default {
             this.loginButtonText = 'Entrando...'
             AuthService.login(this.email, this.password)
                 .then(async (resp) => {
-                    // Save token in localStorage
-                    const token = resp.data
-                    localStorage.setItem('token_type', token.token_type)
-                    localStorage.setItem('access_token', token.access_token)
-                    localStorage.setItem('expires_in', token.expires_in)
-                    localStorage.setItem('refresh_token', token.refresh_token)
-
-                    // Get Account/User data
-                    const data = await UserService.getMe()
-                    localStorage.setItem('user_name', data.name)
-                    localStorage.setItem('user_email', data.email)
-                    localStorage.setItem('account_id', data.account_id)
-                    localStorage.setItem('user_id', data.id)
                     this.$router.push({ name: 'home' })
                 })
                 .catch(() => {

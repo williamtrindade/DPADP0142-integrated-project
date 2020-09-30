@@ -91,6 +91,7 @@ import Button from '@/components/Button'
 import UserService from '@/services/UserService'
 import ListDeleteButton from '@/components/ListDeleteButton'
 import ListViewButton from '@/components/ListViewButton'
+import NotificationService from '@/services/NotificationService'
 
 export default {
     name: 'ListEmployees',
@@ -118,6 +119,9 @@ export default {
         },
         deleteUser (id) {
             UserService.delete(id)
+                .then(() => {
+                    NotificationService.success('Usuário deletado!')
+                })
             UserService.getAll('?permission=2')
                 .then((users) => {
                     if (users) {

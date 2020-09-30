@@ -138,7 +138,8 @@ export default {
             this.blockSendButton()
             this.registerButtonText = 'Enviando dados...'
 
-            AccountService.create(this.user_name, this.user_email, this.account_name, this.user_password, this.account_cnpj, this.account_phone)
+            AccountService
+                .create(this.user_name, this.user_email, this.account_name, this.user_password, this.account_cnpj, this.account_phone)
                 .then((data) => {
                     NotificationService.success('Bem vindo, faça seu login agora!')
                     this.$router.push({ name: 'login' })

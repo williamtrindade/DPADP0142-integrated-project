@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export default {
 
+    // Returns 202 Accepted
     inviteEmployee: async (email) => {
         const options = {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
@@ -16,6 +17,7 @@ export default {
         const data = {
             hash: hash
         }
-        return await axios.post('/employees/validate/hash', data)
+        return await axios
+            .post('/employees/validate/hash', data)
     }
 }

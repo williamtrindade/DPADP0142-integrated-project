@@ -1,7 +1,25 @@
 <?php
 
+namespace App\Repositories\TimeBlock;
 
-class TimeBlockEloquentRepository
+use App\Models\TimeBlock;
+use App\Repositories\Eloquent\EloquentRepository;
+
+/**
+ * Class TimeBlockEloquentRepository
+ * @package App\Repositories\TimeBlock
+ */
+class TimeBlockEloquentRepository extends EloquentRepository implements TimeBlockRepositoryInterface
 {
+    /** @var TimeBlock $model */
+    public $model;
 
+    /**
+     * TimeBlockEloquentRepository constructor.
+     * @param TimeBlock $model
+     */
+    public function __construct(TimeBlock $model)
+    {
+        $this->model = $model;
+    }
 }

@@ -43,7 +43,6 @@ trait FilterTrait
             }
             $builder = $builder->{$var};
         });
-        // dd($this->{'repository'}->{'queryBuilder'}());
         return $builder;
     }
 }

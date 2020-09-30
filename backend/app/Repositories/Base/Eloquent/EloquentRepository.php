@@ -56,7 +56,7 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
      */
     public function read(int $id): Model
     {
-        return $this->model->findOrFail($id);
+        return $this->queryBuilder()->findOrFail($id);
     }
 
     /**
@@ -110,6 +110,15 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
         if (!isset($this->queryBuilder)) {
             $this->queryBuilder = $this->model->newQuery();
         }
+        return $this->queryBuilder;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function resetBuilder(): Builder
+    {
+        $this->queryBuilder = $this->model->newQuery();
         return $this->queryBuilder;
     }
 }

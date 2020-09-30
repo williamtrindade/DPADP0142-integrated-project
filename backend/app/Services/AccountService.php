@@ -43,6 +43,7 @@ class AccountService extends Service implements ServiceInterface, ScopableServic
     /**
      * @param array $data
      * @return Model
+     * @throws ValidationException
      */
     public function create(array $data): Model
     {

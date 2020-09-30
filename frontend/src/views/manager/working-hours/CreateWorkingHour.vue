@@ -17,7 +17,7 @@
                                     placeholder="Digite o nome da carga horária"
                                     minlength="3"
                                     maxlength="255"
-                                    v-model="workHour.name"
+                                    v-model="workingHour.name"
                                     type="text"
                                     class="form-control"
                                     id="name"
@@ -32,7 +32,7 @@
                                     placeholder="Digite a descrição da carga horária"
                                     minlength="3"
                                     maxlength="255"
-                                    v-model="workHour.description"
+                                    v-model="workingHour.description"
                                     type="text"
                                     class="form-control"
                                     id="description"
@@ -160,12 +160,13 @@
 import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import Button from '@/components/Button'
+import WorkingHourService from '@/services/WorkingHourService'
 
 export default {
     name: 'CreateWorkingHour',
     data () {
         return {
-            workHour: {
+            workingHour: {
                 name: null,
                 description: null
             },
@@ -212,6 +213,7 @@ export default {
         },
         sendForm () {
             console.log(this.$data)
+            WorkingHourService.create(this.$data)
         }
     }
 }
