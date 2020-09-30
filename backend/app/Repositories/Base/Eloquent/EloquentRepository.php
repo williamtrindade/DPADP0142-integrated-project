@@ -10,7 +10,6 @@ use Throwable;
 /**
  * Class EloquentRepository
  * @package App\Repositories\Base
- *
  * @property Model $model
  * @property Builder $queryBuilder
  */
