@@ -13,3 +13,4 @@ yarn-error.log
 /database/database.sqlite
 /.idea
 .idea
+/.vscode/settings.json
