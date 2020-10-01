@@ -58,7 +58,5 @@ export default {
         }
         return axios
             .delete('/v1/users/' + id, options)
-            .then((resp) => resp)
-            .catch((error) => Promise.reject(error))
     }
 }

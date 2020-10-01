@@ -34,6 +34,6 @@ class TimeBlockService extends Service implements ServiceInterface, ScopableServ
     public function __construct(TimeBlockRepositoryInterface $repository, TimeBlockValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator = $validator;
+        $this->validator  = $validator;
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 /**
  * Class WorkingHour
  * @package App\Models
+ * @property int        $id
  * @property string     $name
  * @property string     $description
  * @property int        $user_id

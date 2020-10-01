@@ -47,7 +47,9 @@ Route::middleware([ManagerPermission::class])->group(function () {
     Route::get('users/{id}', 'UserController@read');
 
     // WorkingHourController
+    Route::get('working/hours', 'WorkingHourController@index');
     Route::post('working/hours', 'WorkingHourController@create');
+    Route::delete('working/hours/{id}', 'WorkingHourController@delete');
 });
 
 /*

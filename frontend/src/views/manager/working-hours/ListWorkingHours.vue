@@ -37,25 +37,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- <tr v-for="user in users" v-bind:key="user.id">
-                                            <th>{{ user.name }} </th>
-                                            <td>{{ user.email }}</td>
-                                            <td>{{ (user.phone != null) ? user.phone : 'Telefone não informado'  }}</td>
-                                            <td>{{ (user.permission === '1') ? 'Gerente': 'Colaborador'  }}</td>
+                                        <tr v-for="(working_hour, index) in working_hours" v-bind:key="index">
+                                            <th>{{ working_hour.name }} </th>
+                                            <td>{{ working_hour.description }}</td>
+                                            <td>{{ working_hour.time_blocks.length }}</td>
+                                            <td>0</td>
+                                            <td>0</td>
                                             <td>
                                                 <view-button
                                                     icon="far fa-eye"
-                                                    v-on:click.native="viewUser(user.id)"
+                                                    v-on:click.native="editWorkingHour(working_hour.id)"
                                                 >
                                                 </view-button>
                                                 <delete-button
                                                     icon="far fa-trash-alt"
-                                                    v-on:click.native="deleteUser(user.id)"
+                                                    v-on:click.native="deleteWorkingHour(working_hour.id)"
                                                 >
                                                 </delete-button>
                                             </td>
 
-                                        </tr> -->
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -71,13 +72,42 @@
 import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import ButtonComponent from '@/components/Button'
+import WorkingHourService from '@/services/WorkingHourService'
+import ListDeleteButton from '@/components/ListDeleteButton'
+import ListViewButton from '@/components/ListViewButton'
+import NotificationService from '@/services/NotificationService'
 
 export default {
     name: 'ListWorkingHours',
+    data () {
+        return {
+            working_hours: null
+        }
+    },
     components: {
         sidebar: ManagerSidebar,
         topbar: ManagerTopbar,
-        'button-component': ButtonComponent
+        'button-component': ButtonComponent,
+        'delete-button': ListDeleteButton,
+        'view-button': ListViewButton
+    },
+    mounted () {
+        WorkingHourService.getAll().then((workingHours) => {
+            this.working_hours = workingHours
+        })
+    },
+    methods: {
+        editWorkingHour (id) {
+        },
+        deleteWorkingHour (id) {
+            WorkingHourService.delete(id)
+                .then(() => {
+                    NotificationService.success('Carga horária deletada!')
+                    WorkingHourService.getAll().then((workingHours) => {
+                        this.working_hours = workingHours
+                    })
+                })
+        }
     }
 }
 </script>

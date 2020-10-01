@@ -2,8 +2,8 @@
 
 namespace App\Repositories\TimeBlock;
 
-use App\Models\TimeBlock;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Interface TimeBlockRepositoryInterface
@@ -11,12 +11,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 interface TimeBlockRepositoryInterface
 {
-    /**
-     * UserRepositoryInterface constructor.
-     * @param TimeBlock $model
-     */
-    public function __construct(TimeBlock $model);
-
     /**
      * @param bool $paginate
      * @param int $page
@@ -27,29 +21,29 @@ interface TimeBlockRepositoryInterface
 
     /**
      * @param array $data
-     * @return TimeBlock
+     * @return Model
      */
-    public function create(array $data): TimeBlock;
+    public function create(array $data): Model;
 
     /**
      * @param int $id
-     * @return TimeBlock
+     * @return Model
      */
-    public function read(int $id): TimeBlock;
+    public function read(int $id): Model;
 
     /**
      * @param array $data
      * @param int|null $id
-     * @param TimeBlock|null $item
-     * @return TimeBlock
+     * @param Model|null $item
+     * @return Model
      */
-    public function update(array $data, int $id = null, TimeBlock $item = null): TimeBlock;
+    public function update(array $data, int $id = null, Model $item = null): Model;
 
     /**
      * @param int $id
-     * @return bool
+     * @return bool|null
      */
-    public function delete(int $id): bool;
+    public function delete(int $id): ?bool;
 
     /**
      * @return Builder

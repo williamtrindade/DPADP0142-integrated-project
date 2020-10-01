@@ -2,7 +2,6 @@
 
 namespace App\Repositories\WorkingHour;
 
-use App\Models\User;
 use App\Models\WorkingHour;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -43,7 +42,7 @@ interface WorkingHourRepositoryInterface
      * @param array $data
      * @param int|null $id
      * @param Model|null $item
-     * @return User
+     * @return Model
      */
     public function update(array $data, int $id = null, Model $item = null): Model;
 

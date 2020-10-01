@@ -2,6 +2,8 @@
 
 namespace App\Validators;
 
+use App\Models\Account;
+use App\Models\User;
 use App\Validators\Base\ValidatorInterface;
 
 /**
@@ -10,7 +12,6 @@ use App\Validators\Base\ValidatorInterface;
  */
 class WorkingHourValidator implements ValidatorInterface
 {
-
     /**
      * @param array $data
      * @return array
@@ -18,14 +19,10 @@ class WorkingHourValidator implements ValidatorInterface
     public static function validateToCreate(array $data): array
     {
         return [
-            'workingHour' => 'required',
-            'workingHour.name' => 'required|string|min:3|max:255',
-            'workingHour.description' => 'required|string|min:3|max:255',
-//            'timeBlocks' => 'array|required',
-//            'timeBlocks.*.entranceTime' => 'required|time',
-//            'timeBlocks.*.exitTime' => 'required|time',
-//            'timeBlocks.*.weekDays' => 'required|array',
-//            'timeBlocks.*.weekDays.*.id' => 'required|int',
+            'account_id'  => 'required|integer|exists:' . (new Account())->getTable() . ',id',
+            'user_id'     => 'required|integer|exists:' . (new User())->getTable() . ',id',
+            'name'        => 'required|string|min:3|max:255',
+            'description' => 'required|string|min:3|max:255',
         ];
     }
 

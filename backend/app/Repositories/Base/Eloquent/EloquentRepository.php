@@ -27,7 +27,7 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
      * @param int $show
      * @return mixed
      */
-    public function all(bool $paginate = true, int $page = 1, int $show = 15)
+    public function all(bool $paginate = false, int $page = 1, int $show = 15)
     {
         if ($paginate) {
             return $this->paginate($page, $show);
@@ -56,7 +56,7 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
      */
     public function read(int $id): Model
     {
-        return $this->queryBuilder()->findOrFail($id);
+        return $this->queryBuilder()->where('id', '=', $id)->firstOrFail();
     }
 
     /**

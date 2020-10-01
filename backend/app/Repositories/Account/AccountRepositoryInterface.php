@@ -3,7 +3,6 @@
 namespace App\Repositories\Account;
 
 use App\Models\Account;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,7 +42,7 @@ interface AccountRepositoryInterface
      * @param array $data
      * @param int|null $id
      * @param Model|null $model
-     * @return User
+     * @return Model
      */
     public function update(array $data, int $id = null, Model $model = null): Model;
 

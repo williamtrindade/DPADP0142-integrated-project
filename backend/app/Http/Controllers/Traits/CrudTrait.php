@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Traits;
 
 use App\Http\Response\Response;
+use App\Scopes\AccountScope;
 use App\Services\Base\ServiceInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -24,7 +25,10 @@ trait CrudTrait
      */
     public function index(): JsonResponse
     {
-        $data = $this->service->all(true, $this->getPage(), $this->getShow());
+        $data = $this->service
+            ->filter($this->request->query())
+            ->addScope(new AccountScope($this->request->user()->account_id))
+            ->all(true, $this->getPage(), $this->getShow());
         return $this->response->collection($data);
     }
 

@@ -11,18 +11,19 @@ use Illuminate\Support\Collection;
  * Class User
  * @package App\Models
  *
- * @property int         $id
- * @property string      $name
- * @property string      $email
- * @property string      $password
- * @property string      $remember_token
- * @property Datetime    $email_verified_at
- * @property int         $permission
- * @property string      $phone
- * @property string      $created_at
+ * @property int        $id
+ * @property string     $name
+ * @property string     $email
+ * @property string     $password
+ * @property string     $remember_token
+ * @property Datetime   $email_verified_at
+ * @property int        $permission
+ * @property string     $phone
+ * @property string     $created_at
+ * @property int        $account_id
  *
- * @property Account     $account
- * @property Collection  $pointRecords
+ * @property Account    $account
+ * @property Collection $pointRecords
  * @property Collection $workingHours
  */
 class User extends UserModel implements ModelInterface

@@ -3,7 +3,7 @@
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="title-black">Adicionar carga horária</h1>
+            <h1 class="title-black">Adicionar jornada de trabalho</h1>
 
             <div class="m-3 card-data">
                 <!--FORM------------------------------------------------->
@@ -11,13 +11,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="name">Nome da carga horária</label>
+                                <label for="name">Nome</label>
                                 <input
                                     required
-                                    placeholder="Digite o nome da carga horária"
+                                    placeholder="Digite o nome da joranda"
                                     minlength="3"
                                     maxlength="255"
-                                    v-model="workingHour.name"
+                                    v-model="working_hour.name"
                                     type="text"
                                     class="form-control"
                                     id="name"
@@ -26,13 +26,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="description">Descrição da carga horária</label>
+                                <label for="description">Descrição</label>
                                 <input
                                     required
-                                    placeholder="Digite a descrição da carga horária"
+                                    placeholder="Digite a descrição da jornada"
                                     minlength="3"
                                     maxlength="255"
-                                    v-model="workingHour.description"
+                                    v-model="working_hour.description"
                                     type="text"
                                     class="form-control"
                                     id="description"
@@ -44,7 +44,7 @@
                     <!--time row---------------------------------------->
                     <div
                         class="time-blocks"
-                        v-for="(timeBlock, index) in timeBlocks"
+                        v-for="(time_block, index) in time_blocks"
                         v-bind:key="index"
                     >
                         <div class="card mb-2 shadow">
@@ -67,7 +67,7 @@
                                                 required
                                                 minlength="3"
                                                 maxlength="255"
-                                                v-model="timeBlock.entranceTime"
+                                                v-model="time_block.start_hour"
                                                 type="time"
                                                 class="form-control"
                                                 id="entrance"
@@ -81,7 +81,7 @@
                                                 required
                                                 minlength="3"
                                                 maxlength="255"
-                                                v-model="timeBlock.exitTime"
+                                                v-model="time_block.end_hour"
                                                 type="time"
                                                 class="form-control"
                                                 id="exit"
@@ -93,7 +93,7 @@
                                         <div class="form-group">
                                             <!--week Days-------------------------------------------------------------------------->
                                             <div class="form-check form-check-inline"
-                                                 v-for="(weekDayObject, weekDaysIndex) in timeBlock.weekDays"
+                                                 v-for="(weekDayObject, weekDaysIndex) in time_block.week_days"
                                                  v-bind:key="weekDaysIndex"
                                             >
                                                 <input
@@ -161,20 +161,21 @@ import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import Button from '@/components/Button'
 import WorkingHourService from '@/services/WorkingHourService'
+import NotificationService from '@/services/NotificationService'
 
 export default {
     name: 'CreateWorkingHour',
     data () {
         return {
-            workingHour: {
+            working_hour: {
                 name: null,
                 description: null
             },
-            timeBlocks: [
+            time_blocks: [
                 {
-                    entranceTime: null,
-                    exitTime: null,
-                    weekDays: [
+                    start_hour: null,
+                    end_hour: null,
+                    week_days: [
                         { id: 0, value: false, day: 'SEG' },
                         { id: 1, value: false, day: 'TER' },
                         { id: 2, value: false, day: 'QUA' },
@@ -197,10 +198,10 @@ export default {
             this.timeBlocks.splice(index, 1)
         },
         addTimeBlock () {
-            this.timeBlocks.push({
-                entranceTime: null,
-                exitTime: null,
-                weekDays: [
+            this.time_blocks.push({
+                start_hour: null,
+                end_hour: null,
+                week_days: [
                     { id: 0, value: false, day: 'SEG' },
                     { id: 1, value: false, day: 'TER' },
                     { id: 2, value: false, day: 'QUA' },
@@ -212,8 +213,11 @@ export default {
             })
         },
         sendForm () {
-            console.log(this.$data)
             WorkingHourService.create(this.$data)
+                .then(() => {
+                    NotificationService.success('Carga horária criada com sucesso!')
+                    this.$router.push({ name: 'manager-working-hours' })
+                })
         }
     }
 }

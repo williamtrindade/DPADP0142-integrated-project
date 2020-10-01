@@ -24,6 +24,8 @@ class WorkingHourModel extends Model
         'account_id'
     ];
 
+    protected $dateFormat = 'Y-m-d H:i:s';
+
     /**
      * @return HasMany
      */

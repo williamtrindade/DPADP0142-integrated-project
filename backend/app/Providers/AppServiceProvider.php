@@ -6,6 +6,7 @@ use App\Repositories\Account\AccountEloquentRepository;
 use App\Repositories\Account\AccountRepositoryInterface;
 use App\Repositories\EmployeeInvitation\EmployeeInvitationEloquentRepository;
 use App\Repositories\EmployeeInvitation\EmployeeInvitationRepositoryInterface;
+use App\Repositories\TimeBlock\TimeBlockEloquentRepository;
 use App\Repositories\TimeBlock\TimeBlockRepositoryInterface;
 use App\Repositories\User\UserEloquentRepository;
 use App\Repositories\User\UserRepositoryInterface;
@@ -35,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AccountRepositoryInterface::class, AccountEloquentRepository::class);
         $this->app->bind(EmployeeInvitationRepositoryInterface::class, EmployeeInvitationEloquentRepository::class);
         $this->app->bind(WorkingHourRepositoryInterface::class, WorkingHourEloquentRepository::class);
-        $this->app->bind(TimeBlockRepositoryInterface::class, TimeBlockRepositoryInterface::class);
+        $this->app->bind(TimeBlockRepositoryInterface::class, TimeBlockEloquentRepository::class);
     }
 
     /**
