@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 /**
  * Class TimeBlock
  * @package App\Models
+ * @property int         $id
  * @property Carbon      $start_hour
  * @property Carbon      $end_hour
  * @property string      $week_days

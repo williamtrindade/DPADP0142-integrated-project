@@ -23,9 +23,9 @@ class TimeBlockModel extends Model
         'account_id',
     ];
 
-    protected $dates = [
-        'start_hour',
-        'end_hour'
+    protected $casts = [
+        'end_hour'  => 'time',
+        'week_days' => 'time',
     ];
 
     /**

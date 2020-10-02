@@ -30,8 +30,21 @@ class TimeBlockValidator implements ValidatorInterface
         ];
     }
 
+    /**
+     * @param array $data
+     * @param int $id
+     * @return string[]
+     */
     public static function validateToUpdate(array $data, int $id): array
     {
-        return [];
+        return [
+            'working_hour_id'  => 'sometimes|integer|exists:' . (new WorkingHour())->getTable() . ',id',
+            'start_hour'       => 'sometimes|date_format:H:i',
+            'end_hour'         => 'sometimes|date_format:H:i',
+            '.*.weekDays'      => 'sometimes|array',
+            '.*.weekDays.*'    => 'sometimes|array|min:10',
+            '.*.weekDays.*.id' => 'sometimes|integer|in:' . TimeBlock::getWeekDaysValues()->implode(','),
+            'weekDays.*.value' => 'sometimes|boolean',
+        ];
     }
 }

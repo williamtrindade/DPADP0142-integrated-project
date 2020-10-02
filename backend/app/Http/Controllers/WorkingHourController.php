@@ -81,4 +81,32 @@ class WorkingHourController extends Controller
         $this->service->delete($id);
         return $this->response->withNoContent();
     }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function read(int $id): JsonResponse
+    {
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $data = $this->service->read($id);
+        return $this->response->item($data);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function update(int $id): JsonResponse
+    {
+        $this->request->merge([
+            'account_id' => (int) $this->request->user()->account_id,
+            'user_id'    => $this->request->user()->id
+        ]);
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $data = $this->service->update($this->request->all(), $id);
+        return $this->response->item($data);
+    }
 }

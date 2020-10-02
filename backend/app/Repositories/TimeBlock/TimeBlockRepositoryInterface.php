@@ -46,6 +46,14 @@ interface TimeBlockRepositoryInterface
     public function delete(int $id): ?bool;
 
     /**
+     * @param array $ids
+     * @param string $relation
+     * @param bool $detach
+     * @return Model
+     */
+    public function sync(array $ids, string $relation, bool $detach = true): Model;
+
+    /**
      * @return Builder
      */
     public function queryBuilder(): Builder;

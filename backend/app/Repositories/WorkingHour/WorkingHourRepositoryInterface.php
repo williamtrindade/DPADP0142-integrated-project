@@ -53,6 +53,20 @@ interface WorkingHourRepositoryInterface
     public function delete(int $id): bool;
 
     /**
+     * @param array $ids
+     * @param string $relation
+     * @param bool $detach
+     * @return Model
+     */
+    public function sync(array $ids, string $relation, bool $detach = true): Model;
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function unsetTimeBlocks(int $id);
+
+    /**
      * @return Builder
      */
     public function queryBuilder(): Builder;

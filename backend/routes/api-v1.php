@@ -25,7 +25,6 @@ Route::put('accounts/{id}', 'AccountController@update');
  * Users
  * _________________________________________
  */
-
 Route::post('users', 'UserController@create');
 
 /*
@@ -50,6 +49,8 @@ Route::middleware([ManagerPermission::class])->group(function () {
     Route::get('working/hours', 'WorkingHourController@index');
     Route::post('working/hours', 'WorkingHourController@create');
     Route::delete('working/hours/{id}', 'WorkingHourController@delete');
+    Route::get('working/hours/{id}', 'WorkingHourController@read');
+    Route::put('working/hours/{id}', 'WorkingHourController@update');
 });
 
 /*

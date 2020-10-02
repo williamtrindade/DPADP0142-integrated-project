@@ -31,10 +31,10 @@ interface ServiceInterface
     public function read(int $id);
 
     /**
-     * @param $data
-     * @param $id
+     * @param array $data
+     * @param int $id
      */
-    public function update($data, $id);
+    public function update(array $data, int $id);
 
     /**
      * @param $id

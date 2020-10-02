@@ -4,6 +4,8 @@ namespace App\Repositories\WorkingHour;
 
 use App\Models\WorkingHour;
 use App\Repositories\Eloquent\EloquentRepository;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * Class WorkingHourEloquentRepository
@@ -34,6 +36,25 @@ class WorkingHourEloquentRepository extends EloquentRepository implements Workin
             $this->queryBuilder = $this->queryBuilder()->with(array('timeBlocks'));
             return $this->paginate($page, $show);
         }
-        return $this->model->with('timeBlocks')->get();
+        return $this->queryBuilder()->with('timeBlocks')->get();
+    }
+
+    /**
+     * @param int $id
+     * @return Model
+     * @throws ModelNotFoundException
+     */
+    public function read(int $id): Model
+    {
+        return $this->queryBuilder()->where('id', '=', $id)->with('timeBlocks')->firstOrFail();
+    }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function unsetTimeBlocks(int $id)
+    {
+        $this->read($id)->timeBlocks()->delete();
     }
 }

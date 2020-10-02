@@ -59,13 +59,14 @@ class AccountService extends Service implements ServiceInterface, ScopableServic
     {
         $this->validator::validateToCreateGuest($data);
         $account_data = $this->getAccountData($data);
-        $user_data = $this->getUserData($data);
-        $account = null;
+        $user_data    = $this->getUserData($data);
+        $account      = null;
         DB::transaction(function() use (&$user_data, &$account_data, &$account) {
             // Create Account
             /** @var Account $account */
             $account = parent::create($account_data);
             $this->setupManagerUserData($user_data, $account);
+
             /** @var User $user */
             $user = app(UserService::class)->create($user_data);
             parent::update(['manager_id' => $user->id], $account->id);

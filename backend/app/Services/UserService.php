@@ -72,7 +72,7 @@ class UserService extends Service implements ServiceInterface, ScopableService, 
      * @return Model
      * @throws ValidationException
      */
-    public function update($data, $id)
+    public function update(array $data, int $id)
     {
         $this->validateToUpdate($data, $id);
         if ($pass = Arr::get($data, 'password', false)) {

@@ -83,6 +83,20 @@ abstract class EloquentRepository implements EloquentRepositoryInterface
     }
 
     /**
+     * @param array $ids
+     * @param string $relation
+     * @param bool $detach
+     * @return Model
+     */
+    public function sync(array $ids, string $relation, bool $detach = true): Model
+    {
+        if (!$detach) {
+            $this->model->$relation()->syncWithoutDetaching($ids);
+        }
+        return $this->model->$relation()->sync($ids);
+    }
+
+    /**
      * @param int $id
      * @return bool
      * @throws Exception

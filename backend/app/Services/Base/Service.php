@@ -49,7 +49,7 @@ abstract class Service
      * @param $id
      * @throws ValidationException
      */
-    public function update($data, $id)
+    public function update(array $data, int $id)
     {
         $item = $this->repository->read($id);
         $this->validateToUpdate($data, $id);

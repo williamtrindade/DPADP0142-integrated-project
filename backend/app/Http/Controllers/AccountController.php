@@ -38,8 +38,8 @@ class AccountController extends Controller
      */
     public function __construct(AccountService $service, Request $request, Response $response)
     {
-        $this->service = $service;
-        $this->request = $request;
+        $this->service  = $service;
+        $this->request  = $request;
         $this->response = $response;
     }
 
@@ -61,7 +61,9 @@ class AccountController extends Controller
      */
     public function read(int $id): JsonResponse
     {
-        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        if ($this->request->user()->account_id != $id) {
+            return $this->response->withForbidden();
+        }
         $data = $this->service->read($id);
         return $this->response->item($data);
     }

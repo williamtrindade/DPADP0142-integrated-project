@@ -38,7 +38,6 @@ trait CrudTrait
      */
     public function create(): JsonResponse
     {
-        dd($this->request->all());
         $data = $this->service->create($this->request->all());
         return $this->response->item($data);
     }
