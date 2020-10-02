@@ -3,7 +3,7 @@
         <sidebar></sidebar>
         <topbar></topbar>
         <div class="content">
-            <h1 class="title-black">Adicionar jornada de trabalho</h1>
+            <h1 class="title-black">Editar jornada de trabalho</h1>
 
             <div class="m-3 card-data">
                 <!--FORM------------------------------------------------->
@@ -101,7 +101,7 @@
                                                     class="form-check-input"
                                                     type="checkbox"
                                                 >
-                                                <label class="form-check-label">{{weekDayObject.day}}</label>
+                                                <label class="form-check-label">{{daysVariables[weekDaysIndex]}}</label>
                                             </div>
                                             <!--Week Days--------------------------------------------------------------------------->
                                         </div>
@@ -133,7 +133,7 @@
                             "
                         class="mt-3"
                         ref="button"
-                        content="Finalizar"
+                        content="Salvar"
                         icon="fas fa-check"
                     >
                     </button-component>
@@ -162,30 +162,18 @@ import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import Button from '@/components/Button'
 import WorkingHourService from '@/services/WorkingHourService'
 import NotificationService from '@/services/NotificationService'
+import DaysVariables from '@/views/manager/working-hours/DaysVariables'
 
 export default {
     name: 'CreateWorkingHour',
     data () {
         return {
+            daysVariables: DaysVariables.weekDays,
             working_hour: {
                 name: null,
                 description: null
             },
-            time_blocks: [
-                {
-                    start_hour: null,
-                    end_hour: null,
-                    week_days: [
-                        { id: 0, value: false, day: 'SEG' },
-                        { id: 1, value: false, day: 'TER' },
-                        { id: 2, value: false, day: 'QUA' },
-                        { id: 3, value: false, day: 'QUI' },
-                        { id: 4, value: false, day: 'SEX' },
-                        { id: 5, value: false, day: 'SAB' },
-                        { id: 6, value: false, day: 'DOM' }
-                    ]
-                }
-            ]
+            time_blocks: null
         }
     },
     components: {
@@ -193,29 +181,43 @@ export default {
         topbar: ManagerTopbar,
         'button-component': Button
     },
+    mounted () {
+        if (this.$route.params.id) {
+            WorkingHourService.get(this.$route.params.id)
+                .then((workingHour) => {
+                    this.working_hour = workingHour
+                    this.time_blocks = workingHour.time_blocks
+                    delete workingHour.time_blocks
+                }).catch(() => {
+                    this.$router.push({ name: 'not-found' })
+                })
+        } else {
+            this.$router.push({ name: 'not-found' })
+        }
+    },
     methods: {
         removeItem (index) {
-            this.time_locks.splice(index, 1)
+            this.time_blocks.splice(index, 1)
         },
         addTimeBlock () {
             this.time_blocks.push({
                 start_hour: null,
                 end_hour: null,
                 week_days: [
-                    { id: 0, value: false, day: 'SEG' },
-                    { id: 1, value: false, day: 'TER' },
-                    { id: 2, value: false, day: 'QUA' },
-                    { id: 3, value: false, day: 'QUI' },
-                    { id: 4, value: false, day: 'SEX' },
-                    { id: 5, value: false, day: 'SAB' },
-                    { id: 6, value: false, day: 'DOM' }
+                    { id: 0, value: false },
+                    { id: 1, value: false },
+                    { id: 2, value: false },
+                    { id: 3, value: false },
+                    { id: 4, value: false },
+                    { id: 5, value: false },
+                    { id: 6, value: false }
                 ]
             })
         },
         sendForm () {
-            WorkingHourService.create(this.$data)
+            WorkingHourService.update(this.$data, this.$route.params.id)
                 .then(() => {
-                    NotificationService.success('Carga horária criada com sucesso!')
+                    NotificationService.success('Carga horária alterada com sucesso!')
                     this.$router.push({ name: 'manager-working-hours' })
                 })
         }

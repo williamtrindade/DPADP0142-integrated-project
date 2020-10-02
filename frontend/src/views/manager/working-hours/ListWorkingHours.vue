@@ -45,7 +45,7 @@
                                             <td>0</td>
                                             <td>
                                                 <view-button
-                                                    icon="far fa-eye"
+                                                    icon="far fa-edit"
                                                     v-on:click.native="editWorkingHour(working_hour.id)"
                                                 >
                                                 </view-button>
@@ -98,6 +98,7 @@ export default {
     },
     methods: {
         editWorkingHour (id) {
+            this.$router.push({ name: 'manager-edit-working-hours', params: { id: id } })
         },
         deleteWorkingHour (id) {
             WorkingHourService.delete(id)

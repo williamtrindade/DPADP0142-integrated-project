@@ -121,6 +121,12 @@ export default {
             UserService.delete(id)
                 .then(() => {
                     NotificationService.success('Usuário deletado!')
+                    UserService.getAll('?permission=2')
+                        .then((users) => {
+                            if (users) {
+                                this.users = users
+                            }
+                        })
                 })
             UserService.getAll('?permission=2')
                 .then((users) => {

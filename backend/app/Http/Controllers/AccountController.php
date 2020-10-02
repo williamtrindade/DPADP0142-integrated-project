@@ -75,7 +75,6 @@ class AccountController extends Controller
      */
     public function update(int $id): JsonResponse
     {
-        $this->service->addScope(new AccountScope($this->request->user()->account_id));
         $data = $this->service->update($this->request->all(), $id);
         return $this->response->item($data);
     }
