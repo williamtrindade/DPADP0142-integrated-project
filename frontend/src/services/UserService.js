@@ -52,6 +52,13 @@ export default {
             .catch((error) => Promise.reject(error))
     },
 
+    updateWorkingHour: async (userId, workingHourId) => {
+        const options = {
+            headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
+        }
+        return await axios.put(`/v1/users/${userId}/working/hour/${workingHourId}`, {}, options)
+    },
+
     delete: async (id) => {
         const options = {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }

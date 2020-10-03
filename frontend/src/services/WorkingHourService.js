@@ -4,7 +4,7 @@ export default {
     getAll: async () => {
         const options = { headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') } }
         return await axios.get('/v1/working/hours', options)
-            .then((data) => (data.data.data.data))
+            .then((data) => (data.data.data))
             .catch((error) => Promise.reject(error))
     },
 
