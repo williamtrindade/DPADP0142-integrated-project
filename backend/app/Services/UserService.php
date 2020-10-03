@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 /**
  * Class UserService
@@ -93,5 +94,16 @@ class UserService extends Service implements ServiceInterface, ScopableService, 
                                   ->getAccountByHash($data['hash'])->id;
         $data['permission'] = User::EMPLOYEE_PERMISSION;
         return $this->create($data);
+    }
+
+    /**
+     * @param int $userId
+     * @param int $workingHourId
+     * @return void
+     * @throws Throwable
+     */
+    public function updateWorkingHour(int $userId, int $workingHourId)
+    {
+        $this->repository->updateWorkingHour($userId, $workingHourId);
     }
 }

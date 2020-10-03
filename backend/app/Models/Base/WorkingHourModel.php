@@ -49,4 +49,12 @@ class WorkingHourModel extends Model
     {
         return $this->belongsTo(Account::class, 'account_id');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function employees(): HasMany
+    {
+        return $this->hasMany(User::class, 'working_hour_id');
+    }
 }

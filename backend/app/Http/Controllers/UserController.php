@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 /**
  * Class UserController
@@ -111,5 +112,18 @@ class UserController extends Controller
         $this->service->addScope(new AccountScope($this->request->user()->account_id));
         $this->service->delete($id);
         return $this->response->withNoContent();
+    }
+
+    /**
+     * @param int $userId
+     * @param int $workingHourId
+     * @return JsonResponse
+     * @throws Throwable
+     */
+    public function updateWorkingHour(int $userId, int $workingHourId): JsonResponse
+    {
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $this->service->updateWorkingHour($userId, $workingHourId);
+        return $this->response->json();
     }
 }

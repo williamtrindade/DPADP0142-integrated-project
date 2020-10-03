@@ -43,6 +43,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Celular</th>
                                         <th scope="col">Permissão</th>
+                                        <th>Jornada</th>
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
@@ -52,6 +53,26 @@
                                         <td>{{ user.email }}</td>
                                         <td>{{ (user.phone != null) ? user.phone : 'Telefone não informado'  }}</td>
                                         <td>{{ (user.permission === '1') ? 'Gerente': 'Colaborador'  }}</td>
+                                        <td>
+                                            <select
+                                                v-on:change="changeSelect(user.id, $event)"
+                                                class="form-control form-control-sm"
+                                                v-model="user.working_hour_id"
+                                            >
+                                                <option
+                                                    value="null"
+                                                >
+                                                    Selecione
+                                                </option>
+                                                <option
+                                                    v-for="workingHour in workingHours"
+                                                    v-bind:key="workingHour.id"
+                                                    v-bind:value="workingHour.id"
+                                                >
+                                                    {{workingHour.name}}
+                                                </option>
+                                            </select>
+                                        <td>
                                         <td>
                                             <view-button
                                                 icon="far fa-eye"
@@ -92,11 +113,12 @@ import UserService from '@/services/UserService'
 import ListDeleteButton from '@/components/ListDeleteButton'
 import ListViewButton from '@/components/ListViewButton'
 import NotificationService from '@/services/NotificationService'
+import WorkingHourService from '@/services/WorkingHourService'
 
 export default {
     name: 'ListEmployees',
     data () {
-        return { users: null, searchText: null }
+        return { users: null, searchText: null, workingHours: null }
     },
     components: {
         sidebar: ManagerSidebar,
@@ -111,6 +133,10 @@ export default {
                 if (users) {
                     this.users = users
                 }
+            })
+        WorkingHourService.getAll()
+            .then((resp) => {
+                this.workingHours = resp
             })
     },
     methods: {
@@ -138,6 +164,20 @@ export default {
         async search () {
             this.users = await UserService
                 .getAll('?permission=2&name=' + this.searchText)
+        },
+        changeSelect (userId, event) {
+            if (event.target.value !== 'null') {
+                UserService.updateWorkingHour(userId, event.target.value)
+                    .then(() => {
+                        NotificationService.success('Jornada de trabalho alterada!')
+                        UserService.getAll('?permission=2')
+                            .then((users) => {
+                                if (users) {
+                                    this.users = users
+                                }
+                            })
+                    })
+            }
         }
     }
 }

@@ -52,7 +52,7 @@ class WorkingHourController extends Controller
         $data = $this->service
             ->filter($this->request->query())
             ->addScope(new AccountScope($this->request->user()->account_id))
-            ->all(true, $this->getPage(), $this->getShow());
+            ->all(false, $this->getPage(), $this->getShow());
         return $this->response->collection($data);
     }
 

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property Collection $timeBlocks
  * @property User       $user
  * @property Account    $account
+ * @property Collection $employees
  */
 class WorkingHour extends WorkingHourModel
 {

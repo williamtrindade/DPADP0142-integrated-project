@@ -77,4 +77,12 @@ class UserModel extends Authenticatable
     {
         return $this->hasMany(WorkingHour::class, 'user_id', 'id');
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function workingHour(): BelongsTo
+    {
+        return $this->belongsTo(WorkingHour::class, 'working_hour_id', 'id');
+    }
 }

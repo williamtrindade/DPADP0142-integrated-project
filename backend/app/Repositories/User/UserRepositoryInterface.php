@@ -5,6 +5,7 @@ namespace App\Repositories\User;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Throwable;
 
 /**
  * Interface UserRepositoryInterface
@@ -69,4 +70,12 @@ interface UserRepositoryInterface
      * @return Builder
      */
     public function resetBuilder(): Builder;
+
+    /**
+     * @param int $userId
+     * @param int $workingHourId
+     * @throws Throwable
+     * @return bool
+     */
+    public function updateWorkingHour(int $userId, int $workingHourId);
 }
