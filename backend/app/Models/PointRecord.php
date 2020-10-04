@@ -11,18 +11,18 @@ use Illuminate\Support\Collection;
  * Class Account
  * @package App\Models
  *
- * @property int $id
- * @property Carbon $date
- * @property Carbon $hour
- * @property int $status
- * @property int $type
- * @property int $location_id
- * @property int $user_id
- * @property int $account_id
+ * @property int      $id
+ * @property Carbon   $date
+ * @property Carbon   $hour
+ * @property int      $status
+ * @property int      $type
+ * @property int      $location_id
+ * @property int      $user_id
+ * @property int      $account_id
  *
  * @property Location $location
- * @property User $user
- * @property Account $account
+ * @property User     $user
+ * @property Account  $account
  */
 class PointRecord extends PointRecordModel implements ModelInterface
 {
