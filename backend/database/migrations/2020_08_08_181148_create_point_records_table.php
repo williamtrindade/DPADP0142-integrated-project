@@ -23,6 +23,8 @@ class CreatePointRecordsTable extends Migration
             $table->id();
             $table->date('date');
             $table->time('hour');
+            $table->string('lat');
+            $table->string('lng');
             $table->tinyInteger('status')->default(PointRecord::ON_HOLD_STATUS);
             $table->tinyInteger('type');
 

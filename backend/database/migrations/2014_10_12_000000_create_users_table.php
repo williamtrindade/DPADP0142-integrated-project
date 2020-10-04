@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('cpf');
+            $table->string('lat');
+            $table->string('lng');
             $table->string('email')->unique();
             $table->unsignedBigInteger('account_id');
             $table->foreign('account_id')

@@ -23,6 +23,8 @@ class PointRecordModel extends Model
         'type',
         'user_id',
         'account_id',
+        'lat',
+        'lng',
     ];
 
     /**
