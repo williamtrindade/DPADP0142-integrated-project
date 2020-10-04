@@ -18,7 +18,6 @@ axios.interceptors.response
         const status = error.response.status
         switch (status) {
             case 422:
-                console.log(error.response)
                 NotificationService.throwValidationErrors(error.response.data.data)
                 break
             case 500:

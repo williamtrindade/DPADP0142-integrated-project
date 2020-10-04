@@ -195,7 +195,7 @@ export default {
     },
     methods: {
         removeItem (index) {
-            this.time_locks.splice(index, 1)
+            this.time_blocks.splice(index, 1)
         },
         addTimeBlock () {
             this.time_blocks.push({

@@ -6,40 +6,36 @@
                 <hr>
                 <h2 id="form-title">Cadastre-se</h2>
                 <hr>
-                <form v-on:submit.prevent="register" class="form">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user-name">Nome</label>
-                                <input
-                                    required
-                                    minlength="3"
-                                    maxlength="255"
-                                    v-model="user_name"
-                                    type="text"
-                                    class="form-control"
-                                    id="user-name"
-                                    placeholder="Seu nome"
-                                />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email">Endereço de email</label>
-                                <input
-                                    required
-                                    minlength="3"
-                                    maxlength="255"
-                                    v-model="user_email"
-                                    type="email"
-                                    class="form-control"
-                                    id="email"
-                                    placeholder="Seu e-mail"
-                                />
-                            </div>
-                        </div>
+                <form
+                    v-on:submit.prevent="register"
+                    class="form"
+                >
+                    <div class="form-group">
+                        <label for="user-name">Nome</label>
+                        <input
+                            required
+                            minlength="3"
+                            maxlength="255"
+                            v-model="user_name"
+                            type="text"
+                            class="form-control"
+                            id="user-name"
+                            placeholder="Seu nome"
+                        />
                     </div>
-
+                    <div class="form-group">
+                        <label for="email">Endereço de email</label>
+                        <input
+                            required
+                            minlength="3"
+                            maxlength="255"
+                            v-model="user_email"
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Seu e-mail"
+                        />
+                    </div>
                     <div class="form-group">
                         <label for="account-name">Nome da empresa</label>
                         <input
@@ -67,34 +63,37 @@
                             placeholder="Sua nova senha"
                         />
                     </div>
-                    <div class="form-group">
-                        <label for="account-cnpj">CNPJ</label>
-                        <input
-                            required
-                            minlength="14"
-                            maxlength="18"
-                            v-model="account_cnpj"
-                            type="text"
-                            class="form-control"
-                            id="account-cnpj"
-                            placeholder="CNPJ da empresa"
-                        />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="account-cnpj">CNPJ</label>
+                                <the-mask
+                                    :masked="false"
+                                    :mask="['##.###.###/####-##']"
+                                    required
+                                    v-model="account_cnpj"
+                                    class="form-control"
+                                    id="account-cnpj"
+                                    placeholder="99.999.999/9999-99"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="account-phone">Telefone/Celular</label>
+                                <the-mask
+                                    :masked="false"
+                                    :mask="['## (##) #####-####']"
+                                    required
+                                    v-model="account_phone"
+                                    class="form-control"
+                                    id="account-phone"
+                                    placeholder="99 (99) 99999-9999"
+                                />
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="account-phone">Telefone/Celular</label>
-                        <input
-                            required
-                            minlength="8"
-                            maxlength="15"
-                            v-model="account_phone"
-                            type="text"
-                            class="form-control"
-                            id="account-phone"
-                            placeholder="+99 99 99999-9999"
-                        />
-                    </div>
-
+                    <hr>
                     <div class="justify-content-start float-left full-width" style="text-align: left;">
                         <button
                             id="send-button"
@@ -135,6 +134,7 @@ export default {
     },
     methods: {
         register () {
+            console.log(this.account_phone)
             this.blockSendButton()
             this.registerButtonText = 'Enviando dados...'
 
