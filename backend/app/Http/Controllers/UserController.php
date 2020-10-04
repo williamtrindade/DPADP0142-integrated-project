@@ -126,4 +126,16 @@ class UserController extends Controller
         $this->service->updateWorkingHour($userId, $workingHourId);
         return $this->response->json();
     }
+
+    /**
+     * @param int $user_id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function updateAddress(int $user_id): JsonResponse
+    {
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $data = $this->service->updateAddress($user_id, $this->request->all());
+        return $this->response->item($data);
+    }
 }

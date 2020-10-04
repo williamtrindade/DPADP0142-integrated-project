@@ -52,6 +52,9 @@ Route::middleware([ManagerPermission::class])->group(function () {
     Route::delete('working/hours/{id}', 'WorkingHourController@delete');
     Route::get('working/hours/{id}', 'WorkingHourController@read');
     Route::put('working/hours/{id}', 'WorkingHourController@update');
+
+    // User address update
+    Route::put('users/{id}/address', 'UserController@updateAddress');
 });
 
 /*
