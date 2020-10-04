@@ -30,7 +30,7 @@ use Illuminate\Support\Collection;
  */
 class User extends UserModel implements ModelInterface
 {
-    public const MANAGER_PERMISSION = 1;
+    public const MANAGER_PERMISSION  = 1;
     public const EMPLOYEE_PERMISSION = 2;
 
     /**

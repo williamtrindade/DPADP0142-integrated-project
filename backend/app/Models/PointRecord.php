@@ -20,7 +20,6 @@ use Illuminate\Support\Collection;
  * @property int      $user_id
  * @property int      $account_id
  *
- * @property Location $location
  * @property User     $user
  * @property Account  $account
  */

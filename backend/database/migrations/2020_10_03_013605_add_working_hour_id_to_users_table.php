@@ -36,7 +36,6 @@ class AddWorkingHourIdToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['working_hour_id']);
-
         });
     }
 }
