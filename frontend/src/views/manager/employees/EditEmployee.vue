@@ -48,7 +48,8 @@
                             </div>
                             <button-component
                                 ref="button"
-                                content="Enviar"
+                                content="Salvar"
+                                icon="fas fa-check"
                             >
                             </button-component>
                         </div>
@@ -74,11 +75,31 @@
                                     id="name"
                                 >
                             </div> -->
-                            <div id="map">
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="email">Endereço</label>
+                                        <input
+                                            required
+                                            placeholder="Digite um endereço"
+                                            minlength="3"
+                                            maxlength="255"
+                                            v-model="address"
+                                            type="text"
+                                            class="form-control"
+                                            id="address"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div id="map">
+                                    </div>
+                                </div>
                             </div>
                             <button-component
                                 ref="button"
-                                content="Enviar"
+                                content="Salvar"
+                                icon="fas fa-check"
                             >
                             </button-component>
                         </div>
@@ -99,18 +120,8 @@ import Button from '@/components/Button'
 
 export default {
     name: 'EditEmployee',
-    mounted () {
-        this.mountMapScript().then(() => {
-            // eslint-disable-next-line no-unused-vars
-            let map
-            window.initMap = () => {
-                // eslint-disable-next-line no-undef
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -34.397, lng: 150.644 },
-                    zoom: 8
-                })
-            }
-        })
+    created () {
+        this.mountMapScript()
     },
     components: {
         sidebar: ManagerSidebar,
@@ -123,19 +134,29 @@ export default {
                 name: 'Wil',
                 email: 'wil@odig.net'
             },
+            address: null,
             key: 'AIzaSyA9r-z8yUPJMrxuUnoPwhU3Os4T6JL9Wd8'
         }
     },
     methods: {
         mountMapScript () {
-            return new Promise((resolve, reject) => {
-                // <script async defer src=
-                const scriptTag = document.createElement('script')
-                scriptTag.async = true
-                scriptTag.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.key + '&callback=initMap'
-                document.head.append(scriptTag)
-                resolve()
-            })
+            // Create the script tag, set the appropriate attributes
+            var script = document.createElement('script')
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.key + '&callback=initMap'
+            script.defer = true
+
+            // Attach your callback function to the `window` object
+            window.initMap = function () {
+                // eslint-disable-next-line
+                let map
+                // eslint-disable-next-line
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 8
+                })
+            }
+            // Append the 'script' element to 'head'
+            document.head.appendChild(script)
         },
         sendForm () {
         }
@@ -144,4 +165,9 @@ export default {
 </script>
 
 <style scoped>
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+}
 </style>
