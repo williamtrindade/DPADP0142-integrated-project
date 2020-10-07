@@ -17,6 +17,7 @@ use Illuminate\Support\Collection;
  * @property string      $password
  * @property string      $lat
  * @property string      $lng
+ * @property string      $address
  * @property string      $remember_token
  * @property Datetime    $email_verified_at
  * @property int         $permission

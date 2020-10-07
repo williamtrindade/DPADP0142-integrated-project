@@ -68,10 +68,11 @@ h1 label {
     color: #00ff9d;
 }
 .title-black {
+    font-family: arial;
     padding: 0.9%;
     background-color: rgb(0, 0, 0);
     color: white;
-    font-size: 130%;
+    font-size: 110%;
     text-align: left;
 }
 </style>

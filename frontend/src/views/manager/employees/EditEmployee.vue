@@ -13,98 +13,90 @@
                     icon="fas fa-arrow-left"
                 >
                 </button-component>
-                <form @on:submit.prevent="sendForm">
-
-                    <div class="card">
-                        <div class="card-header">
-                            Dados básicos
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="name">Nome</label>
-                                <input
-                                    required
-                                    placeholder="Email do colaborador"
-                                    minlength="3"
-                                    maxlength="255"
-                                    v-model="user.name"
-                                    type="text"
-                                    class="form-control"
-                                    id="name"
-                                >
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input
-                                    required
-                                    placeholder="Nome do colaborador"
-                                    minlength="3"
-                                    maxlength="255"
-                                    v-model="user.email"
-                                    type="text"
-                                    class="form-control"
-                                    id="email"
-                                >
-                            </div>
-                            <button-component
-                                ref="button"
-                                content="Salvar"
-                                icon="fas fa-check"
-                            >
-                            </button-component>
-                        </div>
-                    </div>
-                </form>
-
-                <form>
-                    <div class="card mt-3">
-                        <div class="card-header">
-                            Endereço
-                        </div>
-                        <div class="card-body">
-                            <!-- <div class="form-group">
-                                <label for="name">Nome</label>
-                                <input
-                                    required
-                                    placeholder="Digite seu nome"
-                                    minlength="3"
-                                    maxlength="255"
-                                    v-model="name"
-                                    type="text"
-                                    class="form-control"
-                                    id="name"
-                                >
-                            </div> -->
-                            <div class="row mb-3">
-                                <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form @on:submit.prevent="sendForm">
+                            <div class="card">
+                                <div class="card-header">
+                                    Dados básicos
+                                </div>
+                                <div class="card-body">
                                     <div class="form-group">
-                                        <label for="email">Endereço</label>
+                                        <label for="name">Nome</label>
                                         <input
                                             required
-                                            placeholder="Digite um endereço"
+                                            placeholder="Email do colaborador"
                                             minlength="3"
                                             maxlength="255"
-                                            v-model="address"
+                                            v-model="user.name"
                                             type="text"
                                             class="form-control"
-                                            id="address"
+                                            id="name"
                                         >
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div id="map">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input
+                                            required
+                                            placeholder="Nome do colaborador"
+                                            minlength="3"
+                                            maxlength="255"
+                                            v-model="user.email"
+                                            type="text"
+                                            class="form-control"
+                                            id="email"
+                                        >
                                     </div>
+                                    <button-component
+                                        ref="button"
+                                        content="Salvar"
+                                        icon="fas fa-check"
+                                    >
+                                    </button-component>
                                 </div>
                             </div>
-                            <button-component
-                                ref="button"
-                                content="Salvar"
-                                icon="fas fa-check"
-                            >
-                            </button-component>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                    <div class="col-md-6">
+                        <form v-on:submit.prevent="sendAddress">
+                            <div class="card">
+                                <div class="card-header">
+                                    Endereço do colaborador
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-12">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="searchAddressField">Endereço</label>
+                                                <input
+                                                    required
+                                                    placeholder="Digite um endereço"
+                                                    minlength="3"
+                                                    maxlength="255"
+                                                    type="text"
+                                                    class="form-control"
+                                                    v-model="user.address"
+                                                    id="searchAddressField"
+                                                >
+                                            </div>
+                                            <div id="map">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                        </div>
+                                    </div>
+                                    <button-component
+                                        class="mt-3"
+                                        ref="button"
+                                        content="Salvar"
+                                        icon="fas fa-check"
+                                    >
+                                    </button-component>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -115,13 +107,25 @@
 import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import Button from '@/components/Button'
-// import NotificationService from '@/services/NotificationService'
+import UserService from '@/services/UserService'
+import NotificationService from '@/services/NotificationService'
 // import EmployeeInvitationService from '@/services/EmployeeInvitationService'
 
 export default {
     name: 'EditEmployee',
-    created () {
-        this.mountMapScript()
+    mounted () {
+        this.getUserData()
+            .then(async () => {
+                this.mountMapScript()
+                this.setMapScriptCallback()
+            })
+    },
+    destroyed () {
+        const allScripts = Array.from(document.getElementsByTagName('script'))
+        const filteredScripts = allScripts.filter((script) => script.src.indexOf('https://maps.googleapis.com/') >= 0)
+        filteredScripts.forEach(script => {
+            script.remove()
+        })
     },
     components: {
         sidebar: ManagerSidebar,
@@ -131,34 +135,95 @@ export default {
     data () {
         return {
             user: {
-                name: 'Wil',
-                email: 'wil@odig.net'
+                id: null,
+                name: null,
+                email: null,
+                lat: null,
+                lng: null,
+                address: null
             },
-            address: null,
-            key: 'AIzaSyA9r-z8yUPJMrxuUnoPwhU3Os4T6JL9Wd8'
+            address: {
+                text: null,
+                lat: null,
+                lng: null
+            },
+            key: 'AIzaSyA9r-z8yUPJMrxuUnoPwhU3Os4T6JL9Wd8',
+            mapInfos: {
+                autocomplete: null,
+                map: null,
+                marker: null,
+                geocoder: null
+            }
         }
     },
     methods: {
-        mountMapScript () {
-            // Create the script tag, set the appropriate attributes
-            var script = document.createElement('script')
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.key + '&callback=initMap'
-            script.defer = true
-
-            // Attach your callback function to the `window` object
-            window.initMap = function () {
-                // eslint-disable-next-line
-                let map
-                // eslint-disable-next-line
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -34.397, lng: 150.644 },
-                    zoom: 8
-                })
+        async getUserData () {
+            if (this.$route.params.id) {
+                try {
+                    const user = await UserService.getUser(this.$route.params.id)
+                    this.user = user
+                } catch (e) {
+                    this.$router.push({ name: 'not-found' })
+                }
+            } else {
+                this.$router.push({ name: 'not-found' })
             }
-            // Append the 'script' element to 'head'
+        },
+        mountMapScript () {
+            const script = document.createElement('script')
+            script.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.key + '&libraries=places&callback=initMap'
+            script.defer = true
             document.head.appendChild(script)
         },
+        setMapScriptCallback () {
+            return new Promise((resolve, reject) => {
+                window.initMap = () => {
+                    // eslint-disable-next-line no-undef
+                    this.mapInfos.map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: -34.397, lng: 150.644 },
+                        zoom: 8
+                    })
+                    // eslint-disable-next-line no-undef
+                    this.mapInfos.marker = new google.maps.Marker({ map: this.mapInfos.map })
+
+                    if (this.user.lat !== 'null' && this.user.lng !== 'null') {
+                        // eslint-disable-next-line no-undef
+                        const latlng = new google.maps.LatLng(this.user.lat, this.user.lng)
+                        this.mapInfos.marker.setPosition(latlng)
+                        // eslint-disable-next-line no-undef
+                        this.mapInfos.map.setCenter(latlng)
+                    }
+
+                    const input = document.getElementById('searchAddressField')
+                    // eslint-disable-next-line
+                    this.mapInfos.autocomplete = new google.maps.places.Autocomplete(input)
+                    this.mapInfos.autocomplete.addListener('place_changed', this.onPlaceChanged)
+                    this.mapInfos.autocomplete.bindTo('bounds', this.mapInfos.map)
+                    resolve()
+                }
+            })
+        },
+        onPlaceChanged () {
+            const place = this.mapInfos.autocomplete.getPlace()
+            if (place.geometry) {
+                this.mapInfos.map.panTo(place.geometry.location)
+                this.mapInfos.map.setZoom(15)
+                this.user.address = place.formatted_address
+                this.address.lat = place.geometry.location.lat()
+                this.address.lng = place.geometry.location.lng()
+                // eslint-disable-next-line no-undef
+                const latlng = new google.maps.LatLng(this.address.lat, this.address.lng)
+                // eslint-disable-next-line no-undef
+                this.mapInfos.marker.setPosition(latlng)
+            }
+        },
         sendForm () {
+        },
+        sendAddress () {
+            UserService.updateAddress(this.address.lat, this.address.lng, this.user.address, this.user.id)
+                .then((resp) => {
+                    NotificationService.success('Endereço alterado com sucesso!')
+                })
         }
     }
 }

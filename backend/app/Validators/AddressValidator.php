@@ -17,8 +17,9 @@ class AddressValidator
     private function rulesToUpdateAddress(): array
     {
         return [
-            'lat' => 'required|string',
-            'lng' => 'required|string',
+            'lat'     => 'required|string',
+            'lng'     => 'required|string',
+            'address' => 'required|string'
         ];
     }
 

@@ -46,9 +46,7 @@ export default {
         }
         return await axios
             .put('/v1/me', data, options)
-            .then((resp) => {
-                return resp.data.data
-            })
+            .then((resp) => resp.data.data)
             .catch((error) => Promise.reject(error))
     },
 
@@ -57,6 +55,14 @@ export default {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
         }
         return await axios.put(`/v1/users/${userId}/working/hour/${workingHourId}`, {}, options)
+    },
+
+    updateAddress: async (lat, lng, addressText, userId) => {
+        const options = { headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') } }
+        const data = { lat: String(lat), lng: String(lng), address: addressText }
+        return await axios.put(`/v1/users/${userId}/address`, data, options)
+            .then((resp) => resp.data.data)
+            .catch((error) => Promise.reject(error))
     },
 
     delete: async (id) => {

@@ -43,7 +43,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Celular</th>
                                         <th scope="col">Permissão</th>
-                                        <th>Jornada</th>
+                                        <th scope="col">Jornada</th>
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
@@ -72,7 +72,7 @@
                                                     {{workingHour.name}}
                                                 </option>
                                             </select>
-                                        <td>
+                                        </td>
                                         <td>
                                             <view-button
                                                 icon="far fa-eye"
@@ -89,7 +89,6 @@
                                                 v-on:click.native="deleteUser(user.id)"
                                             ></delete-button>
                                         </td>
-
                                     </tr>
                                 </tbody>
                             </table>

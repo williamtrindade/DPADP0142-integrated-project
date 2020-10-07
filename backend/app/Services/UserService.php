@@ -117,8 +117,9 @@ class UserService extends Service implements ServiceInterface, ScopableService, 
     {
         app(AddressValidator::class)->validateAddress($data);
         return $this->repository->update([
-            'lat' => $data['lat'],
-            'lng' => $data['lng'],
+            'lat'      => $data['lat'],
+            'lng'      => $data['lng'],
+            'address'  => $data['address'],
         ], $user_id);
     }
 }

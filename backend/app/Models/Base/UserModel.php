@@ -3,7 +3,6 @@
 namespace App\Models\Base;
 
 use App\Models\Account;
-use App\Models\Location;
 use App\Models\PointRecord;
 use App\Models\WorkingHour;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,6 +36,7 @@ class UserModel extends Authenticatable
         'phone',
         'lat',
         'lng',
+        'address',
     ];
 
     /**
