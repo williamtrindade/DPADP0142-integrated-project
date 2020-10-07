@@ -15,7 +15,7 @@
                 </button-component>
                 <div class="row">
                     <div class="col-md-6">
-                        <form @on:submit.prevent="sendForm">
+                        <form @submit.prevent="saveUser">
                             <div class="card">
                                 <div class="card-header">
                                     Dados básicos
@@ -58,7 +58,7 @@
                         </form>
                     </div>
                     <div class="col-md-6">
-                        <form v-on:submit.prevent="sendAddress">
+                        <form @submit.prevent="sendAddress">
                             <div class="card">
                                 <div class="card-header">
                                     Endereço do colaborador
@@ -152,7 +152,8 @@ export default {
                 autocomplete: null,
                 map: null,
                 marker: null,
-                geocoder: null
+                geocoder: null,
+                circle: null
             }
         }
     },
@@ -185,15 +186,25 @@ export default {
                     })
                     // eslint-disable-next-line no-undef
                     this.mapInfos.marker = new google.maps.Marker({ map: this.mapInfos.map })
-
                     if (this.user.lat !== 'null' && this.user.lng !== 'null') {
                         // eslint-disable-next-line no-undef
                         const latlng = new google.maps.LatLng(this.user.lat, this.user.lng)
                         this.mapInfos.marker.setPosition(latlng)
                         // eslint-disable-next-line no-undef
                         this.mapInfos.map.setCenter(latlng)
-                    }
+                        this.mapInfos.map.setZoom(18)
 
+                        // eslint-disable-next-line no-undef
+                        this.mapInfos.circle = new google.maps.Circle({
+                            radius: 50,
+                            fillColor: '#00ff9d',
+                            strokeColor: '#00ff9d',
+                            strokeOpacity: 0.75,
+                            strokeWeight: 1
+                        })
+                        this.mapInfos.circle.bindTo('center', this.mapInfos.marker, 'position')
+                        this.mapInfos.circle.bindTo('map', this.mapInfos.marker, 'map')
+                    }
                     const input = document.getElementById('searchAddressField')
                     // eslint-disable-next-line
                     this.mapInfos.autocomplete = new google.maps.places.Autocomplete(input)
@@ -207,22 +218,28 @@ export default {
             const place = this.mapInfos.autocomplete.getPlace()
             if (place.geometry) {
                 this.mapInfos.map.panTo(place.geometry.location)
-                this.mapInfos.map.setZoom(15)
+                this.mapInfos.map.setZoom(18)
                 this.user.address = place.formatted_address
                 this.address.lat = place.geometry.location.lat()
                 this.address.lng = place.geometry.location.lng()
+                this.user.lat = place.geometry.location.lat()
+                this.user.lng = place.geometry.location.lng()
                 // eslint-disable-next-line no-undef
                 const latlng = new google.maps.LatLng(this.address.lat, this.address.lng)
                 // eslint-disable-next-line no-undef
                 this.mapInfos.marker.setPosition(latlng)
             }
         },
-        sendForm () {
+        saveUser () {
+            UserService.updateUser(this.user.name, this.user.email, null, this.user.id)
+                .then(() => {
+                    NotificationService.success('Dados do usuário alterados!')
+                })
         },
         sendAddress () {
-            UserService.updateAddress(this.address.lat, this.address.lng, this.user.address, this.user.id)
+            UserService.updateAddress(this.user.lat, this.user.lng, this.user.address, this.user.id)
                 .then((resp) => {
-                    NotificationService.success('Endereço alterado com sucesso!')
+                    NotificationService.success('Endereço do susuário alterado!')
                 })
         }
     }

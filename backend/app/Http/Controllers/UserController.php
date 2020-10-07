@@ -72,6 +72,19 @@ class UserController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function update(int $id): JsonResponse
+    {
+        $data = $this->service
+            ->addScope(new AccountScope($this->request->user()->account_id))
+            ->update($this->request->all(), $id);
+        return $this->response->item($data);
+    }
+
+    /**
      * @return JsonResponse
      * @throws Exception
      */
