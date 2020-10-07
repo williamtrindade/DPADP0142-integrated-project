@@ -213,7 +213,7 @@ export default {
     methods: {
         async savePersonalData () {
             this.blockSendPersonalDataButton()
-            UserService.update(this.name, this.email, this.password)
+            UserService.updateMe(this.name, this.email, this.password)
                 .then((user) => {
                     NotificationService.success('Dados do usuário alterados!')
                     this.name = user.name

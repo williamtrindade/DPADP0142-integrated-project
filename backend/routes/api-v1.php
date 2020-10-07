@@ -45,6 +45,7 @@ Route::middleware([ManagerPermission::class])->group(function () {
     Route::delete('users/{id}', 'UserController@delete');
     Route::get('users/{id}', 'UserController@read');
     Route::put('users/{id}/working/hour/{working_hour_id}', 'UserController@updateWorkingHour');
+    Route::put('users/{id}', 'UserController@update');
 
     // WorkingHourController
     Route::get('working/hours', 'WorkingHourController@index');
@@ -52,6 +53,9 @@ Route::middleware([ManagerPermission::class])->group(function () {
     Route::delete('working/hours/{id}', 'WorkingHourController@delete');
     Route::get('working/hours/{id}', 'WorkingHourController@read');
     Route::put('working/hours/{id}', 'WorkingHourController@update');
+
+    // User address update
+    Route::put('users/{id}/address', 'UserController@updateAddress');
 });
 
 /*

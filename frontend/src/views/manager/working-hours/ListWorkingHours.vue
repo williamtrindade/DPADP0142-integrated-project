@@ -44,11 +44,11 @@
                                             <td>0</td>
                                             <td>0</td>
                                             <td>
-                                                <view-button
+                                                <edit-button
                                                     icon="far fa-edit"
                                                     v-on:click.native="editWorkingHour(working_hour.id)"
                                                 >
-                                                </view-button>
+                                                </edit-button>
                                                 <delete-button
                                                     icon="far fa-trash-alt"
                                                     v-on:click.native="deleteWorkingHour(working_hour.id)"
@@ -74,7 +74,7 @@ import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import ButtonComponent from '@/components/Button'
 import WorkingHourService from '@/services/WorkingHourService'
 import ListDeleteButton from '@/components/ListDeleteButton'
-import ListViewButton from '@/components/ListViewButton'
+import ListEditButton from '@/components/ListEditButton'
 import NotificationService from '@/services/NotificationService'
 
 export default {
@@ -89,7 +89,7 @@ export default {
         topbar: ManagerTopbar,
         'button-component': ButtonComponent,
         'delete-button': ListDeleteButton,
-        'view-button': ListViewButton
+        'edit-button': ListEditButton
     },
     mounted () {
         WorkingHourService.getAll().then((workingHours) => {

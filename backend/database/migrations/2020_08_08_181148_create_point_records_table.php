@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Account;
-use App\Models\Location;
 use App\Models\PointRecord;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -24,15 +23,10 @@ class CreatePointRecordsTable extends Migration
             $table->id();
             $table->date('date');
             $table->time('hour');
+            $table->string('lat');
+            $table->string('lng');
             $table->tinyInteger('status')->default(PointRecord::ON_HOLD_STATUS);
             $table->tinyInteger('type');
-
-            // Location ID
-            $table->unsignedBigInteger('location_id');
-            $table->foreign('location_id')
-                ->references('id')
-                ->on((new Location())->getTable())
-                ->onDelete('CASCADE');
 
             // User ID
             $table->unsignedBigInteger('user_id')->nullable();

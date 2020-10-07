@@ -72,6 +72,19 @@ class UserController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function update(int $id): JsonResponse
+    {
+        $data = $this->service
+            ->addScope(new AccountScope($this->request->user()->account_id))
+            ->update($this->request->all(), $id);
+        return $this->response->item($data);
+    }
+
+    /**
      * @return JsonResponse
      * @throws Exception
      */
@@ -125,5 +138,17 @@ class UserController extends Controller
         $this->service->addScope(new AccountScope($this->request->user()->account_id));
         $this->service->updateWorkingHour($userId, $workingHourId);
         return $this->response->json();
+    }
+
+    /**
+     * @param int $user_id
+     * @return JsonResponse
+     * @throws Exception
+     */
+    public function updateAddress(int $user_id): JsonResponse
+    {
+        $this->service->addScope(new AccountScope($this->request->user()->account_id));
+        $data = $this->service->updateAddress($user_id, $this->request->all());
+        return $this->response->item($data);
     }
 }

@@ -11,6 +11,7 @@ use App\Scopes\ScopableService;
 use App\Scopes\Service\ServiceScopeTrait;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;
+use App\Validators\AddressValidator;
 use App\Validators\UserValidator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -105,5 +106,20 @@ class UserService extends Service implements ServiceInterface, ScopableService, 
     public function updateWorkingHour(int $userId, int $workingHourId)
     {
         $this->repository->updateWorkingHour($userId, $workingHourId);
+    }
+
+    /**
+     * @param int $user_id
+     * @param array $data
+     * @return User|Model
+     */
+    public function updateAddress(int $user_id, array $data): User
+    {
+        app(AddressValidator::class)->validateAddress($data);
+        return $this->repository->update([
+            'lat'      => $data['lat'],
+            'lng'      => $data['lng'],
+            'address'  => $data['address'],
+        ], $user_id);
     }
 }

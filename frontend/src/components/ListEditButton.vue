@@ -1,6 +1,6 @@
 <template>
     <button
-        class="button-component btn-sm button-danger"
+        class="button-component btn-sm button"
         id="send-personal-data-button"
         type="submit"
     >
@@ -17,19 +17,23 @@ export default {
 </script>
 
 <style scoped>
-.button-danger {
+.button {
     margin: 3%;
-    width: 25%;
-    height: 50%;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    justify-content: center;
     border-radius: 0;
     color:rgb(41, 41, 41);
     transition: 0.5s;
-    padding: 3%;
+    padding: 0%;
     border:2.5px solid rgb(46, 46, 46);
 }
-.button-danger:hover {
+.button:hover {
     color: #fff;
-    border:2.5px solid rgb(255, 0, 76);
-    background-color: rgb(255, 0, 76);
+    border:2.5px solid rgba(0, 140, 255, 0.884);
+    background-color:  rgba(0, 132, 255, 0.884);
+}
+.icon {
 }
 </style>

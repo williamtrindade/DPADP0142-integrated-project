@@ -43,7 +43,7 @@
                                         <th scope="col">Email</th>
                                         <th scope="col">Celular</th>
                                         <th scope="col">Permissão</th>
-                                        <th>Jornada</th>
+                                        <th scope="col">Jornada</th>
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
@@ -72,19 +72,23 @@
                                                     {{workingHour.name}}
                                                 </option>
                                             </select>
-                                        <td>
+                                        </td>
                                         <td>
                                             <view-button
                                                 icon="far fa-eye"
                                                 v-on:click.native="viewUser(user.id)"
                                             >
                                             </view-button>
+                                            <edit-button
+                                                icon="far fa-edit"
+                                                v-on:click.native="editUser(user.id)"
+                                            >
+                                            </edit-button>
                                             <delete-button
                                                 icon="far fa-trash-alt"
                                                 v-on:click.native="deleteUser(user.id)"
                                             ></delete-button>
                                         </td>
-
                                     </tr>
                                 </tbody>
                             </table>
@@ -114,6 +118,7 @@ import ListDeleteButton from '@/components/ListDeleteButton'
 import ListViewButton from '@/components/ListViewButton'
 import NotificationService from '@/services/NotificationService'
 import WorkingHourService from '@/services/WorkingHourService'
+import ListEditButton from '@/components/ListEditButton'
 
 export default {
     name: 'ListEmployees',
@@ -125,7 +130,8 @@ export default {
         topbar: ManagerTopbar,
         'button-component': Button,
         'delete-button': ListDeleteButton,
-        'view-button': ListViewButton
+        'view-button': ListViewButton,
+        'edit-button': ListEditButton
     },
     mounted () {
         UserService.getAll('?permission=2')
@@ -142,6 +148,9 @@ export default {
     methods: {
         viewUser (id) {
             this.$router.push({ name: 'manager-view-employee', params: { id: id } })
+        },
+        editUser (id) {
+            this.$router.push({ name: 'manager-edit-employee', params: { id: id } })
         },
         deleteUser (id) {
             UserService.delete(id)

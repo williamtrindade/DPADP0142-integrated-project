@@ -15,6 +15,9 @@ use Illuminate\Support\Collection;
  * @property string      $name
  * @property string      $email
  * @property string      $password
+ * @property string      $lat
+ * @property string      $lng
+ * @property string      $address
  * @property string      $remember_token
  * @property Datetime    $email_verified_at
  * @property int         $permission
@@ -30,7 +33,7 @@ use Illuminate\Support\Collection;
  */
 class User extends UserModel implements ModelInterface
 {
-    public const MANAGER_PERMISSION = 1;
+    public const MANAGER_PERMISSION  = 1;
     public const EMPLOYEE_PERMISSION = 2;
 
     /**

@@ -34,6 +34,9 @@ class UserModel extends Authenticatable
         'permission',
         'account_id',
         'phone',
+        'lat',
+        'lng',
+        'address',
     ];
 
     /**
