@@ -7,7 +7,7 @@
         </div>
         <div class="topbar">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">.Ponto web</a>
+                <a class="navbar-brand" href="#">Ponto</a>
             </nav>
         </div>
         <div class="content">
@@ -29,7 +29,7 @@
                                     placeholder="Digite seu nome"
                                     minlength="3"
                                     maxlength="255"
-                                    v-model="name"
+                                    v-model="user.name"
                                     type="text"
                                     class="form-control"
                                     id="name"
@@ -42,11 +42,41 @@
                                     minlength="3"
                                     maxlength="255"
                                     required
-                                    v-model="email"
+                                    v-model="user.email"
                                     type="email"
                                     class="form-control"
                                     id="email"
                                 >
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cpf">CPF</label>
+                                        <the-mask
+                                            :mask="['###.###.###-##']"
+                                            :masked="false"
+                                            required
+                                            class="form-control"
+                                            placeholder="999.999.999-99"
+                                            v-model="user.cpf"
+                                            id="cpf"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone">Telefone</label>
+                                        <the-mask
+                                            :mask="['+ ## (##) ####-####', '+ ## (##) #####-####']"
+                                            :masked="false"
+                                            required
+                                            class="form-control"
+                                            placeholder="+99 (99) 99999-9999"
+                                            v-model="user.phone"
+                                            id="phone"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="password">Senha</label>
@@ -55,7 +85,7 @@
                                     minlength="6"
                                     maxlength="500"
                                     required
-                                    v-model="password"
+                                    v-model="user.password"
                                     type="password"
                                     class="form-control"
                                     id="password"
@@ -86,10 +116,14 @@ export default {
     name: 'EmployeeRegister',
     data: function () {
         return {
-            name: null,
-            email: null,
-            password: null,
-            hash: null
+            user: {
+                name: null,
+                email: null,
+                password: null,
+                hash: null,
+                cpf: null,
+                phone: null
+            }
         }
     },
     mounted () {
@@ -97,8 +131,8 @@ export default {
             EmployeeInvitationService.validateHash(this.$route.query.hash)
                 .then((resp) => {
                     if (resp.status === 200) {
-                        this.hash = this.$route.query.hash
-                        this.email = this.$route.query.email
+                        this.user.hash = this.$route.query.hash
+                        this.user.email = this.$route.query.email
                     }
                 })
                 .catch(() => {
@@ -114,7 +148,7 @@ export default {
     methods: {
         createUser () {
             this.$refs.button.$el.firstChild.disabled = true
-            UserService.createByHash(this.name, this.email, this.password, this.hash)
+            UserService.createByHash(this.user)
                 .then((resp) => {
                     if (resp.status === 201) {
                         NotificationService.success('Bem vindo, faça seu login agora!')

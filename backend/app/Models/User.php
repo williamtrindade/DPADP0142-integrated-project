@@ -22,6 +22,7 @@ use Illuminate\Support\Collection;
  * @property Datetime    $email_verified_at
  * @property int         $permission
  * @property string      $phone
+ * @property string      $cpf
  * @property string      $created_at
  * @property int         $account_id
  * @property int         $working_hour_id

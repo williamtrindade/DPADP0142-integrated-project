@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         /** @var Account $account */
         $account = Account::create([
             'name'       => 'Ponto Web',
-            'cnpj'       => '1234567',
+            'cnpj'       => '12345678989',
             'address'    => 'Address',
             'cep'        => '12345678989',
             'manager_id' => null,
@@ -33,6 +33,8 @@ class UserSeeder extends Seeder
             'email'      => 'williamtrindade777@gmail.com',
             'password'   => Hash::make('laravel'),
             'permission' => User::MANAGER_PERMISSION,
+            'cpf'        => '03899083814',
+            'phone'      => '03899083040',
             'account_id' => $account->id,
         ]);
         $account->update([

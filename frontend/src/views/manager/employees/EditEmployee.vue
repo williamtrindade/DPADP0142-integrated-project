@@ -47,6 +47,36 @@
                                             id="email"
                                         >
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="cpf">CPF</label>
+                                                <the-mask
+                                                    :mask="['###.###.###-##']"
+                                                    :masked="false"
+                                                    required
+                                                    class="form-control"
+                                                    placeholder="999.999.999-99"
+                                                    v-model="user.cpf"
+                                                    id="cpf"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="phone">Telefone</label>
+                                                <the-mask
+                                                    :mask="['+ ## (##) ####-####', '+ ## (##) #####-####']"
+                                                    :masked="false"
+                                                    required
+                                                    class="form-control"
+                                                    placeholder="+99 (99) 99999-9999"
+                                                    v-model="user.phone"
+                                                    id="phone"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
                                     <button-component
                                         ref="button"
                                         content="Salvar"
@@ -140,7 +170,9 @@ export default {
                 email: null,
                 lat: null,
                 lng: null,
-                address: null
+                address: null,
+                phone: null,
+                cpf: null
             },
             address: {
                 text: null,
@@ -231,7 +263,7 @@ export default {
             }
         },
         saveUser () {
-            UserService.updateUser(this.user.name, this.user.email, null, this.user.id)
+            UserService.updateUser(this.user, this.user.id)
                 .then(() => {
                     NotificationService.success('Dados do usuário alterados!')
                 })

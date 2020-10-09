@@ -2,6 +2,7 @@
 
 namespace App\Validators;
 
+use App\Models\Address;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -17,8 +18,8 @@ class AddressValidator
     private function rulesToUpdateAddress(): array
     {
         return [
-            'lat'     => ['required', 'string', 'regex:^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$^'],
-            'lng'     => ['required', 'string', 'regex:^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$^   '],
+            'lat'     => ['required', 'string', 'regex:' . Address::LAT_REGX],
+            'lng'     => ['required', 'string', 'regex:' . Address::LNG_REGX],
             'address' => 'required|string'
         ];
     }

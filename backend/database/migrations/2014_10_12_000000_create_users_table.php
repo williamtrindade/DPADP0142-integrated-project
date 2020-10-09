@@ -19,9 +19,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('cpf')->nullable();
+            $table->string('cpf');
+            $table->string('phone');
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
+            $table->string('address')->nullable();
             $table->string('email')->unique();
             $table->unsignedBigInteger('account_id');
             $table->foreign('account_id')

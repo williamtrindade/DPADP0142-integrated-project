@@ -40,8 +40,8 @@ class UserController extends Controller
      */
     public function __construct(UserService $service, Request $request, Response $response)
     {
-        $this->service = $service;
-        $this->request = $request;
+        $this->service  = $service;
+        $this->request  = $request;
         $this->response = $response;
     }
 

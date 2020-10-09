@@ -36,6 +36,7 @@ class UserModel extends Authenticatable
         'phone',
         'lat',
         'lng',
+        'cpf',
         'address',
     ];
 

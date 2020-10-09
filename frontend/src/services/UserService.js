@@ -2,9 +2,8 @@ import axios from 'axios'
 
 export default {
 
-    createByHash: async (name, email, password, hash) => {
-        const data = { name: name, email: email, password: password, hash: hash }
-        return await axios.post('/users/invitation/hash', data)
+    createByHash: async (user) => {
+        return await axios.post('/users/invitation/hash', user)
     },
 
     getAll: async (params) => {
@@ -50,14 +49,13 @@ export default {
             .catch((error) => Promise.reject(error))
     },
 
-    updateUser: async (name, email, password, userId) => {
+    updateUser: async (data, id) => {
         const options = { headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') } }
-        const data = { name: name, email: email }
-        if (password != null) {
-            data.password = password
+        if (data.password == null) {
+            delete data.password
         }
         return await axios
-            .put(`/v1/users/${userId}`, data, options)
+            .put(`/v1/users/${id}`, data, options)
             .then((resp) => resp.data.data)
             .catch((error) => Promise.reject(error))
     },

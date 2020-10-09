@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\WorkingHour;
 use App\Repositories\Eloquent\EloquentRepository;
 use App\Repositories\WorkingHour\WorkingHourRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Throwable;
 
 /**
@@ -62,5 +63,4 @@ class UserEloquentRepository extends EloquentRepository implements UserRepositor
         $user->working_hour_id = $workingHour->id;
         return $user->saveOrFail();
     }
-
 }

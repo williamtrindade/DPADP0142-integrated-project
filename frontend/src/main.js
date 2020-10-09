@@ -9,6 +9,7 @@ import VueTheMask from 'vue-the-mask'
 // we import jquery and pooperjs
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'chart.js'
 
 Vue.use(Notifications)
 Vue.use(VueTheMask)

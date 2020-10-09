@@ -19,56 +19,28 @@
                         Dados Pessoais
                     </div>
                     <div class="card-body">
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="name">Nome</label>
-                                        <input
-                                            required
-                                            min="3"
-                                            max="255"
-                                            type="text"
-                                            class="form-control"
-                                            id="name"
-                                            placeholder="Digite seu nome."
-                                            v-model="user.name"
-                                            disabled
-                                        />
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-12 m-3">
+                                <div class="row">
+                                    <h1>{{user.name}}</h1>
                                 </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="email">Endereço de email</label>
-                                        <input
-                                            required
-                                            minlength="3"
-                                            maxlength="255"
-                                            type="email"
-                                            class="form-control"
-                                            id="email"
-                                            placeholder="Digite seu email."
-                                            v-model="user.email"
-                                            disabled
-                                        />
-                                    </div>
+                                <div class="row">
+                                    <p><b>Email: </b>{{user.email}}</p>
+                                </div>
+                                <div class="row">
+                                    <p><b>Permissão: </b> {{user.permission}}</p>
+                                </div>
+                                <div class="row" v-if="user.address">
+                                    <p><b>Endereço: </b>{{user.address}}</p>
+                                </div>
+                                <div class="row" v-if="user.phone">
+                                    <p><b>Telefone: </b>{{user.phone}}</p>
+                                </div>
+                                <div class="row" v-if="user.cpf">
+                                    <p><b>CPF: </b>{{user.cpf}}</p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="permission">Permissão</label>
-                                        <input
-                                            disabled
-                                            type="text"
-                                            v-model="user.permission"
-                                            class="form-control"
-                                            id="permission"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,7 +61,10 @@ export default {
             user: {
                 name: null,
                 email: null,
-                permission: null
+                permission: null,
+                address: null,
+                phone: null,
+                cpf: null
             }
         }
     },
@@ -105,7 +80,10 @@ export default {
                     this.user = {
                         name: user.name,
                         email: user.email,
-                        permission: user.permission === '1' ? 'Gerente' : 'Colaborador'
+                        permission: user.permission === '1' ? 'Gerente' : 'Colaborador',
+                        address: user.address,
+                        phone: user.phone,
+                        cpf: user.cpf
                     }
                 }).catch(() => {
                     this.$router.push({ name: 'not-found' })

@@ -41,7 +41,6 @@
                                     <tr>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Celular</th>
                                         <th scope="col">Permissão</th>
                                         <th scope="col">Jornada</th>
                                         <th scope="col">Ações</th>
@@ -51,7 +50,6 @@
                                     <tr v-for="user in users" v-bind:key="user.id">
                                         <th>{{ user.name }}</th>
                                         <td>{{ user.email }}</td>
-                                        <td>{{ (user.phone != null) ? user.phone : 'Telefone não informado'  }}</td>
                                         <td>{{ (user.permission === '1') ? 'Gerente': 'Colaborador'  }}</td>
                                         <td>
                                             <select

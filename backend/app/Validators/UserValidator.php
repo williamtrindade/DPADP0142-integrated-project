@@ -25,6 +25,8 @@ class UserValidator implements ValidatorInterface
             'name'       => 'required|min:3|max:255|string',
             'email'      => 'required|email|min:3|max:255|unique:' . (new User())->getTable(),
             'password'   => 'required|string|min:6|max:500',
+            'cpf'        => 'required|string|min:11|max:11',
+            'phone'      => 'required|string',
             'account_id' => 'required|integer|exists:' . (new Account())->getTable() . ',id',
             'permission' => 'required|integer'
         ];
@@ -41,6 +43,8 @@ class UserValidator implements ValidatorInterface
             'name'       => 'sometimes|string|min:3|max:255',
             'email'      => 'sometimes|email|min:3|max:255|unique:' . (new User())->getTable() . ',email,' . $id,
             'password'   => 'sometimes|string|min:6|max:500',
+            'cpf'        => 'sometimes|string|min:11|max:11',
+            'phone'      => 'sometimes|string',
             'account_id' => 'sometimes|integer|exists:' . (new Account())->getTable() . ',id',
             'permission' => 'sometimes|integer'
         ];

@@ -16,7 +16,7 @@ class CnpjRule implements Rule
 {
     public const INVALID_FORMAT = 'O formato do CNPJ é inválido';
     public const INVALID_NUMBER = 'O número de CNPJ não existe';
-    public const VALID_CHARS = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '/',];
+    public const VALID_CHARS    = ['.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '/',];
 
     /** @var string $error */
     public $error;
