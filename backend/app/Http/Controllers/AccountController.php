@@ -6,7 +6,6 @@ use App\Http\Controllers\Base\Controller;
 use App\Http\Controllers\Traits\CrudTrait;
 use App\Http\Controllers\Traits\PaginationTrait;
 use App\Http\Response\Response;
-use App\Scopes\AccountScope;
 use App\Services\AccountService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -62,7 +61,7 @@ class AccountController extends Controller
     public function read(int $id): JsonResponse
     {
         if ($this->request->user()->account_id != $id) {
-            return $this->response->withForbidden();
+            return $this->response->withNotFound();
         }
         $data = $this->service->read($id);
         return $this->response->item($data);
@@ -75,6 +74,9 @@ class AccountController extends Controller
      */
     public function update(int $id): JsonResponse
     {
+        if ($this->request->user()->account_id != $id) {
+            return $this->response->withNotFound();
+        }
         $data = $this->service->update($this->request->all(), $id);
         return $this->response->item($data);
     }

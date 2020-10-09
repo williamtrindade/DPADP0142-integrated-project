@@ -11,8 +11,8 @@ use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;
 use App\Validators\AccountValidator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -50,41 +50,18 @@ class AccountService extends Service implements ServiceInterface, ScopableServic
         return $this->createNewAccount($data);
     }
 
-    /**
-     * @param array $data
-     * @return Account
-     * @throws ValidationException
-     */
     private function createNewAccount(array $data)
     {
-        $this->validator::validateToCreateGuest($data);
-        $account_data = $this->getAccountData($data);
-        $user_data    = $this->getUserData($data);
-        $account      = null;
-        DB::transaction(function() use (&$user_data, &$account_data, &$account) {
-            // Create Account
-            /** @var Account $account */
-            $account = parent::create($account_data);
-            $this->setupManagerUserData($user_data, $account);
-
-            /** @var User $user */
-            $user = app(UserService::class)->create($user_data);
+        $account = null;
+        DB::transaction(function () use ($data, &$account) {
+            $userData    = Arr::get($data, 'user', []);
+            $accountData = Arr::get($data, 'account', []);
+            $account = parent::create($accountData);
+            $this->setupManagerUserData($userData, $account);
+            $user = app(UserService::class)->create($userData);
             parent::update(['manager_id' => $user->id], $account->id);
         });
         return $account;
-    }
-
-    /**
-     * @param $data
-     * @param $id
-     * @return Model
-     * @throws ValidationException
-     */
-    public function update($data, $id)
-    {
-        $item = $this->repository->read($id);
-        $this->validateToUpdate($data, $id);
-        return $this->repository->update($data, null, $item);
     }
 
     /**
@@ -99,36 +76,15 @@ class AccountService extends Service implements ServiceInterface, ScopableServic
     }
 
     /**
-     * Get user data
-     *
-     * @param array $data
-     * @return array
+     * @param $data
+     * @param $id
+     * @return Model
+     * @throws ValidationException
      */
-    private function getUserData(array $data): array
+    public function update($data, $id)
     {
-        $user_data = [];
-        collect($data)->each(function ($value, $key) use (&$user_data) {
-            if (Str::startsWith($key, 'user_')) {
-                $user_data[Str::replaceFirst('user_', '', $key)] = $value;
-            }
-        });
-        return $user_data;
-    }
-
-    /**
-     * Get account data
-     *
-     * @param array $data
-     * @return array
-     */
-    private function getAccountData(array $data): array
-    {
-        $account_data = [];
-        collect($data)->each(function ($value, $key) use (&$account_data) {
-            if(Str::startsWith($key, 'account_')) {
-                $account_data[Str::replaceFirst('account_', '', $key)] = $value;
-            }
-        });
-        return $account_data;
+        $item = $this->repository->read($id);
+        $this->validateToUpdate($data, $id);
+        return $this->repository->update($data, null, $item);
     }
 }

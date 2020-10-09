@@ -32,19 +32,12 @@ export default {
             .catch((error) => Promise.reject(error))
     },
 
-    updateMe: async (name, email, password) => {
+    updateMe: async (user) => {
         const options = {
             headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') }
         }
-        const data = {
-            name: name,
-            email: email
-        }
-        if (password != null) {
-            data.password = password
-        }
         return await axios
-            .put('/v1/me', data, options)
+            .put('/v1/me', user, options)
             .then((resp) => resp.data.data)
             .catch((error) => Promise.reject(error))
     },
