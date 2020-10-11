@@ -2,22 +2,8 @@ import axios from 'axios'
 
 export default {
 
-    create: async (
-        userName,
-        userEmail,
-        accountName,
-        userPassword,
-        accountCnpj,
-        accountPhone
-    ) => {
-        const data = {
-            user_name: userName,
-            user_email: userEmail,
-            account_name: accountName,
-            user_password: userPassword,
-            account_cnpj: accountCnpj,
-            account_phone: accountPhone
-        }
+    create: async (user, account) => {
+        const data = { user, account }
         return await axios.post('/accounts', data)
     },
 
@@ -31,11 +17,9 @@ export default {
             .catch((error) => Promise.reject(error))
     },
 
-    update: async (name, cnpj, phone) => {
+    update: async (account) => {
         const options = { headers: { authorization: 'Bearer ' + localStorage.getItem('access_token') } }
-        const data = { name, cnpj, phone }
-        return await axios
-            .put('/v1/accounts/' + localStorage.getItem('account_id'), data, options)
+        return await axios.put('/v1/accounts/' + localStorage.getItem('account_id'), account, options)
             .then((resp) => resp.data.data)
             .catch((error) => Promise.reject(error))
     }

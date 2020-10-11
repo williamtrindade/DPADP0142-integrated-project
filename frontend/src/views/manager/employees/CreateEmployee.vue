@@ -50,7 +50,7 @@
 
 import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
-import Button from '@/components/Button'
+import SendButton from '@/components/SendButton'
 import NotificationService from '@/services/NotificationService'
 import EmployeeInvitationService from '@/services/EmployeeInvitationService'
 
@@ -59,7 +59,7 @@ export default {
     components: {
         sidebar: ManagerSidebar,
         topbar: ManagerTopbar,
-        'button-component': Button
+        'button-component': SendButton
     },
     data () {
         return {

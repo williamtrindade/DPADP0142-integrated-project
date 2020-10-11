@@ -34,7 +34,7 @@
                         </a>
                         <div class="dropdown-menu mt-1" style="border-radius: 0;border-style: none">
                             <router-link
-                                :to="{ name:'manager-me-settings' }"
+                                :to="{ name:'manager-settings' }"
                                 class="btn dropdown-item">
                                 <div class="btn link-drop">
                                     <i class="fas fa-user"></i>

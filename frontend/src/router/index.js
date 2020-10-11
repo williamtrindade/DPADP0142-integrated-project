@@ -6,7 +6,7 @@ import NotFound from '@/views/exceptions/NotFound'
 import ManagerDash from '@/views/manager/ManagerDash'
 import EmployeeDash from '@/views/employee/EmployeeDash'
 import Register from '@/views/auth/Register'
-import Settings from '@/views/manager/settings/Settings'
+import ManagerSettings from '@/views/manager/settings/ManagerSettings'
 import ListEmployees from '@/views/manager/employees/ListEmployees'
 import CreateEmployees from '@/views/manager/employees/CreateEmployee'
 import EmployeeRegister from '@/views/employee/register/EmployeeRegister'
@@ -16,6 +16,8 @@ import ListWorkingHours from '@/views/manager/working-hours/ListWorkingHours'
 import CreateWorkingHour from '@/views/manager/working-hours/CreateWorkingHour'
 import EditWorkingHour from '@/views/manager/working-hours/EditWorkingHour'
 import EditEmployee from '@/views/manager/employees/EditEmployee'
+import ListPointRecords from '@/views/employee/point-records/ListPointRecords'
+import EmployeeSettings from '@/views/employee/settings/EmployeeSettings'
 
 Vue.use(VueRouter)
 
@@ -64,8 +66,8 @@ const routes = [
     },
     {
         path: '/manager/settings',
-        name: 'manager-me-settings',
-        component: Settings,
+        name: 'manager-settings',
+        component: ManagerSettings,
         meta: { requireManagerPermission: true }
     },
     {
@@ -116,6 +118,18 @@ const routes = [
         path: '/employee/dash',
         name: 'employee-dash',
         component: EmployeeDash,
+        meta: { requireEmployeePermission: true }
+    },
+    {
+        path: '/employee/point-records',
+        name: 'list-point-records',
+        component: ListPointRecords,
+        meta: { requireEmployeePermission: true }
+    },
+    {
+        path: '/employee/settings',
+        name: 'employee-settings',
+        component: EmployeeSettings,
         meta: { requireEmployeePermission: true }
     }
 ]

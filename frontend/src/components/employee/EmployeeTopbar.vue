@@ -32,7 +32,7 @@
                         </a>
                         <div class="dropdown-menu mt-1" style="border-radius: 0;border-style: none">
                             <router-link
-                                :to="{ name:'employee-me-settings' }"
+                                :to="{ name:'employee-settings' }"
                                 class="btn dropdown-item">
                                 <div class="btn link-drop">
                                     <i class="fas fa-user"></i>

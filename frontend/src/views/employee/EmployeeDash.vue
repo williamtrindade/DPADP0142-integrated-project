@@ -85,7 +85,6 @@
 <script>
 import EmployeeSidebar from '@/components/employee/EmployeeSidebar'
 import EmployeeTopbar from '@/components/employee/EmployeeTopbar'
-
 export default {
     name: 'EmployeeDash',
     components: {
@@ -96,9 +95,4 @@ export default {
 </script>
 
 <style scoped>
-.employee-dash {
-    float: left;
-    width: 100%;
-    height: 100%;
-}
 </style>

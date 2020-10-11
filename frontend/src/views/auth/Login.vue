@@ -2,7 +2,12 @@
     <div class="login">
         <div class="login-left align-middle">
             <div class="div-left-content shadow-lg bg-white">
-                <h1 style="text-align: center" class="title-ponto">.Ponto</h1>
+                <h1 style="text-align: center" class="title-ponto">
+                    <img
+                        src="https://crmpiperun.com/wp-content/uploads/2019/01/piperun-sistema-crm-vendas.png"
+                        alt=""
+                        width="150"
+                    ></h1>
                 <hr>
                 <h2 id="form-title">Entre</h2>
                 <hr>
@@ -35,12 +40,11 @@
                         />
                     </div>
                     <div class="justify-content-start float-left full-width" style="text-align: left;">
-                        <button
-                            id="send-button"
-                            type="submit"
-                            class="btn button-primary pl-5 pr-5"
-                            style="border: none;">{{ loginButtonText }}
-                        </button>
+                        <SendButton
+                            :content="loginButtonText"
+                            class="pl-5 pr-5"
+                            buttonClass="black"
+                        ></SendButton>
                         <router-link to="register">
                             <a href="#" class="link-text-login pl-3 pt-1" >Ainda não tenho conta!</a>
                         </router-link>
@@ -56,6 +60,7 @@
 <script>
 import AuthService from '@/services/AuthService'
 import NotificationService from '@/services/NotificationService'
+import SendButton from '@/components/SendButton'
 
 export default {
     name: 'Login',
@@ -66,9 +71,11 @@ export default {
             password: null
         }
     },
+    components: {
+        SendButton
+    },
     methods: {
         async login () {
-            this.blockSendButton()
             this.loginButtonText = 'Entrando...'
             AuthService.login(this.email, this.password)
                 .then(async (resp) => {
@@ -77,14 +84,7 @@ export default {
                 .catch(() => {
                     NotificationService.danger('Falha na autenticação, tente novamente!')
                     this.loginButtonText = 'Reenviar dados'
-                    this.unblockSendButton()
                 })
-        },
-        blockSendButton () {
-            document.querySelector('#send-button').disabled = true
-        },
-        unblockSendButton () {
-            document.querySelector('#send-button').disabled = false
         }
     }
 }
@@ -183,16 +183,6 @@ export default {
 }
 .form label {
     font-size: 80%;
-}
-.button-primary {
-    color: #ffffff;
-    border: none;
-    background-color: #242424;
-    transition: 1s;
-}
-.button-primary:hover {
-    color: white;
-    background-color: #000000;
 }
 @media (min-width: 1901px) {
     .form input {

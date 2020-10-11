@@ -1,5 +1,6 @@
 <template>
     <div id="app" class="full-height full-width">
+        <LoadingSpinner></LoadingSpinner>
         <notifications group="error" position="left bottom" class="mt-3 error"/>
         <notifications group="success" position="bottom left" class="mb-4 success"/>
         <notifications group="danger" position="top left" class="mt-4 danger"/>
@@ -8,8 +9,13 @@
 </template>
 
 <script>
+import LoadingSpinner from '@/components/spinner/LoadingSpinner'
+
 export default {
-    name: 'App'
+    name: 'App',
+    components: {
+        LoadingSpinner
+    }
 }
 </script>
 

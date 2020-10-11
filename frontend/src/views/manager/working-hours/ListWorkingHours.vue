@@ -71,7 +71,7 @@
 <script>
 import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
-import ButtonComponent from '@/components/Button'
+import ButtonComponent from '@/components/SendButton'
 import WorkingHourService from '@/services/WorkingHourService'
 import ListDeleteButton from '@/components/ListDeleteButton'
 import ListEditButton from '@/components/ListEditButton'

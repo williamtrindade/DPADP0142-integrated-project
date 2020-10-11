@@ -107,7 +107,7 @@
 
 <script>
 
-import Button from '@/components/Button'
+import SendButton from '@/components/SendButton'
 import EmployeeInvitationService from '@/services/EmployeeInvitationService'
 import UserService from '@/services/UserService'
 import NotificationService from '@/services/NotificationService'
@@ -143,7 +143,7 @@ export default {
         }
     },
     components: {
-        'button-component': Button
+        'button-component': SendButton
     },
     methods: {
         createUser () {

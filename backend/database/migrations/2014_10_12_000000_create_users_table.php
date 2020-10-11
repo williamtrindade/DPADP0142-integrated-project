@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('cpf');
-            $table->string('phone');
+            $table->string('phone');    
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
             $table->string('address')->nullable();

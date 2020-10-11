@@ -14,6 +14,7 @@ import 'chart.js'
 Vue.use(Notifications)
 Vue.use(VueTheMask)
 Vue.config.productionTip = false
+Vue.prototype.$isRequestingApi = false
 new Vue({
     router,
     store,

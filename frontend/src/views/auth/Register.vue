@@ -1,10 +1,14 @@
 <template>
     <div class="register">
         <div class="register-left align-middle">
-            <div class="div-left-content shadow-lg bg-white">
-                <h1 style="text-align: center" class="title-ponto">.Ponto</h1>
-                <hr>
-                <h2 id="form-title">Cadastre-se</h2>
+            <div class="div-left-content shadow-lg bg-white pb-3 pt-4">
+                <h1 style="text-align: center" class="title-ponto">
+                    <img
+                        src="https://crmpiperun.com/wp-content/uploads/2019/01/piperun-sistema-crm-vendas.png"
+                        alt=""
+                        width="150"
+                    >
+                </h1>
                 <hr>
                 <form
                     v-on:submit.prevent="register"
@@ -16,11 +20,11 @@
                             required
                             minlength="3"
                             maxlength="255"
-                            v-model="user_name"
+                            v-model="user.name"
                             type="text"
-                            class="form-control"
+                            class="form-control form-control-sm"
                             id="user-name"
-                            placeholder="Seu nome"
+                            placeholder="Seu nome completo"
                         />
                     </div>
                     <div class="form-group">
@@ -29,12 +33,45 @@
                             required
                             minlength="3"
                             maxlength="255"
-                            v-model="user_email"
+                            v-model="user.email"
                             type="email"
-                            class="form-control"
+                            class="form-control form-control-sm"
                             id="email"
                             placeholder="Seu e-mail"
                         />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="cpf">CPF</label>
+                                <the-mask
+                                    :mask="['###.###.###-##']"
+                                    :masked="false"
+                                    required
+                                    minlength="14"
+                                    class="form-control form-control-sm"
+                                    placeholder="999.999.999-99"
+                                    v-model="user.cpf"
+                                    id="cpf"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="phone">Número de telefone</label>
+                                <the-mask
+                                    :mask="['+ ## (##) ####-####', '+ ## (##) #####-####']"
+                                    :masked="false"
+                                    required
+                                    minlength="20"
+                                    maxlength="20"
+                                    class="form-control form-control-sm"
+                                    placeholder="+99 (99) 99999-9999"
+                                    v-model="user.phone"
+                                    id="phone"
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="account-name">Nome da empresa</label>
@@ -42,65 +79,45 @@
                             required
                             minlength="3"
                             maxlength="255"
-                            v-model="account_name"
+                            v-model="account.name"
                             type="text"
-                            class="form-control"
+                            class="form-control form-control-sm"
                             id="account-name"
                             placeholder="Nome da sua empresa"
                         />
                     </div>
-
                     <div class="form-group">
-                        <label for="user-password">Senha</label>
+                        <label for="account-cnpj">CNPJ da empresa</label>
+                        <the-mask
+                            :masked="false"
+                            :mask="['##.###.###/####-##']"
+                            required
+                            v-model="account.cnpj"
+                            class="form-control form-control-sm"
+                            id="account-cnpj"
+                            placeholder="99.999.999/9999-99"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password">Senha de acesso</label>
                         <input
                             required
                             minlength="6"
                             maxlength="500"
-                            v-model="user_password"
+                            v-model="user.password"
                             type="password"
-                            class="form-control"
+                            class="form-control form-control-sm"
                             id="user-password"
-                            placeholder="Sua nova senha"
+                            placeholder="Crie uma senha com no minimo 6 caracteres"
                         />
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="account-cnpj">CNPJ</label>
-                                <the-mask
-                                    :masked="false"
-                                    :mask="['##.###.###/####-##']"
-                                    required
-                                    v-model="account_cnpj"
-                                    class="form-control"
-                                    id="account-cnpj"
-                                    placeholder="99.999.999/9999-99"
-                                />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="account-phone">Telefone/Celular</label>
-                                <the-mask
-                                    :masked="false"
-                                    :mask="['## (##) #####-####']"
-                                    required
-                                    v-model="account_phone"
-                                    class="form-control"
-                                    id="account-phone"
-                                    placeholder="99 (99) 99999-9999"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
+
                     <div class="justify-content-start float-left full-width" style="text-align: left;">
-                        <button
-                            id="send-button"
-                            type="submit"
-                            class="btn button-primary pl-5 pr-5 "
-                            style="border: none;">{{ this.registerButtonText }}
-                        </button>
+                        <SendButton
+                            class="pl-5 pr-5"
+                            :content="registerButtonText"
+                            buttonClass="black"
+                        ></SendButton>
                         <router-link to="login">
                             <a href="#" class="link-text-register pl-3 pt-1">Já tenho conta!</a>
                         </router-link>
@@ -118,42 +135,43 @@
 
 import AccountService from '@/services/AccountService'
 import NotificationService from '@/services/NotificationService'
+import SendButton from '@/components/SendButton'
 
 export default {
     name: 'Register',
     data () {
         return {
             registerButtonText: 'Finalizar cadastro',
-            user_name: null,
-            user_email: null,
-            account_name: null,
-            user_password: null,
-            account_cnpj: null,
-            account_phone: null
+            user: {
+                name: null,
+                email: null,
+                phone: null,
+                password: null
+            },
+            account: {
+                name: null,
+                cnpj: null,
+                phone: null
+            }
         }
+    },
+    components: {
+        SendButton
     },
     methods: {
         register () {
-            console.log(this.account_phone)
-            this.blockSendButton()
             this.registerButtonText = 'Enviando dados...'
-
-            AccountService
-                .create(this.user_name, this.user_email, this.account_name, this.user_password, this.account_cnpj, this.account_phone)
+            if (this.user.phone != null) {
+                this.account.phone = this.user.phone
+            }
+            AccountService.create(this.user, this.account)
                 .then((data) => {
                     NotificationService.success('Bem vindo, faça seu login agora!')
                     this.$router.push({ name: 'login' })
                 })
                 .catch(() => {
                     this.registerButtonText = 'Reenviar dados'
-                    this.unblockSendButton()
                 })
-        },
-        blockSendButton () {
-            document.querySelector('#send-button').disabled = true
-        },
-        unblockSendButton () {
-            document.querySelector('#send-button').disabled = false
         }
     },
     mounted () {
@@ -171,19 +189,6 @@ export default {
 }
 .div-left-content {
     padding: 5%;
-}
-.button-primary {
-    color: #ffffff;
-    border: none;
-    background-color: #242424;
-    transition: 1s;
-}
-.button-primary:hover {
-    color: white;
-    background-color: #000000;
-}
-#form-title {
-    font-size: 150%;
 }
 .register-left {
     background: rgb(0,255,157);
@@ -225,12 +230,6 @@ export default {
 }
 #form-title {
     font-size: 100%;
-}
-.form input {
-    font-size: 80%;
-}
-.form label {
-    font-size: 80%;
 }
 @media (max-width: 575.98px)  {
     .register-left {
@@ -284,5 +283,8 @@ export default {
     .form label {
         font-size: 100%;
     }
+}
+label {
+    font-size: 90%;
 }
 </style>

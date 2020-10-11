@@ -11,7 +11,7 @@
                             <div class="input-group">
                                 <input
                                     v-model="searchText"
-                                    v-on:keyup="search"
+                                    v-on:keydown="search"
                                     type="text"
                                     class="form-control"
                                     placeholder="Pesquisar nome"
@@ -19,12 +19,13 @@
                                 <router-link
                                     :to="{ name:'manager-create-employees' }"
                                 >
-                                    <button-component
+                                    <SendButton
+                                        buttonClass="primary"
                                         class="ml-2"
                                         content="Adicionar"
                                         icon="fas fa-plus"
                                     >
-                                    </button-component>
+                                    </SendButton>
                                 </router-link>
                             </div>
                         </div>
@@ -72,20 +73,20 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <view-button
+                                            <ListViewButton
                                                 icon="far fa-eye"
                                                 v-on:click.native="viewUser(user.id)"
                                             >
-                                            </view-button>
-                                            <edit-button
+                                            </ListViewButton>
+                                            <ListEditButton
                                                 icon="far fa-edit"
                                                 v-on:click.native="editUser(user.id)"
                                             >
-                                            </edit-button>
-                                            <delete-button
+                                            </ListEditButton>
+                                            <ListDeleteButton
                                                 icon="far fa-trash-alt"
                                                 v-on:click.native="deleteUser(user.id)"
-                                            ></delete-button>
+                                            ></ListDeleteButton>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -110,7 +111,7 @@
 <script>
 import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
-import Button from '@/components/Button'
+import SendButton from '@/components/SendButton'
 import UserService from '@/services/UserService'
 import ListDeleteButton from '@/components/ListDeleteButton'
 import ListViewButton from '@/components/ListViewButton'
@@ -121,15 +122,15 @@ import ListEditButton from '@/components/ListEditButton'
 export default {
     name: 'ListEmployees',
     data () {
-        return { users: null, searchText: null, workingHours: null }
+        return { users: null, searchText: null, workingHours: null, timeout: null }
     },
     components: {
         sidebar: ManagerSidebar,
         topbar: ManagerTopbar,
-        'button-component': Button,
-        'delete-button': ListDeleteButton,
-        'view-button': ListViewButton,
-        'edit-button': ListEditButton
+        SendButton,
+        ListDeleteButton,
+        ListViewButton,
+        ListEditButton
     },
     mounted () {
         UserService.getAll('?permission=2')
@@ -169,8 +170,11 @@ export default {
                 })
         },
         async search () {
-            this.users = await UserService
-                .getAll('?permission=2&name=' + this.searchText)
+            clearTimeout(this.timeout)
+            this.timeout = setTimeout(async () => {
+                this.users = await UserService
+                    .getAll('?permission=2&name=' + this.searchText)
+            }, 500)
         },
         changeSelect (userId, event) {
             if (event.target.value !== 'null') {

@@ -6,13 +6,13 @@
             <h1 class="title-black">Visualizar colaborador</h1>
 
             <div class="card-data p-3">
-                <button-component
+                <BackButton
                     class="mb-3"
                     content="Voltar"
                     v-on:click.native="$router.go(-1)"
                     icon="fas fa-arrow-left"
                 >
-                </button-component>
+                </BackButton>
 
                 <div class="card">
                     <div class="card-header">
@@ -52,7 +52,7 @@
 import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import UserService from '@/services/UserService'
-import Button from '@/components/Button'
+import BackButton from '@/components/BackButton'
 
 export default {
     name: 'ViewEmployee',
@@ -71,7 +71,7 @@ export default {
     components: {
         sidebar: ManagerSidebar,
         topbar: ManagerTopbar,
-        'button-component': Button
+        BackButton
     },
     mounted () {
         if (this.$route.params.id) {

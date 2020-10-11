@@ -9,21 +9,15 @@
         > .P
         </a>
 
-        <router-link
-            :to="{ name:'employee-dash' }"
-        >
+        <router-link :to="{ name:'employee-dash' }">
             <i class="fas fa-home"></i>
         </router-link>
 
-        <router-link
-            :to="{ name:'employee-employees' }"
-        >
-            <i class="fas fa-users"></i>
+        <router-link :to="{ name:'list-point-records' }">
+            <i class="fas fa-clock"></i>
         </router-link>
 
-        <router-link
-            :to="{ name:'employee-me-settings' }"
-        >
+        <router-link :to="{ name:'employee-settings' }">
             <i class="fas fa-cogs"></i>
         </router-link>
     </div>

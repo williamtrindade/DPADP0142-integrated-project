@@ -6,13 +6,13 @@
             <h1 class="title-black">Alterar dados do colaborador</h1>
 
             <div class="m-3 card-data">
-                <button-component
+                <BackButton
                     class="mb-3"
                     content="Voltar"
                     v-on:click.native="$router.go(-1)"
                     icon="fas fa-arrow-left"
                 >
-                </button-component>
+                </BackButton>
                 <div class="row">
                     <div class="col-md-6">
                         <form @submit.prevent="saveUser">
@@ -77,12 +77,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button-component
+                                    <SendButton
                                         ref="button"
                                         content="Salvar"
                                         icon="fas fa-check"
                                     >
-                                    </button-component>
+                                    </SendButton>
                                 </div>
                             </div>
                         </form>
@@ -115,13 +115,13 @@
                                         <div class="col-md-12">
                                         </div>
                                     </div>
-                                    <button-component
+                                    <SendButton
                                         class="mt-3"
                                         ref="button"
                                         content="Salvar"
                                         icon="fas fa-check"
                                     >
-                                    </button-component>
+                                    </SendButton>
                                 </div>
                             </div>
                         </form>
@@ -136,7 +136,8 @@
 
 import ManagerSidebar from '@/components/manager/ManagerSidebar'
 import ManagerTopbar from '@/components/manager/ManagerTopbar'
-import Button from '@/components/Button'
+import SendButton from '@/components/SendButton'
+import BackButton from '@/components/BackButton'
 import UserService from '@/services/UserService'
 import NotificationService from '@/services/NotificationService'
 // import EmployeeInvitationService from '@/services/EmployeeInvitationService'
@@ -160,7 +161,8 @@ export default {
     components: {
         sidebar: ManagerSidebar,
         topbar: ManagerTopbar,
-        'button-component': Button
+        SendButton,
+        BackButton
     },
     data () {
         return {
