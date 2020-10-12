@@ -6,13 +6,13 @@ export default {
         let data = ''
         Object.values(errors).forEach(val => {
             val.forEach((msg) => {
-                data = data + '\n' + msg
+                data = data + '<br> - ' + msg
             })
         })
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: data
+            html: data
         })
     },
 

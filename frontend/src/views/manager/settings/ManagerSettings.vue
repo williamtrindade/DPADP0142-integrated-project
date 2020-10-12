@@ -1,7 +1,7 @@
 <template>
     <div class="manager-settings">
-        <sidebar></sidebar>
-        <topbar></topbar>
+        <ManagerSidebar></ManagerSidebar>
+        <ManagerTopbar></ManagerTopbar>
         <div class="content">
             <h1 class="title-black">Configurações</h1>
             <UserSettings></UserSettings>
@@ -19,8 +19,8 @@ import AccountSettings from '@/components/settings/AccountSettings'
 export default {
     name: 'ManagerSettings',
     components: {
-        sidebar: ManagerSidebar,
-        topbar: ManagerTopbar,
+        ManagerSidebar,
+        ManagerTopbar,
         UserSettings,
         AccountSettings
     }

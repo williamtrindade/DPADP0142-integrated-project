@@ -38,7 +38,6 @@ export default {
     border-left: #d53764 solid 2px;
 }
 html, body {
-    float: left;
     width: 100%;
     height: 100%;
     margin: 0;
@@ -64,6 +63,7 @@ h1 label {
     padding-left: 70px;
     height: 100%;
     min-height: 100%;
+    z-index:2;
 }
 .link-text {
     color: #fff;

@@ -7,7 +7,8 @@
                         src="https://crmpiperun.com/wp-content/uploads/2019/01/piperun-sistema-crm-vendas.png"
                         alt=""
                         width="150"
-                    ></h1>
+                    >
+                </h1>
                 <hr>
                 <h2 id="form-title">Entre</h2>
                 <hr>
@@ -121,7 +122,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    float: left;
+    float: right;
     width: 50%;
     height: 100%;
     background-size: cover;

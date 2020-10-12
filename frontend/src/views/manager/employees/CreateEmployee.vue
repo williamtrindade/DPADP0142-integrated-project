@@ -6,13 +6,13 @@
             <h1 class="title-black">Adicionar Colaborador</h1>
 
             <div class="m-3 card-data">
-                <button-component
+                <BackButton
                     class="mb-3"
                     content="Voltar"
                     v-on:click.native="$router.go(-1)"
                     icon="fas fa-arrow-left"
                 >
-                </button-component>
+                </BackButton>
                 <div class="card">
                     <div class="card-header">
                         Adicione o colaborador
@@ -53,13 +53,15 @@ import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import SendButton from '@/components/SendButton'
 import NotificationService from '@/services/NotificationService'
 import EmployeeInvitationService from '@/services/EmployeeInvitationService'
+import BackButton from '@/components/BackButton'
 
 export default {
     name: 'CreateEmployee',
     components: {
         sidebar: ManagerSidebar,
         topbar: ManagerTopbar,
-        'button-component': SendButton
+        'button-component': SendButton,
+        BackButton
     },
     data () {
         return {

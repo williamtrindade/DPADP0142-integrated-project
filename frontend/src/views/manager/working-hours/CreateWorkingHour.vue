@@ -111,44 +111,30 @@
                         </div>
                     </div>
 
-                    <button-component
-                        style="position: fixed;
-                            bottom: 10px;
-                            right: 15px;
-                            "
+                    <SendButton
+                        style="position: fixed; bottom: 10px; right: 15px;"
                         class="mt-3"
-                        buttonClass="button-primary"
-                        ref="button-add-time-block"
                         icon="fas fa-plus"
                         content=""
                         v-on:click.prevent.native="addTimeBlock"
                     >
-                    </button-component>
-
+                    </SendButton>
                     <!--time row---------------------------------------->
-                    <button-component
-                        style="position: fixed;
-                            bottom: 10px;
-                            left: 85px;
-                            "
+                    <SendButton
+                        style="position: fixed; bottom: 10px; left: 85px;"
                         class="mt-3"
-                        ref="button"
                         content="Finalizar"
                         icon="fas fa-check"
                     >
-                    </button-component>
-                    <button-component
-                        style="position: fixed;
-                            bottom: 10px;
-                            left: 200px;
-                            "
+                    </SendButton>
+                    <BackButton
+                        style="position: fixed; bottom: 10px; left: 200px;"
                         class="mt-3"
-                        buttonClass="button-secondary"
-                        ref="button"
+                        buttonClass="secondary"
                         content="Cancelar"
                         v-on:click.prevent.native="$router.go(-1)"
                     >
-                    </button-component>
+                    </BackButton>
                 </form>
                 <!--FORM------------------------------------------------->
             </div>
@@ -162,7 +148,7 @@ import ManagerTopbar from '@/components/manager/ManagerTopbar'
 import SendButton from '@/components/SendButton'
 import WorkingHourService from '@/services/WorkingHourService'
 import NotificationService from '@/services/NotificationService'
-
+import BackButton from '@/components/BackButton'
 export default {
     name: 'CreateWorkingHour',
     data () {
@@ -191,7 +177,8 @@ export default {
     components: {
         sidebar: ManagerSidebar,
         topbar: ManagerTopbar,
-        'button-component': SendButton
+        SendButton,
+        BackButton
     },
     methods: {
         removeItem (index) {
@@ -224,7 +211,4 @@ export default {
 </script>
 
 <style scoped>
-.card {
-    border-radius: 0;
-}
 </style>

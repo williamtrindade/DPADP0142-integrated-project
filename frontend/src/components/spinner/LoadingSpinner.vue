@@ -26,16 +26,20 @@ export default {
 </script>
 
 <style scoped>
+html,body{
+    width: 100%;
+    height:100%;
+}
 #loading {
-    background-color:rgba(0, 0, 0, 0.37);
+    overflow: visible;
+    position: fixed;
+    background-color:rgba(0, 0, 0, 0.637);
     width: 100%;
     height: 100%;
-    position: absolute;
-    z-index: 2;
+    z-index: 10;
 }
 .spinner {
     top:50%;
-    position: absolute;
     left:50%;
 }
 </style>
