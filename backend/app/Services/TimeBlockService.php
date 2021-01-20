@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Filters\Service\FilterableServiceInterface;
 use App\Filters\Service\FilterTrait;
 use App\Repositories\TimeBlock\TimeBlockRepositoryInterface;
-use App\Scopes\ScopableService;
+use App\Scopes\Service\ScopableService;
 use App\Scopes\Service\ServiceScopeTrait;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;

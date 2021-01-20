@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Base\Eloquent;
 
-use App\Repositories\EloquentRepositoryInterface;
 use Illuminate\Database\Eloquent\{Builder, Model, ModelNotFoundException};
 use Exception;
 use Throwable;

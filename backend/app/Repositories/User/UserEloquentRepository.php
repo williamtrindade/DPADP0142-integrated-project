@@ -4,9 +4,8 @@ namespace App\Repositories\User;
 
 use App\Models\User;
 use App\Models\WorkingHour;
-use App\Repositories\Eloquent\EloquentRepository;
+use App\Repositories\Base\Eloquent\EloquentRepository;
 use App\Repositories\WorkingHour\WorkingHourRepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
 use Throwable;
 
 /**

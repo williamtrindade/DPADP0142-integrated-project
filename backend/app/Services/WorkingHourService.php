@@ -7,7 +7,7 @@ use App\Filters\Service\FilterTrait;
 use App\Models\TimeBlock;
 use App\Models\WorkingHour;
 use App\Repositories\WorkingHour\WorkingHourRepositoryInterface;
-use App\Scopes\ScopableService;
+use App\Scopes\Service\ScopableService;
 use App\Scopes\Service\ServiceScopeTrait;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;

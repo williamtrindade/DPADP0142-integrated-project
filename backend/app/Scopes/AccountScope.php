@@ -2,6 +2,7 @@
 
 namespace App\Scopes;
 
+use App\Scopes\Base\ScopeInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 

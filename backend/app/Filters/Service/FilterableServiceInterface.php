@@ -2,7 +2,7 @@
 
 namespace App\Filters\Service;
 
-use App\Repositories\EloquentRepositoryInterface;
+use App\Repositories\Base\Eloquent\EloquentRepositoryInterface;
 
 /**
  * Interface FilterableServiceInterface

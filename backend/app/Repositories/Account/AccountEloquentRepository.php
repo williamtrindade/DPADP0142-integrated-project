@@ -3,7 +3,7 @@
 namespace App\Repositories\Account;
 
 use App\Models\Account;
-use App\Repositories\Eloquent\EloquentRepository;
+use App\Repositories\Base\Eloquent\EloquentRepository;
 
 /**
  * Class AccountEloquentRepository

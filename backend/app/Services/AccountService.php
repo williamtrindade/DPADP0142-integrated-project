@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Account;
 use App\Models\User;
 use App\Repositories\Account\AccountRepositoryInterface;
-use App\Scopes\ScopableService;
+use App\Scopes\Service\ScopableService;
 use App\Scopes\Service\ServiceScopeTrait;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;

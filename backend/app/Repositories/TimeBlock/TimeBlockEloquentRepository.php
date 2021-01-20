@@ -3,7 +3,7 @@
 namespace App\Repositories\TimeBlock;
 
 use App\Models\TimeBlock;
-use App\Repositories\Eloquent\EloquentRepository;
+use App\Repositories\Base\Eloquent\EloquentRepository;
 
 /**
  * Class TimeBlockEloquentRepository

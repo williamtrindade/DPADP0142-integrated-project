@@ -2,7 +2,7 @@
 
 namespace App\Scopes\Service;
 
-use App\Scopes\ScopeInterface;
+use App\Scopes\Base\ScopeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 /**

@@ -3,7 +3,7 @@
 namespace App\Repositories\WorkingHour;
 
 use App\Models\WorkingHour;
-use App\Repositories\Eloquent\EloquentRepository;
+use App\Repositories\Base\Eloquent\EloquentRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

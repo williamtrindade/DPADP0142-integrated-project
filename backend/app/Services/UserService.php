@@ -7,7 +7,7 @@ use App\Filters\Service\FilterTrait;
 use App\Models\User;
 use App\Repositories\EmployeeInvitation\EmployeeInvitationRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
-use App\Scopes\ScopableService;
+use App\Scopes\Service\ScopableService;
 use App\Scopes\Service\ServiceScopeTrait;
 use App\Services\Base\Service;
 use App\Services\Base\ServiceInterface;

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Scopes;
+namespace App\Scopes\Service;
 
-use App\Repositories\EloquentRepositoryInterface;
+use App\Repositories\Base\Eloquent\EloquentRepositoryInterface;
+use App\Scopes\Base\ScopeInterface;
 
 /**
  * Interface ScopableService
