@@ -12,7 +12,10 @@ ___
 
 > $ php artisan db:seed
 
-#### 4. Running
+#### 4. Config passport to auth
+> $ php artisan passport:install
+
+#### 5. Running
 > $ php artisan serve
 
 ___
