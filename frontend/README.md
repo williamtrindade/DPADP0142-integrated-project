@@ -1,6 +1,11 @@
-# frontend
+# Frontend
 
 ## Project setup
+### Create env file
+```
+.env.local
+```
+### Install dependenciies
 ```
 yarn install
 ```
