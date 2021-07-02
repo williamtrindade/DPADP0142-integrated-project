@@ -12,7 +12,8 @@ ___
 
 > $ php artisan db:seed
 
-
+#### 4. Running
+> $ php artisan serve
 
 ___
 #### Diagram:
