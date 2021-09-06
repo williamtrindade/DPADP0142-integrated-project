@@ -37,7 +37,7 @@ interface ServiceInterface
     public function update(array $data, int $id);
 
     /**
-     * @param $id
+     * @param int $id
      */
     public function delete(int $id);
 

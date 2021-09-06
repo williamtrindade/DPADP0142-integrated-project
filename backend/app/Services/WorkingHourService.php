@@ -45,7 +45,7 @@ class WorkingHourService extends Service implements ServiceInterface, ScopableSe
 
     /**
      * @param array $data
-     * @return WorkingHour
+     * @return WorkingHour|null
      * @throws ValidationException
      */
     public function create(array $data)
@@ -62,8 +62,8 @@ class WorkingHourService extends Service implements ServiceInterface, ScopableSe
     }
 
     /**
-     * @param $data
-     * @param $id
+     * @param array $data
+     * @param int $id
      * @return WorkingHour
      * @throws ValidationException
      */

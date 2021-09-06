@@ -40,7 +40,7 @@ class InviteEmployeeMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): InviteEmployeeMail
     {
         return $this->from('ponto@gmail.com')
             ->to($this->email)
