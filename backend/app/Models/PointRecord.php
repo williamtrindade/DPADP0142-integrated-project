@@ -12,14 +12,13 @@ use Illuminate\Support\Collection;
  * @package App\Models
  *
  * @property int      $id
- * @property Carbon   $date
- * @property Carbon   $hour
  * @property int      $status
  * @property int      $type
  * @property string   $lat
  * @property string   $lng
  * @property int      $user_id
  * @property int      $account_id
+ * @property Carbon   $created_at
  *
  * @property User     $user
  * @property Account  $account
@@ -36,7 +35,7 @@ class PointRecord extends PointRecordModel implements ModelInterface
     /**
      * @return Collection
      */
-    public function getStatuses(): Collection
+    public static function getStatuses(): Collection
     {
         return collect([
             self::APPROVED_STATUS,
@@ -48,7 +47,7 @@ class PointRecord extends PointRecordModel implements ModelInterface
     /***
      * @return Collection
      */
-    public function getTypes(): Collection
+    public static function getTypes(): Collection
     {
         return collect([
             self::ENTRANCE_TYPE,

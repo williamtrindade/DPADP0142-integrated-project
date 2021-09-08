@@ -18,6 +18,8 @@ import EditWorkingHour from '@/views/manager/working-hours/EditWorkingHour'
 import EditEmployee from '@/views/manager/employees/EditEmployee'
 import ListPointRecords from '@/views/employee/point-records/ListPointRecords'
 import EmployeeSettings from '@/views/employee/settings/EmployeeSettings'
+import CreatePointRecord from '@/views/employee/point-records/CreatePointRecord'
+import ListPointRecordRequests from '@/views/manager/point-record-requests/ListPointRecordRequests'
 
 Vue.use(VueRouter)
 
@@ -112,7 +114,12 @@ const routes = [
         component: EditWorkingHour,
         meta: { requireManagerPermission: true }
     },
-
+    {
+        path: '/manager/point-record-requests',
+        name: 'manager-list-point-record-requests',
+        component: ListPointRecordRequests,
+        meta: { requireManagerPermission: true }
+    },
     // Employee
     {
         path: '/employee/dash',
@@ -121,15 +128,21 @@ const routes = [
         meta: { requireEmployeePermission: true }
     },
     {
+        path: '/employee/settings',
+        name: 'employee-settings',
+        component: EmployeeSettings,
+        meta: { requireEmployeePermission: true }
+    },
+    {
         path: '/employee/point-records',
-        name: 'list-point-records',
+        name: 'employee-list-point-records',
         component: ListPointRecords,
         meta: { requireEmployeePermission: true }
     },
     {
-        path: '/employee/settings',
-        name: 'employee-settings',
-        component: EmployeeSettings,
+        path: '/employee/point-records/create',
+        name: 'employee-create-point-records',
+        component: CreatePointRecord,
         meta: { requireEmployeePermission: true }
     }
 ]

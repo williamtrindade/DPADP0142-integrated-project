@@ -7,32 +7,20 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * Class PointRecordModel
- * @package App\Models\Base
- */
 class PointRecordModel extends Model
 {
+    protected $table = 'point_records';
+
     /**
      * @var array
      */
     protected $fillable = [
-        'date',
-        'hour',
         'status',
         'type',
         'user_id',
         'account_id',
         'lat',
         'lng',
-    ];
-
-    /**
-     * @var string[] $dates
-     */
-    protected $dates = [
-        'date',
-        'hour',
     ];
 
     /**

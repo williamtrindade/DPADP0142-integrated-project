@@ -13,7 +13,7 @@
             <i class="fas fa-home"></i>
         </router-link>
 
-        <router-link :to="{ name:'list-point-records' }">
+        <router-link :to="{ name:'employee-list-point-records' }">
             <i class="fas fa-clock"></i>
         </router-link>
 

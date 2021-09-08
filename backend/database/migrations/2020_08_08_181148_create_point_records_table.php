@@ -21,8 +21,6 @@ class CreatePointRecordsTable extends Migration
     {
         Schema::create('point_records', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('hour');
             $table->string('lat');
             $table->string('lng');
             $table->tinyInteger('status')->default(PointRecord::ON_HOLD_STATUS);

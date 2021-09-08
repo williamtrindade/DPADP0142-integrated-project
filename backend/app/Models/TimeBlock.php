@@ -10,8 +10,8 @@ use Illuminate\Support\Collection;
  * Class TimeBlock
  * @package App\Models
  * @property int         $id
- * @property Carbon      $start_hour
- * @property Carbon      $end_hour
+ * @property string      $start_hour
+ * @property string      $end_hour
  * @property string      $week_days
  * @property int         $working_hour_id
  * @property int         $account_id

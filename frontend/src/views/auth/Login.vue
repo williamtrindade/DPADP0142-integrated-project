@@ -3,11 +3,12 @@
         <div class="login-left align-middle">
             <div class="div-left-content shadow-lg bg-white">
                 <h1 style="text-align: center" class="title-ponto">
-                    <img
-                        src="https://crmpiperun.com/wp-content/uploads/2019/01/piperun-sistema-crm-vendas.png"
-                        alt=""
-                        width="150"
-                    >
+                    Ponto
+                    <!--                    <img-->
+                    <!--                        src="https://crmpiperun.com/wp-content/uploads/2019/01/piperun-sistema-crm-vendas.png"-->
+                    <!--                        alt=""-->
+                    <!--                        width="150"-->
+                    <!--                    >-->
                 </h1>
                 <hr>
                 <h2 id="form-title">Entre</h2>

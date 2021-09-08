@@ -56,6 +56,15 @@ Route::middleware([ManagerPermission::class])->group(function () {
 
     // User address update
     Route::put('users/{id}/address', 'UserController@updateAddress');
+
+    // Unapproved Point Records
+    Route::get('pointRecords/unapproved', 'PointRecordController@getAllUnapproved');
+    Route::put('pointRecords/{id}/approve', 'PointRecordController@approve');
+    Route::put('pointRecords/{id}/unapprove', 'PointRecordController@unapprove');
+
+    // Reports
+    Route::get('reports', 'ReportsController@reports');
+
 });
 
 /*
@@ -64,5 +73,7 @@ Route::middleware([ManagerPermission::class])->group(function () {
  * ________________________________________
  */
 Route::middleware([EmployeePermission::class])->group(function () {
-
+    // Point Records
+    Route::get('pointRecords', 'PointRecordController@index');
+    Route::post('pointRecords', 'PointRecordController@create');
 });

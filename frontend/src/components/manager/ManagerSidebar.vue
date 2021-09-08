@@ -17,6 +17,9 @@
         <router-link :to="{ name:'manager-working-hours' }" >
             <i class="fas fa-business-time"></i>
         </router-link>
+        <router-link :to="{ name:'manager-list-point-record-requests' }" >
+            <i class="fas fa-user-check"></i>
+        </router-link>
         <router-link :to="{ name:'manager-settings' }" >
             <i class="fas fa-cogs"></i>
         </router-link>

@@ -3,18 +3,27 @@
 </template>
 
 <script>
+import ReportsService from '@/services/ReportsService'
+
 export default {
     name: 'NewEmployeesChart',
-    mounted () {
+    data () {
+        return {
+            newEmployees: null,
+            newEmployeesTotal: null
+        }
+    },
+    async mounted () {
+        await this.getNewEmployees()
         const ctx = document.querySelector('#new-employees-chart').getContext('2d')
         // eslint-disable-next-line
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: '# of New Employees',
+                    data: Object.values(this.newEmployees),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -44,6 +53,12 @@ export default {
                 }
             }
         })
+    },
+    methods: {
+        async getNewEmployees () {
+            const resp = await ReportsService.getAll()
+            this.newEmployees = resp.new_employees
+        }
     }
 }
 </script>

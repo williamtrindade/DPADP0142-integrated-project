@@ -6,7 +6,7 @@ use App\Repositories\Base\Eloquent\EloquentRepositoryInterface;
 use App\Scopes\Base\ScopeInterface;
 
 /**
- * Interface ScopableService
+ * Interface Scopable Service
  * @package App\Scopes
  * @property EloquentRepositoryInterface $repository
  */
